@@ -125,7 +125,7 @@ base <-
   theme_bw(base_size = 14) +
   xlab("") +
   xlim(0, 100) +
-  ylim(0, 0.08)
+  ylim(0, 0.09)
 
 #--------------------------------------
 # Make plots for each order
