@@ -110,7 +110,7 @@ If we only consider name bearing type specimens the bias becomes more extreme.
 
 ```{r}
   type_sum <-
-  specimens2 %>%
+  specimens %>%
   filter(!is.na(sex) & type == "Type") %>%
   add_count(class) %>%
   add_count(class, sex) %>%
@@ -125,7 +125,7 @@ kable(type_sum)
 
 ```{r}
   type_sum2 <-
-  specimens2 %>%
+  specimens %>%
   filter(!is.na(sex) & type != "NonType") %>%
   add_count(class, type) %>%
   add_count(class, sex, type) %>%
