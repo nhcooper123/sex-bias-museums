@@ -117,6 +117,7 @@ ds2 <-
   # Non name bearing types
   mutate(type = str_replace(type, "ALLOTYPE", "NonNameType")) %>%
   mutate(type = str_replace(type, "PARALECTOTYPE", "NonNameType")) %>%
+  mutate(type = str_replace(type, "PARAType", "NonNameType")) %>%
   mutate(type = str_replace(type, "PARATYPE", "NonNameType")) %>%
   mutate(type = str_replace(type, "TOPOTYPE", "NonNameType")) %>% 
   
