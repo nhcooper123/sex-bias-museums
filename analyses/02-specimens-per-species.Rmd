@@ -1,7 +1,6 @@
 ---
 title: "Specimens per species - supplemental analysis"
 output:
-  pdf_document: default
   html_document: default
 ---
   
