@@ -1,0 +1,101 @@
+---
+title: "Specimens per species - supplemental analysis"
+output:
+  pdf_document: default
+  html_document: default
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+# Preliminaries
+
+# Load libraries
+library(tidyverse)
+library(patchwork) # from GitHub
+library(png)
+library(knitr)
+library(broom)
+library(here)
+
+#install.packages("remotes")
+#remotes::install_github("sckott/rphylopic")
+library(rphylopic)
+
+# Read in phylopics
+img_mouse <- readPNG(here("img/mouse.png"))
+img_tit <- readPNG(here("img/tit.png"))
+
+# Colour blind friendly palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Helper functions for plotting
+remove_y <- 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+remove_x <-   
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r}
+# Read in all the specimen data
+specimens <- read_csv(here("data/all-specimen-data.csv")) 
+```
+
+## How does the proportion of male and female specimens vary as we increase the number of specimens?
+We expect large skews in the percentage of male or female specimens when sample size is low, but the ratio of male:female specimens should approach 50:50 as more specimens are added (assuming a 50:50 sex ratio in nature). 
+
+Most species are repesented by only a few specimens (see histograms below), with large skews in % female specimens (in both directions) at low numbers.
+
+```{r, fig.cap = "Distribution of percentage female specimens and log number of specimens per species across birds and mammals."}
+source(here("analyses/figure-specimens-all.R"))
+hist1 / hist2
+```
+```{r, fig.cap = "Relationship between the percentage female specimens per species and the number of specimens per species. Hex bins are used rather than points to make the plot clearer."}
+all
+```
+
+If we fit a model (LM or GLM) to this data we see massive heteroscedasticity in the residuals.
+```{r, fig.cap = "Model diagnostic plots for models of % female specimens as a function of log total number of specimens for each species"}
+ds_females <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  group_by(class) %>%
+  add_count(binomial) %>%
+  add_count(binomial, sex) %>%
+  select(class, binomial, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female")
+
+spec_model <- lm(percent ~ log(n), data = ds_females)
+
+# Diagnostics
+par(mfrow = c(2, 2))
+plot(spec_model, add.smooth = FALSE)
+par(mfrow = c(1, 1))
+```
+
+To avoid this variability influencing our results we excluded all species with fewer than 100 specimens from our analyses. Model fit improved substantially (see below).
+
+```{r, fig.cap = "Model diagnostic plots for models of % female specimens as a function of log total number of specimens for each species, for species with > 100 specimens"}
+ds100 <- 
+  ds_females %>%
+  filter(n >= 100)
+
+spec_model2 <- lm(percent ~ log(n), data = ds100)
+
+# Diagnostics
+par(mfrow = c(2, 2))
+plot(spec_model2, add.smooth = FALSE)
+par(mfrow = c(1, 1))
+```
+
+There is still a significant positive relationship between the number of specimens and the percentage of female specimens, but the effect size is extremely low (slope = `r round(tidy(summary(spec_model2))$estimate[2], 3)`, se = `r round(tidy(summary(spec_model2))$std.error[2], 3)`, t = `r round(tidy(summary(spec_model2))$statistic[2], 3)`,  df = `r tidy(anova(spec_model2))[2, 2]`, p = `r round(tidy(summary(spec_model2))$p.value[2], 3)`, r2 = `r round(glance(summary(spec_model2))$adj.r.squared, 3)`) so we exclude this variable from future analyses. 
