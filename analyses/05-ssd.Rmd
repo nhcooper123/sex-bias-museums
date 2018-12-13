@@ -1,0 +1,56 @@
+---
+title: "Sexual size dimorphism"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+# Preliminaries
+
+# Load libraries
+library(tidyverse)
+library(patchwork) # from GitHub
+library(png)
+library(knitr)
+library(broom)
+library(here)
+library(ggfortify)
+
+#install.packages("remotes")
+#remotes::install_github("sckott/rphylopic")
+library(rphylopic)
+
+# Colour blind friendly palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Helper functions for plotting
+remove_y <- 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+remove_x <-   
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r}
+# Read in all the specimen data
+specimens <- read_csv(here("data/all-specimen-data.csv")) 
+```
+
+## Does sexual size dimorphism influence % female specimens?
+
+### Birds
+
+```{r, all_years, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
+source(here("analyses/figure-years-all.R"))
+```
