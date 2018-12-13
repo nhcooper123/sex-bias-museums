@@ -74,7 +74,7 @@ sum_orders <-
   group_by(class, order) %>%
   summarise('n species' = length(unique(binomial)),
            'n specimens' = sum(n),
-           '% female' = median(percentf))
+           '% female' = round(median(percentf),2))
 
 kable(sum_orders)
 ```
