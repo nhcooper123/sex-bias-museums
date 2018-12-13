@@ -120,6 +120,19 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   arrange(class, percent)
 
 kable(slice(worstb, 1:10))
+
+  bestb <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, binomial) %>%
+  add_count(class, binomial, sex) %>%
+  select(class, binomial, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(class, -percent)
+
+kable(slice(bestb, 1:10))
 ```
 ### Mammals
 ```{r}
@@ -134,7 +147,20 @@ kable(slice(worstb, 1:10))
   filter(sex == "Female" & n >= 100) %>%
   arrange(desc(class), percent)
 
-  kable(slice(worstm, 1:11))
+  kable(slice(worstm, 1:10))
+  
+  bestm <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, binomial) %>%
+  add_count(class, binomial, sex) %>%
+  select(class, binomial, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(desc(class), -percent)
+
+  kable(slice(bestm, 1:10))
 ```
 
 ## What about name bearing type specimens?
