@@ -1,6 +1,7 @@
 ---
 title: "Variation among orders"
 output:
+  word_document: default
   pdf_document: default
   html_document: default
 ---
@@ -24,10 +25,6 @@ library(ggfortify)
 #install.packages("remotes")
 #remotes::install_github("sckott/rphylopic")
 library(rphylopic)
-
-# Read in phylopics
-img_mouse <- readPNG(here("img/mouse.png"))
-img_tit <- readPNG(here("img/tit.png"))
 
 # Colour blind friendly palette
 cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
@@ -66,9 +63,24 @@ ds_orders <-
   rename(female = nn) %>%
   mutate(male = n - female) %>%
   select(class, order, binomial, n, female, male) %>%
+  mutate(percentf = (female/n) * 100) %>%
   distinct()
 ```
 
+## Summary table
+```{r}
+sum_orders <-
+  ds_orders %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(n),
+           '% female' = median(percentf))
+
+kable(sum_orders)
+```
+
+## Fitting models
+### Birds
 ```{r}
 # Fitting the model for birds
 ds_orders_birds <- filter(ds_orders, class == "Birds")
@@ -84,7 +96,7 @@ summary(order_model_birds)
 autoplot(order_model_birds)
 ```
 
-
+### Mammals
 ```{r}
 # Fitting the model for mammals
 ds_orders_mammals <- filter(ds_orders, class == "Mammals")
@@ -102,6 +114,7 @@ summary(order_model_mammals)
 autoplot(order_model_mammals)
 ```
 
+## Plotting
 ### Birds
 
 ```{r, bird_orders, message = FALSE, echo = FALSE, fig.cap = "Kernal density plots showing the % female specimens per species across the six largest orders of birds."}
