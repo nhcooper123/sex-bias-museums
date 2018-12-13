@@ -145,7 +145,8 @@ mutate(binomial = str_replace(binomial, "Oligoryzomys b", NA_character_)) %>%
 # Human
 #------------------------------
 mutate(binomial = str_replace(binomial, "Homo neanderthalensis", NA_character_)) %>%
-
+  mutate(binomial = str_replace(binomial, "Homo sapiens", NA_character_)) %>%
+  
 #-------------------------------------------------------
 # Weird ones missing from taxize but on the MSW database
 # Noted here in case they appear in quality checks
