@@ -66,8 +66,6 @@ ds_years <-
   select(class, order, binomial, year, decade, n, female, male) %>%
   mutate(percentf = (female/n) * 100) %>%
   distinct()
-
-ds_years
 ```
 
 ## Fitting models
@@ -106,18 +104,8 @@ autoplot(year_model_mammals)
 ```
 
 ## Plotting
-### Birds
 
-```{r, bird_years, message = FALSE, echo = FALSE, fig.cap = "Kernal density plots showing the % female specimens per species across the six largest orders of birds."}
-source(here("analyses/figure-orders.R"))
-(pass | hum | wood)/(parrot | shore | pigeon)
-```
-
-### Mammals
-This effect is significant, with carnivores and artiodactlys having significantly lower % female specimens than rodents, and bats having significantly higher % female specimens than rodents, although the effect sizes are low.
-
-```{r, mammal_years, message = FALSE, echo = FALSE, fig.cap = "Kernal density plots showing the % female specimens per species across the six largest orders of mammals"}
-source(here("analyses/figure-orders.R"))
-(rodent | bat | sor)/(carn|primate|artio)
-
+```{r, all_years, message = FALSE, echo = FALSE, fig.cap = "Changes through time in mammals and birds with >50 specimens per species"}
+source(here("analyses/figure-years-all.R"))
+plot_year
 ```
