@@ -134,7 +134,7 @@ base <-
   geom_vline(xintercept = 0, linetype = 3) +
   theme_bw(base_size = 14) +
   xlab("") +
-  ylab("% female specimens") +
+  ylab("% female") +
   ylim(0, 100) +
   xlim(-0.5, 0.5)
 
@@ -144,44 +144,52 @@ base <-
 pass <-
   base +
   geom_point(data = ds_pass, colour = cbPalette[2]) +
-  add_phylopic(img = img_tit, alpha = 1, x = -0.35, y = 95, ysize = 10) +
-  remove_x
+  add_phylopic(img = img_tit, alpha = 1, x = -0.4, y = 90, ysize = 18) +
+  remove_x +
+  geom_smooth(data = ds_pass, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+  #geom_smooth(data = ds_pass, method = "glm", method.args = list(family = "binomial"), col = "darkgrey")
+
 
 hum <-
   base +
   geom_point(data = ds_hum, colour = cbPalette[3]) +
-  add_phylopic(img = img_hummingbird, alpha = 1, x = -0.35, y = 95, ysize = 15) +
+  add_phylopic(img = img_hummingbird, alpha = 1, x = -0.4, y = 90, ysize = 23) +
   remove_x +
-  remove_y
+  remove_y +
+  geom_smooth(data = ds_hum, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 wood <-
   base +
   geom_point(data = ds_wood, colour = cbPalette[4]) +
-  add_phylopic(img = img_woodpecker, alpha = 1, x = -0.4, y = 95, ysize = 15) +
+  add_phylopic(img = img_woodpecker, alpha = 1, x = -0.45, y = 90, ysize = 23) +
   remove_x +
-  remove_y 
+  remove_y +
+  geom_smooth(data = ds_wood, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 parrot <-
   base +
   geom_point(data = ds_parrot, colour = cbPalette[5]) +
-  add_phylopic(img = img_parrot, alpha = 1, x = -0.4, y = 95, ysize = 15) 
+  add_phylopic(img = img_parrot, alpha = 1, x = -0.45, y = 90, ysize = 23) +
+  geom_smooth(data = ds_parrot, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 shore <-
   base +
   geom_point(data = ds_shore, colour = cbPalette[8]) +
-  add_phylopic(img = img_shorebird, alpha = 1, x = -0.35, y = 95, ysize = 12) +
+  add_phylopic(img = img_shorebird, alpha = 1, x = -0.4, y = 90, ysize = 20) +
   remove_y +
-  xlab("log sexual size dimorphism")
+  xlab("log sexual size dimorphism") +
+  geom_smooth(data = ds_shore, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 pigeon <-
   base +
   geom_point(data = ds_pigeon, colour = cbPalette[7]) +
-  add_phylopic(img = img_pigeon, alpha = 1, x = -0.35, y = 95, ysize = 10) +
-  remove_y
+  add_phylopic(img = img_pigeon, alpha = 1, x = -0.4, y = 90, ysize = 18) +
+  remove_y +
+  geom_smooth(data = ds_pigeon, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 (pass | hum | wood)/(parrot | shore | pigeon)
 
-ggsave("figures/ssd-orders-birds.png", height = 100, units = "mm")
+#ggsave("figures/ssd-orders-birds.png", height = 100, units = "mm")
 #-------------------------------------------------------------------
 # MAMMALS
 # Order plots (Top 6 orders only)
@@ -222,7 +230,7 @@ base <-
   geom_vline(xintercept = 0, linetype = 3) +
   theme_bw(base_size = 14) +
   xlab("") +
-  ylab("% female specimens") +
+  ylab("% female") +
   ylim(0, 100) +
   xlim(-1, 1.5)
 
@@ -232,40 +240,51 @@ base <-
 rodent <-
   base +
   geom_point(data = ds_rodent, colour = cbPalette[2]) +
-  add_phylopic(img = img_mouse, alpha = 1, x = -0.75, y = 93, ysize = 9) +
-  remove_x
+  add_phylopic(img = img_mouse, alpha = 1, x = -0.75, y = 93, ysize = 12) +
+  remove_x +
+  geom_smooth(data = ds_rodent, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
 
 bat <-
   base +
   geom_point(data = ds_bat, colour = cbPalette[3]) +
-  add_phylopic(img = img_bat, alpha = 1, x = -0.75, y = 93, ysize = 11) +
+  add_phylopic(img = img_bat, alpha = 1, x = -0.75, y = 93, ysize = 14) +
   remove_x +
-  remove_y
+  remove_y +
+  geom_smooth(data = ds_bat, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
 
 sor <-
   base +
   geom_point(data = ds_sor, colour = cbPalette[4]) +
-  add_phylopic(img = img_shrew, alpha = 1, x = -0.75, y = 93, ysize = 8) +
+  add_phylopic(img = img_shrew, alpha = 1, x = -0.75, y = 93, ysize = 11) +
   remove_x +
-  remove_y
+  remove_y +
+  geom_smooth(data = ds_sor, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
 
 carn <-
   base +
   geom_point(data = ds_carn, colour = cbPalette[5]) +
-  add_phylopic(img = img_tiger, alpha = 1, x = -0.75, y = 93, ysize = 7)
+  add_phylopic(img = img_tiger, alpha = 1, x = -0.75, y = 93, ysize = 10) +
+  geom_smooth(data = ds_carn, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
 
 primate <-
   base +
   geom_point(data = ds_primate, colour = cbPalette[8]) +
-  add_phylopic(img = img_monkey, alpha = 1, x = -0.70, y = 93, ysize = 11) +
+  add_phylopic(img = img_monkey, alpha = 1, x = -0.70, y = 93, ysize = 14) +
   remove_y +
-  xlab("log sexual size dimorphism")
+  xlab("log sexual size dimorphism") +
+  geom_smooth(data = ds_primate, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
 
 artio <-
   base +
   geom_point(data = ds_artio, colour = cbPalette[7]) +
-  add_phylopic(img = img_deer, alpha = 1, x = -0.75, y = 93, ysize = 16) +
-  remove_y
+  add_phylopic(img = img_deer, alpha = 1, x = -0.75, y = 93, ysize = 19) +
+  remove_y +
+  geom_smooth(data = ds_artio, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
 
 (rodent | bat | sor)/(carn|primate|artio)
 
