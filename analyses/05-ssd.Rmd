@@ -112,13 +112,16 @@ autoplot(ssd_model_mammals)
 ### Birds
 
 ```{r, bird_ssd, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
-source(here("figures/ssd-orders-birds.R"))
+source(here("analyses/figure-ssd-all.R"))
+(pass | hum | wood)/(parrot | shore | pigeon)
+
 ```
 
 
 ## Plotting
 ### Mammals
 
-```{r, bird_ssd, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
-source(here("figures/ssd-orders-birds.R"))
+```{r, mammal_ssd, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
+source(here("analyses/figure-ssd-all.R"))
+(rodent | bat | sor)/(carn|primate|artio)
 ```
