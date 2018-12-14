@@ -184,7 +184,7 @@ pigeon <-
 #-------------------------------------------------------------------
 # Density plots (all for appendix)
 #-------------------------------------------------------------------
-# Select birds only
+# Select mammals only
 # Remove the orders with only two species
 ds2 <- 
   ds_orders %>%
