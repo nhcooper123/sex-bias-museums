@@ -43,14 +43,82 @@ remove_x <-
 ```
 
 ```{r}
-# Read in all the specimen data
+# Read in all the specimen data and body size data
 specimens <- read_csv(here("data/all-specimen-data.csv")) 
+extra <- read_csv(here("data/all-extra-data.csv"))
 ```
 
 ## Does sexual size dimorphism influence % female specimens?
 
+```{r}
+ds <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  group_by(class) %>%
+  add_count(binomial) %>%
+  add_count(binomial, sex) %>%
+  filter(n >= 100 & sex == "Female") %>%
+  mutate(percent = (nn/n)*100) %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, binomial, percent, male, female) %>%
+  distinct()
+```
+
+
+```{r}
+# Merge body size data with the specimen data
+# Exclude anything that doesn't have specimen data
+ds_ssd <- left_join(ds, extra)
+```
+
+## Fitting models
+### Birds
+```{r}
+# Fitting the model for birds
+ds_ssd_birds <- filter(ds_ssd, class == "Birds")
+ssd_model_birds <- glm(cbind(female, male) ~ log(SSD), data = ds_ssd_birds, family = "binomial")
+# Check for overdispersion
+summary_mod_birds <- summary(ssd_model_birds)
+summary_mod_birds$deviance / summary_mod_birds$df.resid 
+# Look at outputs
+tidy(anova(ssd_model_birds, test = "Chisq"))
+summary(ssd_model_birds)
+
+# Look at model diagnostics
+autoplot(ssd_model_birds)
+```
+
+### Mammals
+```{r}
+# Fitting the model for mammals
+ds_ssd_mammals <- filter(ds_ssd, class == "Mammals")
+ssd_model_mammals <- glm(cbind(female, male) ~ log(SSD), data = ds_ssd_mammals, family = "binomial")
+
+# Check for overdispersion
+summary_mod_mammals <- summary(ssd_model_mammals)
+summary_mod_mammals$deviance / summary_mod_mammals$df.resid 
+
+# Look at outputs
+tidy(anova(ssd_model_mammals, test = "Chisq"))
+summary(ssd_model_mammals)
+
+# Look at model diagnostics
+autoplot(ssd_model_mammals)
+```
+
+
+## Plotting
 ### Birds
 
-```{r, all_years, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
-source(here("analyses/figure-years-all.R"))
+```{r, bird_ssd, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
+source(here("figures/ssd-orders-birds.R"))
+```
+
+
+## Plotting
+### Mammals
+
+```{r, bird_ssd, message = FALSE, echo = FALSE, fig.cap = "The relationship between % female and the degree of sexual size dimorphism. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0 indicate males are bigger, values < 0 indicate that females are larger."}
+source(here("figures/ssd-orders-birds.R"))
 ```
