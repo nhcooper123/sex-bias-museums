@@ -134,14 +134,14 @@ pass <-
   base +
   geom_density(data = ds_pass,
                alpha = 0.5, fill = cbPalette[2], colour = cbPalette[2]) +
-  add_phylopic(img = img_tit, alpha = 1, x = 10, y = 0.07, ysize = 20) +
+  add_phylopic(img = img_tit, alpha = 1, x = 10, y = 0.08, ysize = 20) +
   remove_x
 
 hum <-
   base +
   geom_density(data = ds_hum,
                alpha = 0.5, fill = cbPalette[3], colour = cbPalette[3]) +
-  add_phylopic(img = img_hummingbird, alpha = 1, x = 10, y = 0.07, ysize = 25) +
+  add_phylopic(img = img_hummingbird, alpha = 1, x = 10, y = 0.08, ysize = 25) +
   remove_x +
   remove_y
 
@@ -149,7 +149,7 @@ wood <-
   base +
   geom_density(data = ds_wood,
                alpha = 0.5, fill = cbPalette[4], colour = cbPalette[4]) +
-  add_phylopic(img = img_woodpecker, alpha = 1, x = 10, y = 0.07, ysize = 25) +
+  add_phylopic(img = img_woodpecker, alpha = 1, x = 10, y = 0.08, ysize = 25) +
   remove_x +
   remove_y
 
@@ -157,13 +157,13 @@ parrot <-
   base +
   geom_density(data = ds_parrot,
                alpha = 0.5, fill = cbPalette[5], colour = cbPalette[5]) +
-  add_phylopic(img = img_parrot, alpha = 1, x = 10, y = 0.07, ysize = 25)
+  add_phylopic(img = img_parrot, alpha = 1, x = 10, y = 0.08, ysize = 25)
 
 shore <-
   base +
   geom_density(data = ds_shore,
                alpha = 0.5, fill = cbPalette[8], colour = cbPalette[8]) +
-  add_phylopic(img = img_shorebird, alpha = 1, x = 10, y = 0.07, ysize = 20) +
+  add_phylopic(img = img_shorebird, alpha = 1, x = 10, y = 0.08, ysize = 20) +
   remove_y +
   xlab("% female specimens")
 
@@ -171,7 +171,7 @@ pigeon <-
   base +
   geom_density(data = ds_pigeon,
                alpha = 0.5, fill = cbPalette[7], colour = cbPalette[7]) +
-  add_phylopic(img = img_pigeon, alpha = 1, x = 10, y = 0.07, ysize = 20) +
+  add_phylopic(img = img_pigeon, alpha = 1, x = 10, y = 0.08, ysize = 20) +
   remove_y
 
 (pass | hum | wood)/(parrot | shore | pigeon)
