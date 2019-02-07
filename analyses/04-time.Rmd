@@ -77,12 +77,17 @@ year_model_birds <- glm(cbind(female, male) ~ year, data = ds_years_birds, famil
 # Check for overdispersion
 summary_mod_birds <- summary(year_model_birds)
 summary_mod_birds$deviance / summary_mod_birds$df.resid 
-# Look at outputs
-tidy(anova(year_model_birds, test = "Chisq"))
-summary(year_model_birds)
+
+year_model_birds <- glm(cbind(female, male) ~ year, data = ds_years_birds, family = "quasibinomial")
 
 # Look at model diagnostics
 autoplot(year_model_birds)
+
+# Look at outputs
+tidy(anova(year_model_birds, test = "F"))
+summary(year_model_birds)
+
+
 ```
 
 ### Mammals
@@ -95,12 +100,15 @@ year_model_mammals <- glm(cbind(female, male) ~ year, data = ds_years_mammals, f
 summary_mod_mammals <- summary(year_model_mammals)
 summary_mod_mammals$deviance / summary_mod_mammals$df.resid 
 
-# Look at outputs
-tidy(anova(year_model_mammals, test = "Chisq"))
-summary(year_model_mammals)
+year_model_mammals <- glm(cbind(female, male) ~ year, data = ds_years_mammals, family = "quasibinomial")
 
 # Look at model diagnostics
 autoplot(year_model_mammals)
+
+# Look at outputs
+tidy(anova(year_model_mammals, test = "F"))
+summary(year_model_mammals)
+
 ```
 
 ## Plotting

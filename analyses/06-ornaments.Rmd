@@ -209,7 +209,7 @@ horn_model <- glm(cbind(female, male) ~ extremesex, data =
 autoplot(horn_model)
 
 # Look at outputs
-tidy(Anova(horn_model, test = "F"))
+tidy(anova(horn_model, test = "F"))
 summary(horn_model)
 
 ```
