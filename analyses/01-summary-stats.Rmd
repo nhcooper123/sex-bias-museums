@@ -1,6 +1,7 @@
 ---
 title: "Summary stats"
 output:
+  word_document: default
   html_document: default
 ---
 
@@ -134,6 +135,12 @@ kable(slice(worstb, 1:10))
 
 kable(slice(bestb, 1:10))
 ```
+```{r}
+kable(filter(worstb, percent < 25))
+
+```
+
+
 ### Mammals
 ```{r}
   worstm <-
