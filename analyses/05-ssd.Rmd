@@ -21,6 +21,7 @@ library(knitr)
 library(broom)
 library(here)
 library(ggfortify)
+library(car)
 
 #install.packages("remotes")
 #remotes::install_github("sckott/rphylopic")
@@ -81,8 +82,13 @@ ssd_model_birds <- glm(cbind(female, male) ~ log(SSD), data = ds_ssd_birds, fami
 # Check for overdispersion
 summary_mod_birds <- summary(ssd_model_birds)
 summary_mod_birds$deviance / summary_mod_birds$df.resid 
+
+# Quasi model
+ssd_model_birds <- glm(cbind(female, male) ~ log(SSD), 
+                       data = ds_ssd_birds, family = "quasibinomial")
+
 # Look at outputs
-tidy(anova(ssd_model_birds, test = "Chisq"))
+tidy(Anova(ssd_model_birds, test = "F"))
 summary(ssd_model_birds)
 
 # Look at model diagnostics
@@ -90,29 +96,56 @@ autoplot(ssd_model_birds)
 ```
 
 ```{r}
-# Just for the top 6 orders
-
-summarise(group_by(ds_ssd_birds, order), length((which(SSD>0))), n())
-
-
-ds_ssd_birds2 <- 
-  ds_ssd_birds %>%
-  filter(order == "Psittaciformes" | order == "Passeriformes" |
-  order == "Charadriiformes" | order == "Columbiformes" |
-  order == "Apodiformes" | order == "Piciformes")  %>%
-  mutate(order = relevel(as.factor(order), ref = "Passeriformes"))
-                 
-ssd_model_birds2 <- glm(cbind(female, male) ~ log(SSD)*order, 
-                        data = ds_ssd_birds2, family = "binomial")
+# More complex models involving order and male_mass
+#1.  With order as an interaction
+ssd_model_birds2 <- glm(cbind(female, male) ~ log(SSD)*log(male_mass)*order, 
+                        data = ds_ssd_birds, family = "quasibinomial")
 
 # Look at outputs
-tidy(anova(ssd_model_birds2, test = "Chisq"))
+tidy(Anova(ssd_model_birds2, test = "F"))
 summary(ssd_model_birds2)
 
-# Look at model diagnostics
-autoplot(ssd_model_birds2)
+#2.  With mass and order as an interaction
+ssd_model_birds3 <- glm(cbind(female, male) ~ log(SSD)*log(male_mass)*order, 
+                        data = ds_ssd_birds, family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(ssd_model_birds3, test = "F"))
+summary(ssd_model_birds3)
+
+#3. Just mass and order
+ssd_model_birds4 <- glm(cbind(female, male) ~ log(male_mass)*order, 
+                        data = ds_ssd_birds, family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(ssd_model_birds4, test = "F"))
+summary(ssd_model_birds4)
+
 ```
 
+```{r}
+
+for(i in 1:length(levels(as.factor(ds_ssd_birds$order)))){
+  dsx <- filter(ds_ssd_birds, order == levels(as.factor(order))[i])
+  if(length(dsx$order) > 10){
+  modelx <- glm(cbind(female, male) ~ log(SSD), 
+            data = dsx, family = "quasibinomial")
+  print(paste(levels(as.factor(ds_ssd_birds$order))[i], tidy(Anova(modelx, test = "F"))[[5]][1]))
+  }
+}
+```
+
+```{r}
+
+for(i in 1:length(levels(as.factor(ds_ssd_mammals$order)))){
+  dsx <- filter(ds_ssd_mammals, order == levels(as.factor(order))[i])
+  if(length(dsx$order) > 10){
+  modelx <- glm(cbind(female, male) ~ log(SSD), 
+            data = dsx, family = "quasibinomial")
+  print(paste(levels(as.factor(ds_ssd_mammals$order))[i], tidy(Anova(modelx, test = "F"))[[5]][1]))
+  }
+}
+```
 ### Mammals
 ```{r}
 # Fitting the model for mammals
@@ -123,14 +156,44 @@ ssd_model_mammals <- glm(cbind(female, male) ~ log(SSD), data = ds_ssd_mammals, 
 summary_mod_mammals <- summary(ssd_model_mammals)
 summary_mod_mammals$deviance / summary_mod_mammals$df.resid 
 
+ssd_model_mammals <- glm(cbind(female, male) ~ log(SSD), 
+                         data = ds_ssd_mammals, family = "quasibinomial")
+
 # Look at outputs
-tidy(anova(ssd_model_mammals, test = "Chisq"))
+tidy(Anova(ssd_model_mammals, test = "F"))
 summary(ssd_model_mammals)
 
 # Look at model diagnostics
 autoplot(ssd_model_mammals)
 ```
 
+```{r}
+# More complex models involving order and male_mass
+#1.  With order as an interaction
+ssd_model_mammals2 <- glm(cbind(female, male) ~ log(SSD)*order, 
+                        data = ds_ssd_mammals, family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(ssd_model_mammals2, test = "F"))
+summary(ssd_model_mammals2)
+
+
+#2.  With mass and order as an interaction
+ssd_model_mammals3 <- glm(cbind(female, male) ~ log(SSD)*log(male_mass)*order, 
+                        data = ds_ssd_mammals, family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(ssd_model_mammals3, test = "F"))
+summary(ssd_model_mammals3)
+
+#3. Just mass and order
+ssd_model_mammals4 <- glm(cbind(female, male) ~ log(male_mass)*order, 
+                        data = ds_ssd_mammals, family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(ssd_model_mammals4, test = "F"))
+summary(ssd_model_mammals4)
+```
 
 ## Plotting
 ### Birds
