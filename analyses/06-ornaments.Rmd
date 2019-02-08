@@ -1,5 +1,5 @@
 ---
-title: "Sexual size dimorphism"
+title: "Plumage and ornaments"
 output:
   word_document: default
   pdf_document: default
@@ -21,6 +21,7 @@ library(knitr)
 library(broom)
 library(here)
 library(ggfortify)
+library(car)
 
 #install.packages("remotes")
 #remotes::install_github("sckott/rphylopic")
@@ -42,17 +43,177 @@ remove_x <-
         axis.ticks.x=element_blank())
 ```
 
-```{r}
-# Read in all the specimen data
-specimens <- read_csv(here("data/all-specimen-data.csv")) 
+```{r, message = FALSE}
+# Read in all the specimen data and extra data
+specimens <- read_csv(here("data/all-specimen-data.csv"))
+extra <- read_csv(here("data/all-extra-data.csv"))
 ```
 
-## Do sexual ornaments influence % female specimens?
-This is only for Passeriformes where we have data on plumage colours for males and females, and for Artiodactyla which often have horns, antlers or tusks.
+## Extract % female specimens
 
-## Passeriformes plumage
+```{r}
+ds <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  group_by(class) %>%
+  add_count(binomial) %>%
+  add_count(binomial, sex) %>%
+  filter(n >= 100 & sex == "Female") %>%
+  mutate(percent = (nn/n)*100) %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, binomial, percent, male, female) %>%
+  distinct()
+```
+
+
+```{r}
+# Merge data with the specimen data
+# Exclude anything that doesn't have specimen data
+ds_plumage <- left_join(ds, extra)
+```
+
+## Fitting models
+## Do sexual ornaments influence % female specimens?
+### Passeriformes plumage
+This is only for Passeriformes where we have data on plumage colours for males and females.
+
+```{r}
+# Fitting the model for birds
+# Model is overdispersed so use quasi binomial model
+ds_plumage_birds <- filter(ds_plumage, class == "Birds")
+plumage_model_birds <- glm(cbind(female, male) ~ log(plumageD), 
+                           data = ds_plumage_birds, family = "quasibinomial")
+
+# Look at model diagnostics
+autoplot(plumage_model_birds)
+
+# Look at outputs
+tidy(Anova(plumage_model_birds, test = "F"))
+summary(plumage_model_birds)
+```
+
+## 
 
 ![Figure 11: The relationship between % female specimens and sexual dimorphism in plumage colouration. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0.1 indicate males are more colourful, values < -0.1 indicate that females are more colourful, and values between -0.1 and 01 indicate similar colouration.](birds/figures/plumage-passeriformes.png)
+
+### Ornaments in mammals
+
+```{r}
+# Fitting the model for mammals
+# Extract mammals and remove ossicles
+ds_ornament_mammals <- filter(ds_plumage, class == "Mammals" 
+                              & (is.na(feature) | feature != "ossicle"))
+
+# Model is overdispersed so use quasi binomial model
+ornament_model_mammals <- glm(cbind(female, male) ~ ornamentation, data = 
+                                ds_ornament_mammals, family = "quasibinomial")
+# Note that the interaction with order is not significant
+
+# Look at model diagnostics
+autoplot(ornament_model_mammals)
+
+# Look at outputs
+tidy(Anova(ornament_model_mammals, test = "F"))
+summary(ornament_model_mammals)
+```
+```{r}
+# What about for type of ornament?
+feature_model_mammals <- glm(cbind(female, male) ~ feature, data = 
+                                ds_ornament_mammals, family = "quasibinomial")
+# Note that the interaction with order is not significant
+
+# Look at model diagnostics
+autoplot(feature_model_mammals)
+
+# Look at outputs
+tidy(Anova(feature_model_mammals, test = "F"))
+summary(feature_model_mammals)
+```
+```{r}
+# What about for whether males or females have the ornament?
+sex_model_mammals <- glm(cbind(female, male) ~ ornamentedsex, data = 
+                                ds_ornament_mammals, family = "quasibinomial")
+# Note that the interaction with order is not significant
+
+# Look at model diagnostics
+autoplot(sex_model_mammals)
+
+# Look at outputs
+tidy(Anova(sex_model_mammals, test = "F"))
+summary(sex_model_mammals)
+```
+
+```{r}
+# What about for whether males or females have the ornament and what sort it is?
+both_model_mammals <- glm(cbind(female, male) ~ feature * ornamentedsex, data = 
+                                ds_ornament_mammals, family = "quasibinomial")
+# Note that the interaction with order is not significant
+
+# Look at model diagnostics
+autoplot(both_model_mammals)
+
+# Look at outputs
+tidy(Anova(both_model_mammals, test = "F"))
+summary(both_model_mammals)
+```
+
+```{r}
+# How about just for horns or tusks?
+orn <-
+  ds_ornament_mammals %>%
+  mutate(horn = ornamentation) %>%
+  mutate(horn = ifelse(feature == "tusk" | is.na(feature), "Absent", horn)) %>%
+  mutate(tusk = ornamentation) %>%
+  mutate(tusk = ifelse(feature == "horn" | is.na(feature), "Absent", tusk)) %>%
+  mutate(artio = ifelse(order == "Artiodactyla", "artio", "not"))
+
+horn_model_mammals <- glm(cbind(female, male) ~ horn, data = 
+                                orn, family = "quasibinomial")
+
+# Look at model diagnostics
+autoplot(horn_model_mammals)
+
+# Look at outputs
+tidy(Anova(horn_model_mammals, test = "F"))
+summary(horn_model_mammals)
+
+tusk_model_mammals <- glm(cbind(female, male) ~ tusk, data = 
+                                orn, family = "quasibinomial")
+
+# Look at model diagnostics
+autoplot(tusk_model_mammals)
+
+# Look at outputs
+tidy(Anova(tusk_model_mammals, test = "F"))
+summary(tusk_model_mammals)
+
+artio_model_mammals <- glm(cbind(female, male) ~ artio + ornamentation, data = 
+                                orn, family = "quasibinomial")
+
+# Look at model diagnostics
+autoplot(artio_model_mammals)
+
+# Look at outputs
+tidy(Anova(artio_model_mammals, test = "F"))
+summary(artio_model_mammals)
+```
+
+```{r}
+justhorns <- filter(orn, horn == "Present")
+
+horn_model <- glm(cbind(female, male) ~ extremesex, data = 
+                                justhorns, family = "quasibinomial")
+
+# Look at model diagnostics
+autoplot(horn_model)
+
+# Look at outputs
+tidy(anova(horn_model, test = "F"))
+summary(horn_model)
+
+```
+
 
 ## Artiodacytla ornamentation
 ![Figure 12: The relationship between % female specimens and the presence of ornaments in Artiodactlya. Horns are horns and antlers combined.](mammals/figures/ornament-artiodactyla.png)

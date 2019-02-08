@@ -88,12 +88,18 @@ order_model_birds <- glm(cbind(female, male) ~ order, data = ds_orders_birds, fa
 # Check for overdispersion
 summary_mod_birds <- summary(order_model_birds)
 summary_mod_birds$deviance / summary_mod_birds$df.resid 
-# Look at outputs
-tidy(anova(order_model_birds, test = "Chisq"))
-summary(order_model_birds)
+
+# quasibinomial
+order_model_birds <- glm(cbind(female, male) ~ order, data = ds_orders_birds, family = "quasibinomial")
 
 # Look at model diagnostics
 autoplot(order_model_birds)
+
+# Look at outputs
+tidy(anova(order_model_birds, test = "F"))
+summary(order_model_birds)
+
+
 ```
 
 ### Mammals
@@ -106,12 +112,14 @@ order_model_mammals <- glm(cbind(female, male) ~ order, data = ds_orders_mammals
 summary_mod_mammals <- summary(order_model_mammals)
 summary_mod_mammals$deviance / summary_mod_mammals$df.resid 
 
-# Look at outputs
-tidy(anova(order_model_mammals, test = "Chisq"))
-summary(order_model_mammals)
+order_model_mammals <- glm(cbind(female, male) ~ order, data = ds_orders_mammals, family = "quasibinomial")
 
 # Look at model diagnostics
 autoplot(order_model_mammals)
+
+# Look at outputs
+tidy(anova(order_model_mammals, test = "F"))
+summary(order_model_mammals)
 ```
 
 ## Plotting
