@@ -1,9 +1,9 @@
 ---
 title: "Sexual size dimorphism"
 output:
-  word_document: default
-  pdf_document: default
   html_document: default
+  pdf_document: default
+  word_document: default
 ---
   
   ```{r setup, include=FALSE}
@@ -89,6 +89,30 @@ summary(ssd_model_birds)
 autoplot(ssd_model_birds)
 ```
 
+```{r}
+# Just for the top 6 orders
+
+summarise(group_by(ds_ssd_birds, order), length((which(SSD>0))), n())
+
+
+ds_ssd_birds2 <- 
+  ds_ssd_birds %>%
+  filter(order == "Psittaciformes" | order == "Passeriformes" |
+  order == "Charadriiformes" | order == "Columbiformes" |
+  order == "Apodiformes" | order == "Piciformes")  %>%
+  mutate(order = relevel(as.factor(order), ref = "Passeriformes"))
+                 
+ssd_model_birds2 <- glm(cbind(female, male) ~ log(SSD)*order, 
+                        data = ds_ssd_birds2, family = "binomial")
+
+# Look at outputs
+tidy(anova(ssd_model_birds2, test = "Chisq"))
+summary(ssd_model_birds2)
+
+# Look at model diagnostics
+autoplot(ssd_model_birds2)
+```
+
 ### Mammals
 ```{r}
 # Fitting the model for mammals
@@ -117,6 +141,25 @@ source(here("analyses/figure-ssd-all.R"))
 
 ```
 
+```{r}
+names(ds_ssd)
+ds_ssd_birdsX <- filter(ds_ssd_birds, order != "Passeriformes")
+
+ggplot(ds_ssd_mammals, aes(x = log(SSD), y = percent, color = order)) +
+  geom_point() 
+
+x1 <-  filter(ds_ssd_birds, male_mass <= 100)
+x2 <-  filter(ds_ssd_birds, male_mass > 300)
+
+ssd_m1 <- glm(cbind(female, male) ~ log(SSD), data = ds_ssd_birdsX, family = "binomial")
+ssd_m1 <- glm(cbind(female, male) ~ log(SSD), data = x1, family = "binomial")
+ssd_m2 <- glm(cbind(female, male) ~ log(SSD), data = x2, family = "binomial")
+
+# Look at outputs
+summary(ssd_m1)$coef[2]
+summary(ssd_m2)$coef[2]
+
+```
 ## Plotting
 ### Mammals
 
