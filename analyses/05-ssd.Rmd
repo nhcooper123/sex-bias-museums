@@ -98,7 +98,7 @@ autoplot(ssd_model_birds)
 ```{r}
 # More complex models involving order and male_mass
 #1.  With order as an interaction
-ssd_model_birds2 <- glm(cbind(female, male) ~ log(SSD)*log(male_mass)*order, 
+ssd_model_birds2 <- glm(cbind(female, male) ~ log(SSD)*order, 
                         data = ds_ssd_birds, family = "quasibinomial")
 
 # Look at outputs
