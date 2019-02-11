@@ -64,7 +64,7 @@ ds <-
 #-------------------------------------------------------------
 # Read in the body size data and merge
 #-------------------------------------------------------------
-extra <- read_csv("data/all-extra-data.csv")
+extra <- read_csv(here("data/all-extra-data.csv"))
 
 # Merge with the specimen data
 # Exclude anything that doesn't have specimen data
