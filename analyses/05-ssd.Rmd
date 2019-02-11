@@ -1,5 +1,5 @@
 ---
-title: "Sexual size dimorphism"
+title: "Sexual size dimorphism and body mass"
 output:
   html_document: default
   pdf_document: default
