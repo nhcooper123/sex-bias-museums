@@ -120,7 +120,7 @@ autoplot(ornament_model_mammals)
 
 # Look at outputs
 tidy(Anova(ornament_model_mammals, test = "F"))
-summary(ornament_model_mammals)
+#summary(ornament_model_mammals)
 ```
 ```{r}
 # What about for type of ornament? Remove ossicles here as there is only one species with them
