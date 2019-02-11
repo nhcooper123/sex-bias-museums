@@ -92,7 +92,7 @@ ggplot(ds_ssd, aes(x = log(SSD), y = percent, colour = class)) +
 
 plot_ssd
 
-ggsave("figures/ssd-all.png")
+#ggsave("figures/ssd-all.png")
 
 # Male mass figures for all species
 plot_mass <-   
@@ -114,7 +114,7 @@ plot_mass <-
 
 plot_mass
 
-ggsave("figures/male-mass-all.png")
+#ggsave("figures/male-mass-all.png")
 #-------------------------------------------------------------------
 # BIRDS
 # Order plots (Top 6 only)
@@ -309,3 +309,137 @@ artio <-
 (rodent | bat | sor)/(carn|primate|artio)
 
 ggsave("figures/ssd-orders-mammals.png", height = 100, units = "mm")
+
+#-------------------------------------
+# Male body mass figures per order
+
+# BIRDS
+#--------------------------------------
+# Make base plot
+#--------------------------------------
+base <-
+  ggplot(ds_ssd, aes(x = log(male_mass), y = percent)) +
+  geom_hline(yintercept = 50, linetype = 2) +
+  theme_bw(base_size = 14) +
+  xlab("") +
+  ylab("% female") +
+  ylim(0, 100) +
+  xlim(0, 8)
+
+#--------------------------------------
+# Make plots for each order
+#--------------------------------------
+pass <-
+  base +
+  geom_point(data = ds_pass, colour = cbPalette[2]) +
+  add_phylopic(img = img_tit, alpha = 1, x = 0.75, y = 90, ysize = 18) +
+  remove_x +
+  geom_smooth(data = ds_pass, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+hum <-
+  base +
+  geom_point(data = ds_hum, colour = cbPalette[3]) +
+  add_phylopic(img = img_hummingbird, alpha = 1, x = 0.6, y = 90, ysize = 23) +
+  remove_x +
+  remove_y +
+  geom_smooth(data = ds_hum, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+wood <-
+  base +
+  geom_point(data = ds_wood, colour = cbPalette[4]) +
+  add_phylopic(img = img_woodpecker, alpha = 1, x = 0.55, y = 90, ysize = 23) +
+  remove_x +
+  remove_y +
+  geom_smooth(data = ds_wood, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+parrot <-
+  base +
+  geom_point(data = ds_parrot, colour = cbPalette[5]) +
+  add_phylopic(img = img_parrot, alpha = 1, x = 0.5, y = 90, ysize = 23) +
+  geom_smooth(data = ds_parrot, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+shore <-
+  base +
+  geom_point(data = ds_shore, colour = cbPalette[8]) +
+  add_phylopic(img = img_shorebird, alpha = 1, x = 0.85, y = 90, ysize = 20) +
+  remove_y +
+  xlab("log male body mass (g)") +
+  geom_smooth(data = ds_shore, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+pigeon <-
+  base +
+  geom_point(data = ds_pigeon, colour = cbPalette[7]) +
+  add_phylopic(img = img_pigeon, alpha = 1, x = 0.7, y = 90, ysize = 18) +
+  remove_y +
+  geom_smooth(data = ds_pigeon, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+(pass | hum | wood)/(parrot | shore | pigeon)
+
+#ggsave("figures/mass-orders-birds.png", height = 100, units = "mm")
+#-------------------------------------------------------------------
+# MAMMALS
+# Order plots (Top 6 orders only)
+# Rodentia, Chiroptera, Soriciomorpha, 
+# Carnivora, Primates, Artiodactyla
+#--------------------------------------
+# Make base plot
+#--------------------------------------
+base <-
+  ggplot(ds_ssd, aes(x = log(male_mass), y = percent)) +
+  geom_hline(yintercept = 50, linetype = 2) +
+  theme_bw(base_size = 14) +
+  xlab("") +
+  ylab("% female") +
+  ylim(0, 100) +
+  xlim(0, 15)
+
+#--------------------------------------
+# Make plots for each order
+#--------------------------------------
+rodent <-
+  base +
+  geom_point(data = ds_rodent, colour = cbPalette[2]) +
+  add_phylopic(img = img_mouse, alpha = 1, x = 1.5, y = 93, ysize = 12) +
+  remove_x +
+  geom_smooth(data = ds_rodent, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+bat <-
+  base +
+  geom_point(data = ds_bat, colour = cbPalette[3]) +
+  add_phylopic(img = img_bat, alpha = 1, x = 1.5, y = 93, ysize = 14) +
+  remove_x +
+  remove_y +
+  geom_smooth(data = ds_bat, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+sor <-
+  base +
+  geom_point(data = ds_sor, colour = cbPalette[4]) +
+  add_phylopic(img = img_shrew, alpha = 1, x = 1.5, y = 93, ysize = 11) +
+  remove_x +
+  remove_y +
+  geom_smooth(data = ds_sor, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+carn <-
+  base +
+  geom_point(data = ds_carn, colour = cbPalette[5]) +
+  add_phylopic(img = img_tiger, alpha = 1, x = 1.5, y = 93, ysize = 10) +
+  geom_smooth(data = ds_carn, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+primate <-
+  base +
+  geom_point(data = ds_primate, colour = cbPalette[8]) +
+  add_phylopic(img = img_monkey, alpha = 1, x = 1.5, y = 93, ysize = 14) +
+  remove_y +
+  xlab("log male body mass (g)") +
+  geom_smooth(data = ds_primate, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+artio <-
+  base +
+  geom_point(data = ds_artio, colour = cbPalette[7]) +
+  add_phylopic(img = img_deer, alpha = 1, x = 1.5, y = 93, ysize = 19) +
+  remove_y +
+  geom_smooth(data = ds_artio, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
+
+(rodent | bat | sor)/(carn|primate|artio)
+
+ggsave("figures/mass-orders-mammals.png", height = 100, units = "mm")
