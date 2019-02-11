@@ -71,6 +71,20 @@ ds <-
 # Merge data with the specimen data
 # Exclude anything that doesn't have specimen data
 ds_plumage <- left_join(ds, extra)
+
+# Split into birds and mammals for models
+ds_plumage_birds <- filter(ds_plumage, class == "Birds")
+
+# Extract mammals 
+ds_ornament_mammals <- 
+  ds_plumage %>%
+  filter(class == "Mammals")
+
+# Remove ossicles
+ds_ornament_mammals2 <- 
+  ds_ornament_mammals %>%
+  filter(is.na(feature) | feature != "ossicle")
+  
 ```
 
 ## Fitting models
@@ -81,7 +95,6 @@ This is only for Passeriformes where we have data on plumage colours for males a
 ```{r}
 # Fitting the model for birds
 # Model is overdispersed so use quasi binomial model
-ds_plumage_birds <- filter(ds_plumage, class == "Birds")
 plumage_model_birds <- glm(cbind(female, male) ~ log(plumageD), 
                            data = ds_plumage_birds, family = "quasibinomial")
 
@@ -93,18 +106,10 @@ tidy(Anova(plumage_model_birds, test = "F"))
 summary(plumage_model_birds)
 ```
 
-## 
-
-![Figure 11: The relationship between % female specimens and sexual dimorphism in plumage colouration. The dotted line at zero shows where there is no sexual size dimorphism. Values > 0.1 indicate males are more colourful, values < -0.1 indicate that females are more colourful, and values between -0.1 and 01 indicate similar colouration.](birds/figures/plumage-passeriformes.png)
-
 ### Ornaments in mammals
 
 ```{r}
 # Fitting the model for mammals
-# Extract mammals and remove ossicles
-ds_ornament_mammals <- filter(ds_plumage, class == "Mammals" 
-                              & (is.na(feature) | feature != "ossicle"))
-
 # Model is overdispersed so use quasi binomial model
 ornament_model_mammals <- glm(cbind(female, male) ~ ornamentation, data = 
                                 ds_ornament_mammals, family = "quasibinomial")
@@ -118,9 +123,9 @@ tidy(Anova(ornament_model_mammals, test = "F"))
 summary(ornament_model_mammals)
 ```
 ```{r}
-# What about for type of ornament?
+# What about for type of ornament? Remove ossicles here as there is only one species with them
 feature_model_mammals <- glm(cbind(female, male) ~ feature, data = 
-                                ds_ornament_mammals, family = "quasibinomial")
+                                ds_ornament_mammals2, family = "quasibinomial")
 # Note that the interaction with order is not significant
 
 # Look at model diagnostics
@@ -146,8 +151,9 @@ summary(sex_model_mammals)
 
 ```{r}
 # What about for whether males or females have the ornament and what sort it is?
+# Again cut out ossicles
 both_model_mammals <- glm(cbind(female, male) ~ feature * ornamentedsex, data = 
-                                ds_ornament_mammals, family = "quasibinomial")
+                                ds_ornament_mammals2, family = "quasibinomial")
 # Note that the interaction with order is not significant
 
 # Look at model diagnostics
@@ -161,7 +167,7 @@ summary(both_model_mammals)
 ```{r}
 # How about just for horns or tusks?
 orn <-
-  ds_ornament_mammals %>%
+  ds_ornament_mammals2 %>%
   mutate(horn = ornamentation) %>%
   mutate(horn = ifelse(feature == "tusk" | is.na(feature), "Absent", horn)) %>%
   mutate(tusk = ornamentation) %>%
@@ -187,7 +193,10 @@ autoplot(tusk_model_mammals)
 # Look at outputs
 tidy(Anova(tusk_model_mammals, test = "F"))
 summary(tusk_model_mammals)
+```
 
+```{r}
+# Can we identify if being an artiodactyl or having ornaments is the key thing? (no)
 artio_model_mammals <- glm(cbind(female, male) ~ artio + ornamentation, data = 
                                 orn, family = "quasibinomial")
 
@@ -200,6 +209,7 @@ summary(artio_model_mammals)
 ```
 
 ```{r}
+# What about just looking at species with horns and classing the rest as absent?
 justhorns <- filter(orn, horn == "Present")
 
 horn_model <- glm(cbind(female, male) ~ extremesex, data = 
@@ -211,9 +221,4 @@ autoplot(horn_model)
 # Look at outputs
 tidy(anova(horn_model, test = "F"))
 summary(horn_model)
-
 ```
-
-
-## Artiodacytla ornamentation
-![Figure 12: The relationship between % female specimens and the presence of ornaments in Artiodactlya. Horns are horns and antlers combined.](mammals/figures/ornament-artiodactyla.png)
