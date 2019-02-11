@@ -1,6 +1,6 @@
 # Figures for SSD
 # Natalie Cooper 
-# Dec 2018
+# Feb 2018
 #------------------------
 # Load libraries
 library(tidyverse)
@@ -75,16 +75,15 @@ ds_ssd <- left_join(ds, extra)
 # All species together
 #-------------------------------------------------------------
 plot_ssd <-   
-ggplot(ds_ssd, aes(x = log(SSD), y = percent/100, colour = class)) +
+ggplot(ds_ssd, aes(x = log(SSD), y = percent, colour = class)) +
   geom_point(alpha = 0.8, size = 0.5) +
-  geom_smooth(method = "glm",
-              method.args = list(family = "binomial"), 
-              col = "darkgrey", size = 0.5) +
- geom_abline(slope = 0, intercept = 0.5, linetype = 2) +
+  #geom_smooth(method = "lm", col = "darkgrey", size = 0.5, se = FALSE) +
+  geom_abline(slope = 0, intercept = 50, linetype = 2) +
+  geom_vline(xintercept = 0, linetype = 3) +
   theme_bw(base_size = 14) +
   ylab("% female specimens") +
-  xlab("Collection year") +
-  ylim(0, 1) +
+  xlab("log sexual size dimorphism") +
+  ylim(0, 100) +
   scale_colour_manual(values = c(cbPalette[c(2:5)])) +
   xlim(-1, 2) +
   theme(legend.position = "none",
@@ -94,6 +93,28 @@ ggplot(ds_ssd, aes(x = log(SSD), y = percent/100, colour = class)) +
 plot_ssd
 
 ggsave("figures/ssd-all.png")
+
+# Male mass figures for all species
+plot_mass <-   
+  ggplot(ds_ssd, aes(x = log(male_mass), y = percent, colour = class)) +
+  geom_point(alpha = 0.8, size = 0.5) +
+  #geom_smooth(method = "lm", col = "darkgrey", size = 0.5, se = FALSE) +
+  geom_abline(slope = 0, intercept = 50, linetype = 2) +
+  theme_bw(base_size = 14) +
+  ylab("% female specimens") +
+  xlab("log male body mass (g)") +
+  ylim(0, 100) +
+  scale_colour_manual(values = c(cbPalette[c(2:5)])) +
+  expand_limits(0,0) +
+  theme(legend.position = "none",
+        strip.background = element_rect(fill="white")) +
+  facet_wrap(~class, ncol = 2, scales = "free_x") +
+  expand_limits(0,0) +
+  geom_blank(aes(x = 0))
+
+plot_mass
+
+ggsave("figures/male-mass-all.png")
 #-------------------------------------------------------------------
 # BIRDS
 # Order plots (Top 6 only)
@@ -148,7 +169,6 @@ pass <-
   remove_x +
   geom_smooth(data = ds_pass, method = "lm", col = "darkgrey", se = FALSE, size = 0.5)
   #geom_smooth(data = ds_pass, method = "glm", method.args = list(family = "binomial"), col = "darkgrey")
-
 
 hum <-
   base +
