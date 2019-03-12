@@ -46,8 +46,8 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
 ```{r}
   sum1 <-
   specimens %>%
-  add_count(class) %>%
-  add_count(class, sex) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
   select(class, sex, n, nn) %>%
   distinct() %>%
   mutate('%' = round(nn/n*100, 2))
@@ -61,8 +61,8 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   sum2 <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class) %>%
-  add_count(class, sex) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
   select(class, sex, n, nn) %>%
   distinct() %>%
   mutate('%' = round(nn/n*100, 2))
@@ -76,8 +76,8 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   proportion <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -94,8 +94,8 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   proportion2 <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -112,8 +112,8 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   worstb <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -125,8 +125,8 @@ kable(slice(worstb, 1:10))
   bestb <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -146,8 +146,8 @@ kable(filter(worstb, percent < 25))
   worstm <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -159,8 +159,8 @@ kable(filter(worstb, percent < 25))
   bestm <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class, binomial) %>%
-  add_count(class, binomial, sex) %>%
+  add_count(class, binomial, name = "n") %>%
+  add_count(class, binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -177,8 +177,8 @@ If we only consider name bearing type specimens the bias becomes more extreme.
   type_sum <-
   specimens %>%
   filter(!is.na(sex) & type == "Type") %>%
-  add_count(class) %>%
-  add_count(class, sex) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
   select(class, sex, n, nn) %>%
   distinct() %>%
   mutate('%' = round(nn/n*100, 2))
@@ -192,8 +192,8 @@ kable(type_sum)
   type_sum2 <-
   specimens %>%
   filter(!is.na(sex) & type != "NonType") %>%
-  add_count(class, type) %>%
-  add_count(class, sex, type) %>%
+  add_count(class, type, name = "n") %>%
+  add_count(class, sex, type, name = "nn") %>%
   select(class, sex, type, n, nn) %>%
   distinct() %>%
   mutate('%' = round(nn/n*100, 2))
@@ -206,8 +206,8 @@ kable(type_sum2)
   type_sum3 <-
   specimens %>%
   filter(!is.na(sex) & !is.na(typeStatus)) %>%
-  add_count(class, typeStatus) %>%
-  add_count(class, sex, typeStatus) %>%
+  add_count(class, typeStatus, name = "n") %>%
+  add_count(class, sex, typeStatus, name = "nn") %>%
   select(class, sex, typeStatus, n, nn) %>%
   distinct() %>%
   mutate('%' = round(nn/n*100, 2))

@@ -8,8 +8,8 @@
 ds_all <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(class) %>%
-  add_count(class, sex) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
   select(class, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2))
@@ -19,8 +19,8 @@ ds_all <-
 ds_type <-
   specimens %>%
   filter(!is.na(sex) & type == "Type") %>%
-  add_count(class, type) %>%
-  add_count(class, sex, type) %>%
+  add_count(class, type, name = "n") %>%
+  add_count(class, sex, type, name = "nn") %>%
   select(class, sex, type, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2))
