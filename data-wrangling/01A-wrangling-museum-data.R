@@ -112,9 +112,9 @@ ds2 <-
   mutate(type = str_replace(type, "SYNTYPE", "Type")) %>%
   mutate(type = str_replace(type, "LECTOTYPE", "Type")) %>%
   mutate(type = str_replace(type, "NEOTYPE", "Type")) %>%
-  mutate(type = str_replace(type, "COTYPE", "Type")) %>%
   
   # Non name bearing types
+  mutate(type = str_replace(type, "COTYPE", "NonNameType")) %>%
   mutate(type = str_replace(type, "ALLOTYPE", "NonNameType")) %>%
   mutate(type = str_replace(type, "PARALECTOTYPE", "NonNameType")) %>%
   mutate(type = str_replace(type, "PARAType", "NonNameType")) %>%
