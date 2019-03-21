@@ -10,8 +10,8 @@ ds_females <-
   specimens %>%
   filter(!is.na(sex)) %>%
   group_by(class) %>%
-  add_count(binomial) %>%
-  add_count(binomial, sex) %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
   select(class, binomial, sex, n, nn) %>%
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
@@ -21,20 +21,26 @@ ds_females <-
 # Histograms of % female and number of specimens
 
 hist1 <-
-  ggplot(ds_females, aes(x = percent)) +
+  ggplot(ds_females, aes(x = percent, fill = class)) +
   geom_histogram(alpha = 0.8, bins = 30) +
   theme_bw(base_size = 14) +
   xlab("% female specimens") +
   xlim(0, 100) +
   geom_vline(xintercept = 50, linetype = 2) +
-  facet_wrap(~class)
+  theme(legend.position = "none",
+        strip.background = element_rect(fill = "white")) +
+  scale_fill_manual(values = c(cbPalette[c(2:5)])) +
+  facet_wrap(~ class)
 
 hist2 <- 
-  ggplot(ds_females, aes(x = log(n))) +
-  geom_histogram(alpha = 0.3, bins = 20) +
+  ggplot(ds_females, aes(x = log(n), fill = class)) +
+  geom_histogram(alpha = 0.8, bins = 20) +
   theme_bw(base_size = 14) +
   xlab("log(number of specimens)") +
-  facet_wrap(~class)
+  theme(legend.position = "none",
+        strip.background = element_rect(fill = "white")) +
+  scale_fill_manual(values = c(cbPalette[c(2:5)])) +
+  facet_wrap(~ class)
 
 hist1 / hist2
 #ggsave("figures/histogram-specimen-counts.png")
@@ -51,8 +57,9 @@ all <-
   xlab("Number of specimens") +
   ylim(0, 100) +
   xlim(0, 10000) +
-  scale_fill_gradientn(colours = cbPalette[3:5], na.value = "transparent") +
-  theme(legend.title = element_blank()) +
+  scale_fill_viridis_c(trans = "log10") +
+  theme(legend.title = element_blank(),
+        strip.background = element_rect(fill = "white")) +
   facet_wrap(~class, ncol = 1)
 
 all
