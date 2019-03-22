@@ -22,8 +22,8 @@ ds <-
   specimens %>%
   filter(!is.na(sex)) %>%
   group_by(class) %>%
-  add_count(binomial) %>%
-  add_count(binomial, sex) %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
   filter(n >= 100 & sex == "Female") %>%
   mutate(percent = nn/n*100) %>%
   select(class, order, binomial, percent) %>%

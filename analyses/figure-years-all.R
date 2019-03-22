@@ -11,8 +11,8 @@ ds_years <-
   filter(!is.na(sex)) %>%
   filter(!is.na(year)) %>%
   group_by(class) %>%
-  add_count(binomial, year) %>%
-  add_count(binomial, year, sex) %>%
+  add_count(binomial, year, name = "n") %>%
+  add_count(binomial, year, sex, name = "nn") %>%
   filter(n >= 50 & sex == "Female") %>%
   rename(female = nn) %>%
   mutate(male = n - female) %>%
