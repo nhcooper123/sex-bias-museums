@@ -3,7 +3,6 @@
 %-------------------------------------------------------------------------------
 
 \documentclass[a4paper, 12pt]{article}
-\usepackage{ms}            % load the template
 \usepackage[osf]{mathpazo} % palatino
 %\usepackage[round]{natbib} % author-year citations
 \usepackage[superscript,biblabel]{cite} % for superscript citations
@@ -13,24 +12,24 @@
 \usepackage{amsmath}
 \usepackage{longtable}
 \usepackage{pdflscape}
+\usepackage{array}
 
 \pagenumbering{arabic}  
 \linespread{1.66}
 
 % figure numbering override
-\renewcommand*{\thefigure}{S\arabic{figure}} % make Fig S1 not Fig 1
-\renewcommand*{\thetable}{S\arabic{table}} % make Table S1 not Table 1
+\renewcommand*{\thefigure}{A\arabic{figure}} % make Fig A1 not Fig 1
+\renewcommand*{\thetable}{A\arabic{table}} % make Table A1 not Table 1
 
 %-------------------------------------------------------------------------------
 % Title page information
 %-------------------------------------------------------------------------------
 
-\title{Supplemental Information from:\\
-  \textit{Sex biases in bird and mammal natural history collections}}
+\title{Supplementary Information from: \textit{Sex biases in bird and mammal natural history collections}}
 
 \author{Natalie Cooper, 
   Alexander L. Bond,
-  Kristofer M. Helgen,
+  Kristofer M. Helgen,\\
   Roberto Portela Miguez and
   Louise Tomsett}
 
@@ -45,8 +44,8 @@
 \parindent = 1.5em
 \addtolength{\parskip}{.3em}
 
-\newpage
-
+%-------------------------------------------------------------------------------
+% Figures
 %-------------------------------------------------------------------------------
 
 \section{Supplementary Figures} 
@@ -56,62 +55,125 @@
  \centering
   \includegraphics[width = \linewidth]{figures/types-all.png}
   \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.
+  The dashed line represents 50\% female specimens.}
   \label{fig-types}
 \end{figure}
 
 % figure A2
 \begin{figure}
  \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
+  \includegraphics[width = \linewidth]{figures/orders-density-birds-all.png}
   \caption{Kernel density plots showing the \% female specimens in each species across orders of birds with at least three species in the dataset. 
   Only species with at least 100 specimens are included. 
-  The dashed line represents 50\% female specimens.
-
-  \label{fig-types}
+  The dashed line represents 50\% female specimens.}
+  \label{fig-bird-orders}
 \end{figure}
 
-% figure A1
+% figure A3
 \begin{figure}
  \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
-  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.
-  \label{fig-types}
+  \includegraphics[width = \linewidth]{figures/orders-density-mammals-all.png}
+  \caption{Kernel density plots showing the \% female specimens in each species across orders of mammals with at least three species in the dataset. 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens.}
+  \label{fig-mammal-orders}
 \end{figure}
 
-% figure A1
+% figure A4
 \begin{figure}
  \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
-  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.
-  \label{fig-types}
+  \includegraphics[width = \linewidth]{figures/mass-orders-birds.png}
+  \caption{Plots showing how \% female specimens in each species varies with male body mass (g) across the six largest orders of birds (from left to right, top to bottom: Passeriformes, Apodiformes, Piciformes, Psittaciformes, Charadriiformes, and Columbiformes). 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens; grey lines show relationship between the variables using a simple linear regression and are for reference only. 
+  Silhouettes are from PhyloPic.org contributed by Ferran Sayol (parrot, hummingbird, tit), Steven Traver (woodpecker) and Alexandre Vong (shorebird).}
+  \label{fig-bird-male-mass}
 \end{figure}
 
-% figure A1
+% figure A5
 \begin{figure}
  \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
-  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.
-  \label{fig-types}
+  \includegraphics[width = \linewidth]{figures/mass-orders-mammals.png}
+  \caption{Plots showing how \% female specimens in each species varies with male body mass (g) across the six largest orders of mammals (from left to right, top to bottom: Rodentia, Chiroptera, Soricomorpha, Carnivora, Primates, and Artiodactyla). 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens; grey lines show relationship between the variables using a simple linear regression and are for reference only. 
+  Silhouettes are from PhyloPic.org contributed by Daniel Jaron (mouse), Yan Wong (bat), Becky Barnes (shrew), Lukasiniho (tiger), Sarah Werning (monkey), and Oscar Sanisidro (deer).}
+  \label{fig-mammal-male-mass}
 \end{figure}
 
-% figure A1
+% figure A6
 \begin{figure}
  \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
-  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.
-  \label{fig-types}
+  \includegraphics[width = \linewidth]{figures/ssd-orders-birds.png}
+  \caption{Plots showing how \% female specimens in each species varies with sexual size dimorphism across the six largest orders of birds (from left to right, top to bottom: Passeriformes, Apodiformes, Piciformes, Psittaciformes, Charadriiformes, and Columbiformes).
+  Sexual size dimorphism is male mass divided by female mass. 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens; the dotted line is the point at which males and females have the same body size; grey lines show relationship between the variables using a simple linear regression and are for reference only. 
+  Silhouettes are from PhyloPic.org contributed by Ferran Sayol (parrot, hummingbird, tit), Steven Traver (woodpecker) and Alexandre Vong (shorebird).}
+  \label{fig-bird-ssd}
 \end{figure}
 
+% figure A7
+\begin{figure}
+ \centering
+  \includegraphics[width = \linewidth]{figures/ssd-orders-mammals.png}
+  \caption{Plots showing how \% female specimens in each species varies with sexual size dimorphism across the six largest orders of mammals (from left to right, top to bottom: Rodentia, Chiroptera, Soricomorpha, Carnivora, Primates, and Artiodactyla). 
+  Sexual size dimorphism is male mass divided by female mass. 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens; the dotted line is the point at which males and females have the same body size; grey lines show relationship between the variables using a simple linear regression and are for reference only. 
+  Silhouettes are from PhyloPic.org contributed by Daniel Jaron (mouse), Yan Wong (bat), Becky Barnes (shrew), Lukasiniho (tiger), Sarah Werning (monkey), and Oscar Sanisidro (deer).}
+  \label{fig-mammal-ssd}
+\end{figure}
 
+% figure A8
+\begin{figure}
+ \centering
+  \includegraphics[width = \linewidth]{figures/histogram-specimen-counts.png}
+  \caption{Histograms showing the distribution of percentage female specimens and log number of specimens for each species across birds and mammals.}
+  \label{fig-histograms}
+\end{figure}
 
+% figure A9
+\begin{figure}
+ \centering
+  \includegraphics[width = \linewidth]{figures/specimens-numbers-all.png}
+  \caption{Relationship between the percentage female specimens in each species and the number of specimens for each species. 
+  Hex bins are used rather than points to make the plot easier to read.}
+  \label{fig-hex}
+\end{figure}
 
-% References
-\bibliographystyle{nature}
-\bibliography{sex-bias}
+%-------------------------------------------------------------------------------
+% Tables
+%-------------------------------------------------------------------------------
+
+\newpage
+\section{Supplementary Tables}
+
+% Table A1
+\input{figures/table-orders}
+
+\newpage
+% Table A2
+\input{figures/table-percents}
+
+\newpage
+% Table A3
+\input{figures/table-outputs}
+
+%-------------------------------------------------------------------------------
+% Methods
+%-------------------------------------------------------------------------------
+
+\newpage
+\section{Supplementary Methods}
+
+We expect large skews in the proportion of male or female specimens when sample size is low, but the ratio of male:female specimens should approach 50:50 as more specimens are added if there is no bias. 
+Most species in our dataset were represented by only a few specimens (Figure \ref{fig-histograms}), with large skews in the percentage of female specimens (in both directions) at low numbers (Figure \ref{fig-hex}).
+
+To test whether this may influence our analyses, we used generalised linear models (GLM) with binomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable, and the log number of specimens per species as the explanatory variable. We then used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
+The model showed massive heteroscedasticity in the residuals, due to the skew in proportions when sample size is low. 
+We therefore repeated the analysis, removing species with fewer than 20, 50, 100, 150 and 200 specimens in turn. 
+The best fitting model, without losing too much data, was a model with species with more than 100 specimens. 
+There is still a significant positive relationship between the number of specimens and the proportion of female specimens but this is not unusual with such a large dataset, and the effect size is extremely low ($slope \pm SE = 0.034 \pm 0.001$, $z_3257 = 24.86$, $p < 0.001$) so we exclude this variable from further analyses.
 
 \end{document}
