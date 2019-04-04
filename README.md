@@ -25,12 +25,14 @@ Please also cite the original sources of the data as follows:
 Specimen data
 > GBIF: The Global Biodiversity Information Facility. https://www.gbif.org/ (2018).
 
-> AMNH: Trombone, T., AMNH Bird Collection. American Museum of Natural History. Occurrence dataset https://doi.org/10.15468/xvzdcm accessed via GBIF.org on 2018-08-03 (2013). Trombone, T., AMNH Mammal Collections. American Museum of Natural History. Occurrence Dataset https://doi.org/10.15468/wu3poe accessed via GBIF.org on 2018-08-09 (2016).
+> AMNH birds: Trombone, T., AMNH Bird Collection. American Museum of Natural History. Occurrence dataset https://doi.org/10.15468/xvzdcm accessed via GBIF.org on 2018-08-03 (2013). Trombone, T., 
+> AMNH mammals: AMNH Mammal Collections. American Museum of Natural History. Occurrence Dataset https://doi.org/10.15468/wu3poe accessed via GBIF.org on 2018-08-09 (2016).
 
-> FMNH: Grant, S. & Marks, B., Field Museum of Natural History (Zoology) Bird Collection. Version 14.4. Field Museum. Occurrence dataset https://doi.org/10.15468/exkxdx accessed via GBIF.org on 2018-08-03. (2018). Grant, S. & Ferguson, A., Field Museum of Natural History (Zoology) Mammal Collection. Version 9.3. Field Museum. Occurrence Dataset https://doi.org/10.15468/n4zgxw accessed via GBIF.org on 2018-08-09 (2018).
+> FMNH birds: Grant, S. & Marks, B., Field Museum of Natural History (Zoology) Bird Collection. Version 14.4. Field Museum. Occurrence dataset https://doi.org/10.15468/exkxdx accessed via GBIF.org on 2018-08-03. (2018). 
+> FMNH mammals: Grant, S. & Ferguson, A., Field Museum of Natural History (Zoology) Mammal Collection. Version 9.3. Field Museum. Occurrence Dataset https://doi.org/10.15468/n4zgxw accessed via GBIF.org on 2018-08-09 (2018).
 
-> MNHN: Museum National d’Histoire Naturelle, The birds collection (ZO) of the Muse´um national d’Histoire Naturelle (MNHN - Paris). Version 42.70. Occurrence dataset https://doi.org/10.15468/h0xtwv accessed via GBIF.org on 2018-08-03 (2018). 
-Museum National d’Histoire Naturelle, The mammals collection (ZM) of the Muse´um national d’Histoire naturelle (MNHN - Paris). Version 43.55. Occurrence Dataset https://doi.org/10.15468/j0xw9i accessed via GBIF.org on 2018-08-09 (2018).
+> MNHN birds: Museum National d’Histoire Naturelle, The birds collection (ZO) of the Muse´um national d’Histoire Naturelle (MNHN - Paris). Version 42.70. Occurrence dataset https://doi.org/10.15468/h0xtwv accessed via GBIF.org on 2018-08-03 (2018). 
+> MNHN mammals: Museum National d’Histoire Naturelle, The mammals collection (ZM) of the Muse´um national d’Histoire naturelle (MNHN - Paris). Version 43.55. Occurrence Dataset https://doi.org/10.15468/j0xw9i accessed via GBIF.org on 2018-08-09 (2018).
 
 > NMNH: Orrell, T. & Hollowell, T., NMNH Extant Specimen Records. Version 1.16. National Museum of Natural History, Smithsonian Institution. Occurrence Dataset https://doi.org/10.15468/hnhrg3 accessed via GBIF.org on 2018-08-09 (2018).
 
