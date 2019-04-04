@@ -6,3 +6,33 @@
 raw-data/*
 data/*
 *.html
+
+# LaTeX #
+*.aux
+*.bbl
+*.blg
+*.dvi
+*.fff
+*.lof
+*.lot
+*.out
+*.toc
+*.ttt
+*.fdb_latexmk
+*.pdf
+*.fls
+
+# Packages #
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+*.log
+*.sql
+*.sqlite
