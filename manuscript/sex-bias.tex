@@ -1,0 +1,100 @@
+%-------------------------------------------------------------------------------
+% Preamble
+%-------------------------------------------------------------------------------
+
+\documentclass[a4paper, 12pt]{article}
+\usepackage{ms}            % load the template
+\usepackage[osf]{mathpazo} % palatino
+%\usepackage[round]{natbib} % author-year citations
+\usepackage[superscript,biblabel]{cite} % for superscript citations
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{parskip} 
+\usepackage{amsmath}
+
+\pagenumbering{arabic}  
+\linespread{1.66}
+
+%-------------------------------------------------------------------------------
+% Title page information
+%-------------------------------------------------------------------------------
+
+\title{Sex biases in bird and mammal natural history collections}
+
+\author{
+  Natalie Cooper$^{1*}$, Roberto Portela Miguez$^{1,2}$, Alexander L. Bond$^{1,3}$,\\ 
+  Louise Tomsett$^{1,2}$, and Kristofer M. Helgen$^{4}$
+}
+\date{}
+\affiliation{\noindent{\footnotesize
+  $^1$Department of Life Sciences, Natural History Museum, Cromwell Road, London, SW7 5BD, UK.\\
+  $^2$Mammal Group, Department of Life Sciences, Natural History Museum, Cromwell Road, London, SW7 5BD, UK.\\
+  $^3$Bird Group, Department of Life Sciences, Natural History Museum, Akeman Street, Tring, Hertfordshire, HP23 6AP, UK.\\ 
+  $^4$Department of Ecology and Evolutionary Biology, School of Biological Sciences, University of Adelaide, North Terrace,  Adelaide, SA 5005, Australia.\\
+  $*$Email address: natalie.cooper@nhm.ac.uk
+}}
+
+\vfill
+
+\runninghead{Sex biases in collections}
+%\keywords{}
+%}
+
+%-------------------------------------------------------------------------------
+% Begin document
+%-------------------------------------------------------------------------------
+\begin{document}
+\modulolinenumbers[1]   % Line numbering on every line
+
+\mstitlepage
+
+\parindent = 1.5em
+\addtolength{\parskip}{.9em}
+
+\raggedright
+%-------------------------------------------------------------------------------
+% Abstract
+%-------------------------------------------------------------------------------
+
+\section{Abstract}
+
+Although biological sex may influence evolutionary patterns, it is often overlooked in large-scale studies using natural history specimens. 
+If collections are biased towards one sex, studies may not be representative of the species. 
+Here, we investigate sex ratios in over two million bird and mammal specimen records from five large international museums. 
+We found a slight bias towards males in birds (40\% females) and mammals (48\% females), but this varied among orders. 
+The proportion of female specimens has not significantly changed in 130 years, but decreased in species with “showy” male traits like colourful plumage and horns. Body size had little effect. 
+Male bias was strongest in name-bearing types; only 27\% of bird and 39\% of mammal types were female. 
+These results imply that previous studies may be impacted by undetected male bias, and vigilance is required when using specimen data, collecting new specimens, and designating types.
+
+\textbf{Keywords: carbon stable isotopes, movement models}
+
+%-------------------------------------------------------------------------------
+% Main text
+%-------------------------------------------------------------------------------
+
+\section{Main text}\label{main}
+Natural history museum specimens are used extensively in studies of taxonomy, systematics, biogeography, genomics, comparative anatomy, morphological variability, development, parasitology, stable isotope ecology, toxicology, morphological evolution and more\cite{lister2011natural,pyke2010biological,mclean2015natural}. 
+They are also of vital importance for understanding Anthropocene effects on biodiversity (Meineke et al 2019). 
+Large studies of species phenotypes using museum specimens, especially in vertebrates, are becoming increasingly common (e.g. Cooney et al 2017; Felice \& Goswami 2018) and are revealing new insights into the evolution of diversity. These studies require large amounts of data, therefore the focus is often on collecting data from as many species as possible, to the detriment of other sources of variation. Sex is an important factor that influences many aspects of, an individual's ecology and life-history (Table 1), but it is often treated as a nuisance variable, overlooked entirely, or data collection focuses on just one sex (e.g. Cooper \& Purvis 2014) to avoid the issue. If natural history collections have unbiased sex ratios (i.e. close to 50\% males and females, or reflective of the sex ratio for the species is in the wild; Karlin and Lessard 1986) then this may not be a problem; if there is a bias in the sex composition of collections, this has implications for studies that assume their samples are representative of the whole population or species (Table 1). No large-scale study of sex ratios in museum collections exists, therefore investigating this is of vital importance as the number of studies using museum specimens continue to rise (e.g. this recent special issue: Meineke et al 2019).
+
+% figure 4
+%\begin{figure}
+% \centering
+%  \includegraphics[width = \linewidth]{figures/Figure-4-monthly.png}
+%  \caption{Simulated locations by month taken from the top 10\% best fitting migratory movement models for behavioural phase two (summer 1886 to spring 1890) only.}
+%  \label{fig4}
+%\end{figure}
+
+
+\section{Acknowledgments}\label{acknowledgments}
+We thank...
+
+% References
+\bibliographystyle{nature}
+\bibliography{sex-bias}
+
+%\subsection{Data Code and Materials}\label{data-code-and-materials}
+%Data are available from the NHM Data Portal (https://doi.org/10.5519/0093278). 
+%R code is available from GitHub (https://github.com/nhcooper123/blue-whale-bes)(Zenodo DOI 10.5281/zenodo.2542777).
+
+\end{document}
