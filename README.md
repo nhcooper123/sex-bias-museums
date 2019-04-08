@@ -18,7 +18,7 @@ For reproducibility purposes download this and place it into a `rawdata/` or `da
 * `rawdata/` should contain all other data. Note that we did not upload raw data that can be accessed from the original data sources due to copyright issues, but these can be downloaded from GBIF (references and links below). The raw data are only necessary if you want to repeat the data wrangling steps.
 
 If you use the cleaned data please cite as follows: 
-> Natalie Cooper (2019). Dataset: XXX . Natural History Museum Data Portal (data.nhm.ac.uk). [https://doi.org/10.5519/0093278](https://doi.org/10.5519/0093278).
+> Natalie Cooper, Alexander L Bond, Kristofer M Helgen, Roberto Portela Miguez, Louise Tomsett (2019). Dataset: Sex biases in natural history collections of birds and mammals. Natural History Museum Data Portal (data.nhm.ac.uk). [https://doi.org/10.5519/0065209](https://doi.org/10.5519/0065209).
 
 Please also cite the original sources of the data as follows:
 
