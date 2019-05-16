@@ -89,32 +89,27 @@ Sex is an important factor that influences many aspects of an individual's ecolo
 If natural history collections have unbiased sex ratios (i.e. close to 50\% males and females, or reflective of the sex ratio for the species is in the wild\cite{karlin1986theoretical}) then this may not be a problem; if there is a bias in the sex composition of collections, this has implications for studies that assume their samples are representative of the whole population or species (Table \ref{table_consequences}). 
 No large-scale study of sex ratios in museum collections exists, therefore investigating this is of vital importance as the number of studies using museum specimens continue to rise (e.g. this recent special issue\cite{meineke2018biological}).
 
+Here we investigate sex biases in natural history collections of birds and mammals using  2,496,328 specimen records from five major international museums.
+We find a slight bias towards males in both groups.
+Male bias may be the result of deliberate selection of males, either by collectors in the field or curators accessioning specimens, trapping biases (i.e. trapping method, season of collecting, conspicuous male behaviors or traits) or in some cases simply because there were more males in a population. 
+Collectors may also actively avoid collecting females with young due to legislation, ethical or conservation considerations. 
+In particular a major suspected source of male bias in collections is deliberate selection for large, ``impressive'' male specimens, especially where males are larger or more colourful than females, or possess ornaments such as horns or antlers. 
+Conventional wisdom also suggests that some male bias may be related to the age of the collections, therefore, we expect male bias to decrease towards the present due to changes in collection methods and motivations over the last century. 
+To investigate these biases further, we tested whether male bias differed among orders, with sexual size dimorphism, with the possession of colourful plumage (birds) or ornamentation (mammals) in males, and through time.
+
 \newpage
 \begin{landscape}
   \input{figures/table-consequences}
 \end{landscape}
-
 
 \section{Materials and Methods}
 \subsection{Data collection and cleaning}
 \subsubsection{Specimen data} 
 We obtained museum bird and mammal collection records from the Global Biodiversity Information Facility (GBIF\cite{gbif}). 
 Specifically we collated data from the American Museum of Natural History (AMNH; $n = 271,407$ records\cite{amnh-birds,amnh-mammals}), Field Museum of Natural History (FMNH; $n = 182,984$ records\cite{fmnh-birds,fmnh-mammals}), Mus\'{e}um National d'Histoire Naturelle (MNHN; $n = 86,126$ records\cite{mnhn-birds,mnhn-mammals}), National Museum of Natural History, Smithsonian Institution (NMNH; $n = 496,735$ records\cite{smithsonian-both}), and Natural History Museum, London (NHMUK; $n = 251,409$\cite{nhm-all}).
- All raw data can be downloaded from GBIF\cite{gbif}.
-
-We obtained bird and mammal specimen records from the American Museum of Natural History (AMNH), the Field Museum of Natural History (FMNH), the Mus\'{e}um National d'Histoire Naturelle (MNHN), the National Museum of Natural History, Smithsonian Institution (NMNH), and the Natural History Museum, London (NHMUK). 
-These specimens were obtained between 1751 and 2018, mostly through hunting or trapping, and sexed based on external genitalia or secondary sexual characters, for example plumage colouration or antlers. 
-Note that we recognise that biological sex is a spectrum\cite{sciam2017}. 
-We focus here on specimens identified as females and males for simplicity because there were very few recorded intersex specimens in collections databases, but we recognize the importance of these individuals.
-
-The final dataset contained 2,496,328 specimen records (1,395,748 birds and 1,100,580 mammals), representing 17,348 species (12,574 birds and 4,774 mammals; note that some of these were synonymies). 
-Of these, 20\% of bird specimens were female, 31\% were male, and 49\% were not sexed. 
-For mammals, the number of non-sexed individuals was much lower at 15\%, likely because it is easier to identify sex in mammals, with 41\% female and 44\% male specimens. 
-If we consider only sexed specimens, 40\% of bird and 48\% of mammal specimens were female (Figure A1). 
-In real terms this represents 143,905 more male than female specimens in birds and 40,468 more male specimens in mammals. 
-In the wild, adult sex ratios in many bird species are male skewed, though on average not as skewed as our results (n = 187 species, median 44.8\% female\cite{szekely2014sex}), however, 48\% is not a large deviation from the 50\% expected in many natural populations of mammals\cite{karlin1986theoretical}.
-
-
+These specimens were obtained between 1751 and 2018, mostly through hunting or trapping, and sexed based on external genitalia or secondary sexual characters, for example plumage colouration or antlers.
+All raw data can be downloaded from GBIF\cite{gbif}.
+ 
 Prior to analyses we cleaned the data as follows. 
 (i) Record type. To avoid confusing specimens with archives describing specimens we selected only preserved specimen records; 
 (ii) Age. Juveniles can be harder to sex so we excluded all juveniles, young and foetuses from the dataset; 
@@ -122,55 +117,52 @@ Prior to analyses we cleaned the data as follows.
 (iv) Taxonomy. We removed subspecies names and used species binomials because we were  interested in species-level sex ratios. We corrected bird taxonomy using the GBIF backbone taxonomy\cite{gbif}, and mammal taxonomy using Mammal Species of the World\cite{wilson2005mammal}; 
 (v) Type status. We split types into name bearing (Holotype, Syntype, Lectotype, Neotype) and non-name bearing (Paratype, Paralectotype, Paraneotype, Allotype, Topotype, Cotype) types. Where the records did not specify the kind of type we define these as ambiguous types; 
 (vi) Sex. We standardized sex to either Female, Male or non-sexed, and removed all intersex or hermaphrodite individuals. 
-We also excluded non-sexed individuals from the analyses; and finally 
-(vii) we excluded all surplus data columns. 
-The final dataset contained 2,496,611 specimens (1,395,748 birds and 1,100,863 mammals), representing 17,348 species (12,574 birds and 4,774 mammals). 
+Note that we recognise that biological sex is a spectrum\cite{sciam2017}. 
+We focus here on specimens identified as females and males for simplicity because there were very few recorded intersex specimens in collections databases, but we recognize the importance of these individuals.
+We also excluded non-sexed individuals from the analyses.
+The final dataset contained 2,496,611 specimens (1,395,748 birds and 1,100,863 mammals), representing 17,348 species (12,574 birds and 4,774 mammals; note that some of these were synonymies). 
 
 \subsubsection{Sexual dimorphism, plumage coloration and ornamentation data.}
-We extracted median body masses (g) for males and females from Lislevand et al.\cite{lislevand2007avian} for birds and Jones et al.\cite{pantheria} for mammals, then calculate sexual size dimorphism by dividing mean male body mass by female body mass. 
-The final dataset contains sexual size dimorphism data for 2,272 bird (18\% of species in our specimen dataset) and 1,314 mammal species (28\% of species in our specimen dataset). 
+We extracted median body masses (g) for males and females from Lislevand et al.\cite{lislevand2007avian} for birds and Jones et al.\cite{pantheria} for mammals, then calculated sexual size dimorphism by dividing mean male body mass by female body mass. 
+The final dataset contained sexual size dimorphism data for 2,272 bird (18\% of species in our specimen dataset) and 1,314 mammal species (28\% of species in our specimen dataset). 
 Note that the sample size here is lower because sex disaggregated body size data are rare.
 
-To explore how ``showiness'' might influence sex bias, we include a measure of plumage coloration for passerine birds taken from Dale et al.\cite{dale2015data,dale2015effects}. 
+To explore how ``showiness'' might influence sex bias, we included a measure of plumage coloration for passerine birds taken from Dale et al.\cite{dale2015data,dale2015effects}. 
 This measure is based on the mean RGB (red green blue) values for 400 randomly chosen pixels in six patches (nape, crown, forehead, throat, upper breast, and lower breast) for each sex. 
 We then calculated a plumage dimorphism score by dividing male plumage score by female score for each species. 
-For mammals, we used the Handbook of Mammals of the World to identify mammals where males have ornamentation. We define ornamentation as horns, antlers and tusks. 
-Where species had ornaments, we recorded whether both sexes or only males routinely possess them. The majority of species with ornaments were Artiodactyla (203 of 224 species). 
+For mammals, we used the Handbook of Mammals of the World to identify mammals where males have ornamentation. 
+We defined ornamentation as horns, antlers and tusks. 
+Where species had ornaments, we recorded whether both sexes or only males routinely possess them. 
+The majority of species with ornaments were Artiodactyla (203 of 224 species). 
 Other ornamented species were walruses, beaked whales, narwhals, rhinoceroses, okapis, and elephants, however only artiodactyls and the walrus were represented by more than 100 specimens in the dataset (see below), so were the only species to appear in our models.
 
-The final cleaned data are available on the NHM Data Portal [link will be added on acceptance]. 
+The final cleaned data are available on the NHM Data Portal \cite{sex-bias-data}. 
 
 \subsection{Analyses}
-All analyses investigated birds and mammals separately. 
-We performed all analyses in R version 3.5.0\cite{R}. 
+We analysed bird and mammal data separately and performed all analyses in R version 3.5.0\cite{R}. 
 Reproducible scripts are available on GitHub at https://github.com/nhcooper123/sex-bias-museums [we will add a zenodo link on acceptance].
 
-We first summarized the overall proportion of female specimens, and calculated the median proportion of females across species. 
-In addition, we summarized differences in the proportion of female specimens across orders and types. 
+We first summarised the overall proportion of female specimens, and calculated the median proportion of females across species. 
+In addition, we summarised differences in the proportion of female specimens across orders and types. 
 
-Most species were represented by only a few specimens (Figure A8), with large skews towards either males or females at low numbers (Figure A9). 
-To reduce problems this is likely to cause when fitting models, we use only species with 100 or more specimens in our models (see Supplementary Methods for more details), except in our change-through-time models. 
-In these models our response variable is the proportion of males and females in each species for each year from 1880-2010 (before 1880 and after 2010 we do not have any species with sufficient specimens to include). 
-As there were only 55 bird species and 1216 mammal species with over 100 specimens in a year, change-through-time models instead use all species with more than 50 specimens in a single year to increase the sample size ($n = 391$ birds, $n = 3428$ mammals).
+Most species were represented by only a few specimens (Figure A1), with large skews towards either males or females at low numbers (Figure A2). 
+To reduce problems this is likely to cause when fitting models, we used only species with 100 or more specimens in our models (see Supplementary Methods for more details), except in our change-through-time models. 
+In these models our response variable was the proportion of males and females in each species for each year from 1880-2010 (before 1880 and after 2010 we did not have any species with sufficient specimens to include). 
+As there were only 55 bird species and 1216 mammal species with over 100 specimens in a year, change-through-time models instead used all species with more than 50 specimens in a single year to increase the sample size ($n = 391$ birds, $n = 3428$ mammals).
 
-We fitted all models using generalized linear models (GLM) with quasibinomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable (i.e. a binomial response where the number of females and the number of males for each species were jointly modeled). 
+We fitted all models using generalised linear models (GLM) with quasibinomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable (i.e. a binomial response where the number of females and the number of males for each species were jointly modeled). 
 Quasibinomial rather than binomial errors were used due to overdispersion (all models have deviance/residual degrees of freedom far greater than two; see output on GitHub for exact values), and we assessed the significance of model terms using Type II sums of squares. 
 We used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
-We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) plumage dimorphism (log-transformed; passerine birds only); and (vi) ornamentation (mammals only). 
-
-
-
-
-\newpage
-
-
-Bias towards males in parts of natural history collections may have been driven by a number of reasons such as deliberate selection of males, either by collectors in the field or curators accessioning specimens, trapping biases (i.e. trapping method, season of collecting, conspicuous male behaviors or traits) or in some cases simply because there were more males in a population. 
-Collectors may also actively avoid collecting females with young due to legislation, ethical or conservation considerations. 
-To investigate these biases further, we estimated the proportion of female and male specimens for each species represented by more than 100 sexed individuals (see Materials and Methods and Supplementary Methods for an explanation of this cut-off). 
-Overall the median proportion of female specimens in each species was 41\% in birds and 48\% in mammals. 
-To test for correlates of bias we analyzed birds and mammals separately, and fitted all models using generalized linear models (GLM) with quasibinomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable.
+We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) plumage dimorphism (log transformed; passerine birds only); and (vi) ornamentation (mammals only). 
 
 \section{Results and Discussion}
+
+Of the 2,496,328 specimen records (1,395,748 birds and 1,100,580 mammals) in our dataset, 20\% of bird specimens were female, 31\% were male, and 49\% were not sexed. 
+For mammals, the number of non-sexed individuals were much lower at 15\%, likely because it is easier to identify sex in mammals, with 41\% female and 44\% male specimens. 
+If we consider only sexed specimens, 40\% of bird and 48\% of mammal specimens were female (Figure A3). 
+In real terms this represents 143,905 more male than female specimens in birds and 40,468 more male specimens in mammals. 
+In the wild, adult sex ratios in many bird species are male skewed, though on average not as skewed as our results (n = 187 species, median 44.8\% female\cite{szekely2014sex}), however, 48\% is not a large deviation from the 50\% expected in many natural populations of mammals\cite{karlin1986theoretical}.
+Species with the most extreme sex ratios in our data, i.e. species with fewer than 25\% female or fewer than 25\% male specimens, for species with at least 100 specimens in total, are shown in Table A1. 
 
 % figure 1
 \begin{figure}
@@ -184,15 +176,16 @@ To test for correlates of bias we analyzed birds and mammals separately, and fit
 \end{figure}
 
 \subsection{Variation among orders.} 
-The proportion of female specimens varied across orders for both birds ($F_{24, 1721} = 29.81$, $p < 0.001$; Figure \ref{fig-bird_order_six}; Figure A2; Table A1) and mammals ($F_{24, 1488} = 19.80$, $p < 0.001$; Figure \ref{fig-mammal_order_six}; Figure A3; Table A1). Most orders have more males than females (Table A1). 
-In birds, of the 25 orders with sufficient data, only tinamous (Tinamiformes; 50.4\%) have more females, but these represent just four species in the dataset. 
+The proportion of female specimens varied across orders for both birds ($F_{24, 1721} = 29.81$, $p < 0.001$; Figure \ref{fig-bird_order_six}; Figure A4; Table A2) and mammals ($F_{24, 1488} = 19.80$, $p < 0.001$; Figure \ref{fig-mammal_order_six}; Figure A5; Table A2). 
+Most orders had more males than females (Table A2). 
+In birds, of the 25 orders with sufficient data, only tinamous (Tinamiformes; 50.4\%) had more females, but these represented just four species in the dataset. 
 The most male-biased orders with more than 25 species were pigeons and doves (Columbiformes; 36.8\% female), hummingbirds and swifts (Apodiformes; 37.2\%), and passerines (Passeriformes; 38.4\%). 
 Adult sex ratios in Columbiformes and Passeriformes are generally male-skewed\cite{szekely2014sex,bosque2019skewed,mayr1939sex}, but hummingbirds are often female-skewed in the wild\cite{szekely2014sex,mayr1939sex}. 
 This, along with evidence that, on average, Passeriformes are not as male biased as our results ($n = 54$ species, median 45.1\% female\cite{szekely2014sex}), suggests that greater availability of males alone cannot account for our results.
 
-Seven of the 25 mammalian orders with sufficient data have more females, the most extreme being anteaters and sloths (Pilosa; 71.1\% female). 
+Seven of the 25 mammalian orders with sufficient data had more females, the most extreme being anteaters and sloths (Pilosa; 71.1\% female). 
 Most mammal species have a sex ratio of 1:1 at birth\cite{karlin1986theoretical}, though this can vary in adults. 
-Several species of sloth have higher numbers of females (up to 68.8\% females\cite{reyes2015informacion}) which may explain why we also find more females in collections, however, giant anteaters (\textit{Myrmecophaga tridactyla}) show strong male bias in the field (e.g.\cite{defreitas2015}), but strong female bias in collections (71.3\% female). 
+Several species of sloth have higher numbers of females (up to 68.8\% females\cite{reyes2015informacion}) which may explain why we also found more females in collections, however, giant anteaters (\textit{Myrmecophaga tridactyla}) show strong male bias in the field (e.g.\cite{defreitas2015}), but strong female bias in collections (71.3\% female). 
 Among the orders represented by more than 25 species in our data, only bats have more females (Chiroptera; 52.2\% female; Figure \ref{fig-mammal_order_six}), despite reportedly balanced adult sex ratios in the wild\cite{altringham}. 
 This is likely related to widespread sex segregation in bat roosting sites, with many roosts containing individuals of only one sex\cite{altringham}. 
 In the the past, bats were often trapped by collecting all individuals in a roost site, and female bats use fewer roost sites than males (e.g.\cite{encarnaccao2012spatiotemporal}), so skew towards females is not surprising. 
@@ -210,11 +203,7 @@ The most male-biased order of mammals were the even-toed ungulates (Artiodactyla
   \label{fig-mammal_order_six}
 \end{figure}
 
-
 \subsection{Changes through time.}
-Conventional wisdom suggests that some male bias may be related to the age of the collections. 
-We expected the bias to decrease towards the present due to changes in collection methods and motivations over the last century. 
-To test this we modeled how the proportion of females for each species per year changed between 1880 and 2010. 
 We found male bias increased for birds ($F_{1, 389} = 7.167$, $p = 0.008$; Figure \ref{fig-time}), but decreased for mammals ($F_{1, 3426} = 6.86$, $p = 0.009$; Figure \ref{fig-time}), however the effect sizes were extremely small (birds: $slope \pm SE = -0.002 \pm < 0.001$; mammals: $slope \pm SE = 0.001 \pm < 0.001$), indicating very little change in either class, i.e. there has been no improvement in the sex balance of collecting over the last 130 years.
 
 % figure 3
@@ -230,11 +219,10 @@ We found male bias increased for birds ($F_{1, 389} = 7.167$, $p = 0.008$; Figur
 \end{figure}
 
 \subsection{Male body mass and sexual size dimorphism.}
-A major suspected source of male bias in collections is deliberate selection for large, ``impressive'' male specimens. 
-We found significant effects of male body size on the proportion of female specimens in both birds and mammals (Table A3), however, the direction and strength of the relationship varied among classes and orders (Figure \ref{fig-male-mass}; Figures A4-A5; Table A3). 
+We found significant effects of male body size on the proportion of female specimens in both birds and mammals (Table A3), however, the direction and strength of the relationship varied among classes and orders (Figure \ref{fig-male-mass}; Figures A6-A7; Table A3). 
 Bird species with larger males tended to have more female specimens, whereas the reverse was true for mammals. 
-In mammals this was likely driven by a few orders with large males that have long been favored in collections (e.g. Artiodactyla, Carnivora) and have low median percentages of female specimens (Figure \ref{fig-mammal_order_six}, Table A1). 
-Interestingly however, selection for males in these groups did not increase with increasing male body size (Figure A5), instead it appears male carnivores and artiodactyls were preferred over females, regardless of their body size.
+In mammals this was likely driven by a few orders with large males that have long been favored in collections (e.g. Artiodactyla, Carnivora) and have low median percentages of female specimens (Figure \ref{fig-mammal_order_six}, Table A2). 
+Interestingly however, selection for males in these groups did not increase with increasing male body size (Figure A7), instead it appears male carnivores and artiodactyls were preferred over females, regardless of their body size.
 
 % figure 4
 \begin{figure}
@@ -248,15 +236,12 @@ Interestingly however, selection for males in these groups did not increase with
   \label{fig-male-mass}
 \end{figure}
 
-Rather than selecting large males \textit{per se}, collectors may favour males when the difference in size between females and males is large. 
-To test this we calculated sexual size dimorphism by dividing male body mass by female body mass. 
-We found that as sexual size dimorphism increased, i.e. as males became increasingly larger than females, there was more bias towards male specimens (Table A3), however, this result was entirely driven by differences among orders (Figure A4 and A5); when order was included in the models, sexual size dimorphism did not significantly influence specimen sex ratios over the effects of order (Table A3). 
+Rather than selecting large males \textit{per se}, collectors may favour males when the difference in size between females and males, i.e. sexual size dimorphism, is large. 
+We found that as sexual size dimorphism increased, i.e. as males became increasingly larger than females, there was more bias towards male specimens (Table A3), however, this result was entirely driven by differences among orders (Figure A8 and A9); when order was included in the models, sexual size dimorphism did not significantly influence specimen sex ratios over the effects of order (Table A3). 
 As with body mass, this suggested certain orders were more likely to contain more male specimens, regardless of their size with respect to females, suggesting that other characteristics were driving their selection.
 
 \subsection{Plumage and ornaments.} 
-To further test whether collections were biased towards ``showy'' or ``impressive'' males we collated data on sexually dimorphic features in birds and mammals. 
-For birds, we focused on passerines (Passeriformes) a group with highly sexually dimorphic plumage coloration in some species but not others, and for which there is detailed available data\cite{dale2015data,dale2015effects}. 
-We calculated a sexual plumage dimorphism score for each species, and found that as males became increasingly more colorful than females, the proportion of female specimens decreased (Figure \ref{fig-plumage}; $F_{1, 828} = 58.95$, $p < 0.001$; $slope \pm SE = -0.416 \pm 0.054$). 
+In passerine birds, as males became increasingly more colorful than females, the proportion of female specimens decreased (Figure \ref{fig-plumage}; $F_{1, 828} = 58.95$, $p < 0.001$; $slope \pm SE = -0.416 \pm 0.054$). 
 This relationship was not strong, but fits with anecdotal evidence of collections preferentially selecting, and displaying\cite{machin2008}, colorful male specimens, especially where plumage differences are large, for example in birds of paradise. 
 
 % figure 5
@@ -271,8 +256,7 @@ This relationship was not strong, but fits with anecdotal evidence of collection
   \label{fig-plumage}
 \end{figure}
 
-For mammals, we investigated ornamentation, which we defined as horns, antlers and tusks. 
-Species with ornaments had significantly fewer female specimens than those without (Figure \ref{fig-horns}; $F_{1, 1510} = 47.11$, $p < 0.001$; $slope \pm SE = -0.344 \pm 0.051$). 
+For mammals, species with ornaments (horns, antlers or tusks) had significantly fewer female specimens than those without ornaments (Figure \ref{fig-horns}; $F_{1, 1510} = 47.11$, $p < 0.001$; $slope \pm SE = -0.344 \pm 0.051$). 
 All bar one of the species (the walrus) with ornaments in our models were artiodactyls (other species with ornaments such as elephants have fewer than 100 specimens), and all artiodactyls have horns or tusks, suggesting that the strong male bias in Artiodactyla (39.7\% female; Figure \ref{fig-mammal_order_six}) was due to selection for males with these features. 
 Within ornamented species there was no significant difference if both sexes or only males possessed the ornament (Figure \ref{fig-horns}; $F_{1, 58} = 0.501$, $p = 0.482$), suggesting that even where females are phenotypically different, preference is still given to collecting males. 
 This is particularly concerning since most artiodactyl species are female skewed in the wild\cite{berger1999sex}. 
@@ -290,7 +274,7 @@ This is particularly concerning since most artiodactyl species are female skewed
 
 \subsection{Type specimens.} 
 Perhaps our most notable finding focused on name bearing type specimens (holotypes, syntypes, lectotypes, and neotypes). 
-Here the bias towards male specimens was extreme; only 25\% of bird and 39\% of mammal types were female (Figure A1). 
+Here the bias towards male specimens was extreme; only 25\% of bird and 39\% of mammal types were female (Figure A3). 
 Although in some instances, males might be considered the appropriate sex for holotypes, we see no reason (other than limitations on specimens available) to not also designate a female paratype to represent the phenotypic range of a species. 
 In mammals paratypes were almost 49\% female, but bird paratypes were 38\% female. 
 Currently sex does not form any part of the International Code for Zoological Nomenclature (ICZN) recommendations for designating types, although some historical instructions for collectors emphasize the importance of multiple types (e.g.\cite{schuchert1897type}). 
@@ -309,24 +293,21 @@ Therefore it is paramount that we continue developing these resources while usin
 Finally, researchers investigating broad-scale variation in species should account for these biases when designing data collection protocols and/or in downstream analyses and declare how they dealt with those biases in resulting publications. 
 Our analyses place particular pressure on taxonomists to think more carefully about sex when defining name-bearing types, and suggest more designation of opposite sex paratypes would be desirable, particularly in birds. 
 
-
-
-
 \section{Acknowledgments}
-We thank all collections managers for inputting their specimen data.
+We thank all collection managers for inputting their specimen data to GBIF.
 
 % References
 \bibliographystyle{vancouver}
 \bibliography{sex-bias}
 
-%\section{Author contributions}
-%NC performed the analyses and wrote the first draft. All authors contributed to study design, interpreted results, revised the manuscript, and approved the submitted version.
+\section{Author contributions}
+NC performed the analyses and wrote the first draft. All authors contributed to study design, interpreted results, revised the manuscript, and approved the submitted version.
 
-%\section{Competing interests}
-%The authors declare no competing interests.
+\section{Competing interests}
+The authors declare no competing interests.
 
-\section{Data availability}\label{data-code-and-materials}
-Data are available from the NHM Data Portal (link will be added) and GBIF. 
+\section{Data code and materials}\label{data-code-and-materials}
+Data are available from the NHM Data Portal \cite{sex-bias-data} and GBIF. 
 R code is available from GitHub (https://github.com/nhcooper123/sex-bias-museums)(Zenodo DOI will be added on acceptance).
 
 \end{document}
