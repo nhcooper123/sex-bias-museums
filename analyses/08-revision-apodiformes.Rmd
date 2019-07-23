@@ -63,14 +63,9 @@ ds_apo <-
   filter(n >= 100 & sex == "Female") %>%
   rename(female = nn) %>%
   mutate(male = n - female) %>%
-  select(class, order, binomial, n, female, male) %>%
+  select(class, order, family, binomial, n, female, male) %>%
   mutate(percentf = (female/n) * 100) %>%
   distinct()
-
-## Add taxonomy data
-ds_apo <-
-  ds_apo %>%
-  left_join(taxonomy, by = "binomial")
 ```
 
 ## Split by families
