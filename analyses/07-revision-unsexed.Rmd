@@ -145,7 +145,7 @@ kable(sum_decade_nosex)
 ```{r}
 ggplot(sum_decade_nosex, aes(x = decade, y = `% nosex`, fill = class, colour = class)) +
   geom_line() +
-  geom_ribbon(aes(ymin = `% nosex` - `se nosex`, ymax = `% nosex` + `se nosex`),
+  geom_ribbon(aes(ymin = `% nosex` - 1.96*`se nosex`, ymax = `% nosex` + 1.96*`se nosex`),
               alpha = 0.5) +
   theme_bw(base_size = 14) +
   xlab("Collection decade") +
@@ -210,30 +210,133 @@ ggsave(here("figures/nosex-regions.png"), height = 100, units = "mm")
 
 ```
 
+## Is this biasing our results?
+
+```{r}
+# Extract data for sexed and unsexed individuals
+ds_orders <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  group_by(class) %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
+  filter(n >= 100 & sex == "Female") %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, binomial, n, female, male) %>%
+  mutate(percentf = (female/n) * 100) %>%
+  distinct()
+
+sum_orders <-
+  ds_orders %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(n),
+           '% female' = round(mean(percentf), 2))
+
+# Remove the < 100 specimens species from the unsexed data
+ds_orders_nosex2 <-
+  ds_orders_nosex %>%
+  filter(nspec >= 100)
+
+sum_orders_nosex2 <-
+  ds_orders_nosex2 %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(nspec),
+           '% nosex' = round(mean(percentnosex), 2))
+```
 
 
+```{r}
+# Combine datasets
+all <- 
+  sum_orders %>%
+  left_join(sum_orders_nosex2, by = c("class", "order")) %>%
+  select(class, order, `% female`, `% nosex`)
+```
 
+```{r}
+ggplot(all, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
+  geom_point() +
+  geom_smooth(method = 'lm', alpha = 0.2) +
+  theme_bw(base_size = 14) +
+  xlab("% female") +
+  ylab("% unsexed") +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.9, 0.85)) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
 
+ggsave(here("figures/nosex-correlation.png"), height = 100, units = "mm")
 
+```
 
+```{r}
+# Fit some models for birds and mammals
+allb <- all %>% filter(class == "Birds")
+allm <- all %>% filter(class != "Birds")
 
+modelb <- lm(`% nosex` ~ `% female`, data = allb)
+autoplot(modelb)
+tidy(anova(modelb))
+tidy(summary(modelb))
 
+modelm <- lm(`% nosex` ~ `% female`, data = allm)
+autoplot(modelm)
+tidy(anova(modelm))
+tidy(summary(modelm))
+```
+## What if we look at each species instead of each order?
 
+```{r}
+# Extract data for sexed and unsexed individuals
+sum_species <-
+  ds_orders %>%
+  group_by(class, binomial) %>%
+  summarise('% female' = round(mean(percentf), 2))
 
+# Extract for species that are unsexed
+sum_species_nosex2 <-
+  ds_orders_nosex2 %>%
+  group_by(class, binomial) %>%
+  summarise('% nosex' = round(mean(percentnosex), 2))
 
+# Combine datasets
+all2 <- 
+  sum_species %>%
+  left_join(sum_species_nosex2, by = c("class", "binomial")) %>%
+  select(class, binomial, `% female`, `% nosex`)
+```
 
+```{r}
+ggplot(all2, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm', alpha = 0.2) +
+  theme_bw(base_size = 14) +
+  xlab("% female") +
+  ylab("% unsexed") +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.9, 0.85)) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
 
+ggsave(here("figures/nosex-binomial-correlation.png"), height = 100, units = "mm")
 
+```
 
+```{r}
+# Fit some models for birds and mammals
+allb2 <- all2 %>% filter(class == "Birds")
+allm2 <- all2 %>% filter(class != "Birds")
 
+modelb2 <- lm(`% nosex` ~ `% female`, data = allb2)
+autoplot(modelb2)
+tidy(anova(modelb2))
+tidy(summary(modelb2))
 
-
-
-
-
-
-
-
-
-
-
+modelm2 <- lm(`% nosex` ~ `% female`, data = allm2)
+autoplot(modelm2)
+tidy(anova(modelm2))
+tidy(summary(modelm2))
+```
