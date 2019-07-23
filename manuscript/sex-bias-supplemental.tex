@@ -16,7 +16,7 @@
 \usepackage{float}
 
 \pagenumbering{arabic}  
-\linespread{1.66}
+\linespread{1.3}
 
 % figure numbering override
 \renewcommand*{\thefigure}{A\arabic{figure}} % make Fig A1 not Fig 1
@@ -49,9 +49,26 @@
 % Figures
 %-------------------------------------------------------------------------------
 
-\section{Supplementary Figures} 
+\section*{Supplementary Figures} 
 
 % figure A1
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/histogram-specimen-counts.png}
+  \caption{Histograms showing the distribution of percentage female specimens and log number of specimens for each species across birds and mammals.}
+  \label{fig-histograms}
+\end{figure}
+
+% figure A2
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/specimens-numbers-all.png}
+  \caption{Relationship between the percentage female specimens in each species and the number of specimens for each species. 
+  Hex bins are used rather than points to make the plot easier to read.}
+  \label{fig-hex}
+\end{figure}
+
+% figure A3
 \begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/types-all.png}
@@ -60,7 +77,7 @@
   \label{fig-types}
 \end{figure}
 
-% figure A2
+% figure A4
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/orders-density-birds-all.png}
@@ -70,7 +87,7 @@
   \label{fig-bird-orders}
 \end{figure}
 
-% figure A3
+% figure A5
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/orders-density-mammals-all.png}
@@ -80,7 +97,7 @@
   \label{fig-mammal-orders}
 \end{figure}
 
-% figure A4
+% figure A6
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/mass-orders-birds.png}
@@ -91,7 +108,7 @@
   \label{fig-bird-male-mass}
 \end{figure}
 
-% figure A5
+% figure A7
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/mass-orders-mammals.png}
@@ -102,7 +119,7 @@
   \label{fig-mammal-male-mass}
 \end{figure}
 
-% figure A6
+% figure A8
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/ssd-orders-birds.png}
@@ -114,7 +131,7 @@
   \label{fig-bird-ssd}
 \end{figure}
 
-% figure A7
+% figure A9
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/ssd-orders-mammals.png}
@@ -126,36 +143,20 @@
   \label{fig-mammal-ssd}
 \end{figure}
 
-% figure A8
-\begin{figure}
- \centering
-  \includegraphics[width = \linewidth]{figures/histogram-specimen-counts.png}
-  \caption{Histograms showing the distribution of percentage female specimens and log number of specimens for each species across birds and mammals.}
-  \label{fig-histograms}
-\end{figure}
-
-% figure A9
-\begin{figure}
- \centering
-  \includegraphics[width = \linewidth]{figures/specimens-numbers-all.png}
-  \caption{Relationship between the percentage female specimens in each species and the number of specimens for each species. 
-  Hex bins are used rather than points to make the plot easier to read.}
-  \label{fig-hex}
-\end{figure}
 
 %-------------------------------------------------------------------------------
 % Tables
 %-------------------------------------------------------------------------------
 
 \newpage
-\section{Supplementary Tables}
+\section*{Supplementary Tables}
 
 % Table A1
-\input{figures/table-orders}
+\input{figures/table-percents}
 
 \newpage
 % Table A2
-\input{figures/table-percents}
+\input{figures/table-orders}
 
 \newpage
 % Table A3
@@ -166,12 +167,13 @@
 %-------------------------------------------------------------------------------
 
 \newpage
-\section{Supplementary Methods}
+\section*{Supplementary Methods}
 
 We expect large skews in the proportion of male or female specimens when sample size is low, but the ratio of male:female specimens should approach 50:50 as more specimens are added if there is no bias. 
 Most species in our dataset were represented by only a few specimens (Figure \ref{fig-histograms}), with large skews in the percentage of female specimens (in both directions) at low numbers (Figure \ref{fig-hex}).
 
-To test whether this may influence our analyses, we used generalised linear models (GLM) with binomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable, and the log number of specimens per species as the explanatory variable. We then used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
+To test whether this may influence our analyses, we used generalised linear models (GLM) with binomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable, and the log number of specimens per species as the explanatory variable. 
+We then used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
 The model showed massive heteroscedasticity in the residuals, due to the skew in proportions when sample size is low. 
 We therefore repeated the analysis, removing species with fewer than 20, 50, 100, 150 and 200 specimens in turn. 
 The best fitting model, without losing too much data, was a model with species with more than 100 specimens. 
