@@ -1,0 +1,168 @@
+---
+title: "Looking more closely at Apodiformes"
+output:
+  word_document: default
+  pdf_document: default
+  html_document: default
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+# Preliminaries
+
+# Load libraries
+library(tidyverse)
+library(patchwork) # from GitHub
+library(png)
+library(knitr)
+library(broom)
+library(here)
+library(ggfortify)
+library(car)
+
+#install.packages("remotes")
+#remotes::install_github("sckott/rphylopic")
+library(rphylopic)
+
+# Colour blind friendly palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Helper functions for plotting
+remove_y <- 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+remove_x <-   
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r, warning = FALSE, message = FALSE}
+# Read in all the specimen data
+specimens <- read_csv(here("data/all-specimen-data.csv"))
+```
+
+## Select just selected groups from specimen data
+
+```{r}
+# Set up dataset with % female
+ds_select <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  filter(family == "Accipitridae" | family == "Falconidae" |
+         family == "Scolopacidae" | family == "Charadriidae" |
+         family == "Jacanidae" | family == "Stercorariidae" |
+         family == "Sulidae" | family == "Trochilidae" |
+         family == "Fregatidae" | family == "Cuculidae" |
+         family == "Pipridae" | order == "Strigiformes" |
+         order == "Struthioniformes") %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
+  filter(n >= 100 & sex == "Female") %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, family, binomial, n, female, male) %>%
+  mutate(percentf = (female/n) * 100) %>%
+  distinct()
+
+```
+
+## Split by families
+```{r}
+sum_select <-  
+  ds_select %>%
+  group_by(order, family) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(n),
+           '% female' = round(median(percentf), 2),
+           'se female' = sqrt(var(percentf)/length(percentf)))
+
+kable(sum_select)
+```
+
+```{r}
+ds_select2 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  filter(class == "Birds") %>%
+  mutate(gaudy = case_when(family == "Accipitridae" ~ "gaudy",
+                           family == "Falconidae" ~ "gaudy",
+                           family == "Scolopacidae" ~ "gaudy",
+                           family == "Charadriidae" ~ "gaudy",
+                           family == "Jacanidae" ~ "gaudy",
+                           family == "Stercorariidae" ~ "gaudy",
+                           family == "Sulidae" ~ "gaudy",
+                           family == "Trochilidae" ~ "gaudy",
+                           family == "Fregatidae" ~ "gaudy",
+                           family == "Cuculidae" ~ "gaudy",
+                           family == "Pipridae" ~ "gaudy",
+                           order == "Strigiformes" ~ "gaudy",
+                           order == "Struthioniformes" ~ "gaudy")) %>%
+  mutate(gaudy = replace_na(gaudy, "not")) %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
+  filter(n >= 100 & sex == "Female") %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, family, binomial, gaudy, n, female, male) %>%
+  mutate(percentf = (female/n) * 100) %>%
+  distinct()
+```
+
+```{r}
+  ggplot(ds_select2, aes(x = percentf, colour = gaudy, fill = gaudy)) +
+  theme_bw(base_size = 14) +
+  geom_density(alpha = 0.5) +
+  xlab("% female") +
+  xlim(0, 100) +
+  theme_bw(base_size = 14) +
+  geom_vline(xintercept = 50, linetype = 2) +
+  scale_colour_manual(values = c(cbPalette[c(4,6)]),
+                      labels = c("female extreme", "male extreme")) +
+  scale_fill_manual(values = c(cbPalette[c(4,6)]), 
+                    labels = c("female extreme", "male extreme")) +
+  theme(legend.title = element_blank(),
+        legend.position = c(0.85, 0.85))
+
+ggsave(here("figures/female-extreme.png"), height = 100, units = "mm")
+
+```
+
+## Summary numbers
+```{r}
+sum_select2 <-  
+  ds_select2 %>%
+  group_by(gaudy) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(n),
+           '% female' = round(median(percentf), 2))
+
+kable(sum_select2)
+```
+
+## Fit models
+
+```{r}
+# Fitting the model for birds
+model <- glm(cbind(female, male) ~ gaudy, data = ds_select2, family = "binomial")
+# Check for overdispersion
+summary_mod <- summary(model)
+summary_mod$deviance / summary_mod$df.resid 
+
+# Quasi model
+model <- glm(cbind(female, male) ~ gaudy, data = ds_select2, 
+             family = "quasibinomial")
+
+# Look at outputs
+tidy(Anova(model, test = "F"))
+summary(model)
+
+# Look at model diagnostics
+autoplot(model)
+```
