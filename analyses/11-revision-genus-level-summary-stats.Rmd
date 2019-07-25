@@ -70,7 +70,24 @@ specimens <- read_csv(here("data/genera-specimen-data.csv"))
   kable(sum2)
 ```
 
-## What is the median proportion of females per species?
+## And what if we only look at genera with > 100 specimens
+
+```{r}
+  sum3 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(genus, name = "spec") %>%
+  filter(spec >= 100) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
+  select(class, sex, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+  kable(sum3)
+```
+
+## What is the median proportion of females per genus?
 
 ```{r}
   proportion <-
@@ -88,7 +105,7 @@ specimens <- read_csv(here("data/genera-specimen-data.csv"))
   kable(proportion)
 ```
 
-## What is the median proportion of females per species for those with >= 100 specimens only?
+## What is the median proportion of females per genus for those with >= 100 specimens only?
 
 ```{r}
   proportion2 <-
@@ -106,10 +123,9 @@ specimens <- read_csv(here("data/genera-specimen-data.csv"))
   kable(proportion2)
 ```
 
-## Which are the worst contenders?
-### Birds
+
 ```{r}
-  worstb <-
+  proportion2 <-
   specimens %>%
   filter(!is.na(sex)) %>%
   add_count(class, genus, name = "n") %>%
@@ -118,25 +134,10 @@ specimens <- read_csv(here("data/genera-specimen-data.csv"))
   distinct() %>%
   mutate(percent = round(nn/n*100, 2)) %>%
   filter(sex == "Female" & n >= 100) %>%
-  arrange(class, percent)
+  group_by(class) %>%
+  summarise('median % female' = median(percent))
 
-kable(slice(worstb, 1:10))
-
-  bestb <-
-  specimens %>%
-  filter(!is.na(sex)) %>%
-  add_count(class, genus, name = "n") %>%
-  add_count(class, genus, sex, name = "nn") %>%
-  select(class, genus, sex, n, nn) %>%
-  distinct() %>%
-  mutate(percent = round(nn/n*100, 2)) %>%
-  filter(sex == "Female" & n >= 100) %>%
-  arrange(class, -percent)
-
-kable(slice(bestb, 1:10))
-```
-```{r}
-kable(filter(worstb, percent < 25))
+  kable(proportion2)
 
 ```
 
