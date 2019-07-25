@@ -87,6 +87,21 @@ specimens <- read_csv(here("data/genera-specimen-data.csv"))
   kable(sum3)
 ```
 
+## How many genera are there?
+```{r}
+  sum4 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(genus, name = "spec") %>%
+  filter(spec >= 100) %>%
+  select(class, genus) %>%
+  distinct() %>%
+  group_by(class) %>%
+  summarise(n())
+
+  kable(sum4)
+```
+
 ## What is the median proportion of females per genus?
 
 ```{r}
