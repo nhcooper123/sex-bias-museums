@@ -106,6 +106,38 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   kable(proportion2)
 ```
 
+## And what if we only look at species with > 100 specimens
+
+```{r}
+  sum3 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(species, name = "spec") %>%
+  filter(spec >= 100) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
+  select(class, sex, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+  kable(sum3)
+```
+
+## How many species are there?
+```{r}
+  sum4 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(species, name = "spec") %>%
+  filter(spec >= 100) %>%
+  select(class, genus) %>%
+  distinct() %>%
+  group_by(class) %>%
+  summarise(n())
+
+  kable(sum4)
+```
+
 ## Which are the worst contenders?
 ### Birds
 ```{r}
