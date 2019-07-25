@@ -1,0 +1,221 @@
+---
+title: "Revision - Genus-level summary stats"
+output:
+  word_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r}
+# Preliminaries
+
+# Load libraries
+library(tidyverse)
+library(patchwork) # from GitHub
+library(png)
+library(knitr)
+library(broom)
+library(here)
+
+# Colour blind friendly palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Helper functions for plotting
+remove_y <- 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+remove_x <-   
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r}
+# Read in all the specimen data
+specimens <- read_csv(here("data/genera-specimen-data.csv")) 
+```
+
+## How many male, female and unsexed specimens are there?
+
+```{r}
+  sum1 <-
+  specimens %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
+  select(class, sex, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+  kable(sum1)
+```
+
+## Considering only sexed specimens, how many male and female specimens are there?
+
+```{r}
+  sum2 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
+  select(class, sex, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+  kable(sum2)
+```
+
+## What is the median proportion of females per species?
+
+```{r}
+  proportion <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female") %>%
+  group_by(class) %>%
+  summarise('median % female' = median(percent))
+
+  kable(proportion)
+```
+
+## What is the median proportion of females per species for those with >= 100 specimens only?
+
+```{r}
+  proportion2 <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  group_by(class) %>%
+  summarise('median % female' = median(percent))
+
+  kable(proportion2)
+```
+
+## Which are the worst contenders?
+### Birds
+```{r}
+  worstb <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(class, percent)
+
+kable(slice(worstb, 1:10))
+
+  bestb <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(class, -percent)
+
+kable(slice(bestb, 1:10))
+```
+```{r}
+kable(filter(worstb, percent < 25))
+
+```
+
+
+### Mammals
+```{r}
+  worstm <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(desc(class), percent)
+
+  kable(slice(worstm, 1:10))
+  
+  bestm <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  add_count(class, genus, name = "n") %>%
+  add_count(class, genus, sex, name = "nn") %>%
+  select(class, genus, sex, n, nn) %>%
+  distinct() %>%
+  mutate(percent = round(nn/n*100, 2)) %>%
+  filter(sex == "Female" & n >= 100) %>%
+  arrange(desc(class), -percent)
+
+  kable(slice(bestm, 1:10))
+```
+
+## What about name bearing type specimens?
+If we only consider name bearing type specimens the bias becomes more extreme. 
+
+```{r}
+  type_sum <-
+  specimens %>%
+  filter(!is.na(sex) & type == "Type") %>%
+  add_count(class, name = "n") %>%
+  add_count(class, sex, name = "nn") %>%
+  select(class, sex, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+kable(type_sum)
+```
+
+### What if we split by the kind of type?
+
+```{r}
+  type_sum2 <-
+  specimens %>%
+  filter(!is.na(sex) & type != "NonType") %>%
+  add_count(class, type, name = "n") %>%
+  add_count(class, sex, type, name = "nn") %>%
+  select(class, sex, type, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+kable(type_sum2)
+```
+
+
+```{r}
+  type_sum3 <-
+  specimens %>%
+  filter(!is.na(sex) & !is.na(typeStatus)) %>%
+  add_count(class, typeStatus, name = "n") %>%
+  add_count(class, sex, typeStatus, name = "nn") %>%
+  select(class, sex, typeStatus, n, nn) %>%
+  distinct() %>%
+  mutate('%' = round(nn/n*100, 2))
+
+kable(type_sum3)
+```
+
+```{r types_all, message = FALSE, echo = FALSE, fig.cap="Figure 1: Percentage of female (green) and male (blue) specimens and name bearing type specimens for birds and mammals."}
+source(here("analyses/figure-types-all.R"))
+plot_all + plot_types
+```
