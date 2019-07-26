@@ -78,6 +78,22 @@ ds_ssd_birds <- filter(ds_ssd, class == "Birds")
 ds_ssd_mammals <- filter(ds_ssd, class == "Mammals")
 ```
 
+## How many species and specimens are in the models?
+
+```{r}
+  sum4 <-
+  ds_ssd %>%
+  filter(!is.na(male_mass) & !is.na(female_mass)) %>%
+  select(class, binomial, male, female) %>%
+  distinct() %>%
+  group_by(class) %>%
+  summarise(species = n(), spec = sum(male, female),
+            male = sum(male), female = sum(female))
+
+  kable(sum4)
+```
+
+
 ## Fitting models
 ### Birds
 ```{r}

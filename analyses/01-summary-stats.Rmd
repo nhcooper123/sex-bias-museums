@@ -112,7 +112,7 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   sum3 <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(species, name = "spec") %>%
+  add_count(binomial, name = "spec") %>%
   filter(spec >= 100) %>%
   add_count(class, name = "n") %>%
   add_count(class, sex, name = "nn") %>%
@@ -128,9 +128,9 @@ specimens <- read_csv(here("data/all-specimen-data.csv"))
   sum4 <-
   specimens %>%
   filter(!is.na(sex)) %>%
-  add_count(species, name = "spec") %>%
+  add_count(binomial, name = "spec") %>%
   filter(spec >= 100) %>%
-  select(class, genus) %>%
+  select(class, binomial) %>%
   distinct() %>%
   group_by(class) %>%
   summarise(n())
