@@ -87,6 +87,32 @@ ds_ornament_mammals2 <-
   
 ```
 
+## How many species and specimens are in the models?
+
+```{r}
+  sum_bird <-
+  ds_plumage_birds %>%
+  filter(!is.na(male_plumage) & !is.na(female_plumage)) %>%
+  select(class, binomial, male, female) %>%
+  distinct() %>%
+  summarise(species = n(), spec = sum(male, female),
+            male = sum(male), female = sum(female))
+
+  kable(sum_bird)
+```
+
+```{r}
+  sum_mamm <-
+  ds_ornament_mammals %>%
+  filter(!is.na(ornamentation)) %>%
+  select(class, binomial, male, female) %>%
+  distinct() %>%
+  summarise(species = n(), spec = sum(male, female),
+            male = sum(male), female = sum(female))
+
+  kable(sum_mamm)
+```
+
 ## Fitting models
 ## Do sexual ornaments influence % female specimens?
 ### Passeriformes plumage

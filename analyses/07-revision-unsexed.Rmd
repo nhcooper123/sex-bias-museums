@@ -1,0 +1,342 @@
+---
+  title: "Revision - more detail on unsexed specimens"
+output:
+  word_document: default
+pdf_document: default
+html_document: default
+---
+  
+  ```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
+```
+
+```{r, message = FALSE, warning = FALSE}
+# Preliminaries
+
+# Load libraries
+library(tidyverse)
+library(patchwork) # from GitHub
+library(png)
+library(knitr)
+library(broom)
+library(here)
+library(ggfortify)
+
+#install.packages("remotes")
+#remotes::install_github("sckott/rphylopic")
+library(rphylopic)
+
+# Colour blind friendly palette
+cbPalette <- c("#999999", "#E69F00", "#56B4E9", "#009E73", 
+               "#F0E442", "#0072B2", "#D55E00", "#CC79A7")
+
+# Helper functions for plotting
+remove_y <- 
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank())
+
+remove_x <-   
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+```{r, message = FALSE, warning = FALSE}
+# Read in all the specimen data
+specimens <- read_csv(here("data/all-specimen-data.csv")) 
+```
+
+## For unsexed specimens, how are these split spatiotemporally and taxonomically?
+### First across orders...
+
+```{r}
+# First set up dataset
+ds_orders_nosex <-
+  specimens %>%
+  group_by(class) %>%
+  add_count(binomial, name = "nspec") %>%
+  add_count(binomial, sex, name = "nosex") %>%
+  filter(is.na(sex)) %>%
+  select(class, order, binomial, nspec, nosex) %>%
+  mutate(percentnosex = (nosex/nspec) * 100) %>%
+  distinct()
+```
+
+
+```{r}
+## Summary table
+sum_orders_nosex <-
+  ds_orders_nosex %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(nspec),
+           '% nosex' = round(mean(percentnosex), 2),
+           'se nosex' = sqrt(var(percentnosex)/length(percentnosex)))
+
+kable(sum_orders_nosex)
+```
+
+## Plot this...
+
+```{r}
+bird <- sum_orders_nosex %>% filter(class == "Birds")
+mammal<- sum_orders_nosex %>% filter(class != "Birds")
+
+base <-
+  ggplot(bird, aes(x = order, y = `% nosex`)) +
+  theme_bw(base_size = 14) +
+  ylab("mean % unsexed") +
+  ylim(0, 100) +
+  theme(axis.text.x = element_text(angle = 90, size = 6))
+
+birdplot <- 
+  base +
+  geom_point(colour = cbPalette[2]) +
+  geom_errorbar(aes(ymin = `% nosex` - `se nosex`, ymax = `% nosex` + `se nosex`),
+                width = 0.5, colour = cbPalette[2]) +
+  xlab("Birds")
+  
+mammplot <- 
+  base +
+  geom_point(data = mammal, colour = cbPalette[3]) +
+  geom_errorbar(data = mammal, aes(ymin = `% nosex` - `se nosex`, ymax = `% nosex` + `se nosex`),
+                width = 0.5, colour = cbPalette[3]) +
+  remove_y +
+  xlab("Mammals")
+
+birdplot + mammplot
+
+ggsave(here("figures/nosex-orders.png"), height = 100, units = "mm")
+
+```
+
+### Next through decades...
+
+```{r}
+ds_time_nosex <-
+  specimens %>%
+  filter(!is.na(decade)) %>%
+  group_by(class) %>%
+  add_count(binomial, decade, name = "nspec") %>%
+  add_count(binomial, decade, sex, name = "nosex") %>%
+  filter(is.na(sex)) %>%
+  select(class, order, binomial, decade, nspec, nosex) %>%
+  mutate(percentnosex = (nosex/nspec) * 100) %>%
+  distinct()
+```
+
+
+```{r}
+## Summary table
+sum_decade_nosex <-
+  ds_time_nosex %>%
+  group_by(class, decade) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(nspec),
+           '% nosex' = round(mean(percentnosex), 2),
+           'se nosex' = sqrt(var(percentnosex)/length(percentnosex)))
+
+kable(sum_decade_nosex)
+```
+
+## Plot this (excluding pre 1880 as these represent very few specimens)
+
+```{r}
+ggplot(sum_decade_nosex, aes(x = decade, y = `% nosex`, fill = class, colour = class)) +
+  geom_line() +
+  geom_ribbon(aes(ymin = `% nosex` - 1.96*`se nosex`, ymax = `% nosex` + 1.96*`se nosex`),
+              alpha = 0.5) +
+  theme_bw(base_size = 14) +
+  xlab("Collection decade") +
+  ylab("mean % unsexed") +
+  ylim(0, 100) +
+  xlim(1800, 2010) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  scale_fill_manual(values = c(cbPalette[2], cbPalette[3])) +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.1, 0.2))
+
+ggsave(here("figures/nosex-through-time.png"), height = 100, units = "mm")
+
+```
+
+### And finally regions...
+
+```{r}
+ds_region_nosex <-
+  specimens %>%
+  filter(!is.na(continent)) %>%
+  group_by(class) %>%
+  add_count(binomial, continent, name = "nspec") %>%
+  add_count(binomial, continent, sex, name = "nosex") %>%
+  filter(is.na(sex)) %>%
+  select(class, order, binomial, continent, nspec, nosex) %>%
+  mutate(percentnosex = (nosex/nspec) * 100) %>%
+  distinct()
+```
+
+
+```{r}
+## Summary table
+sum_region_nosex <-
+  ds_region_nosex %>%
+  group_by(class, continent) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(nspec),
+           '% nosex' = round(mean(percentnosex), 2),
+           'se nosex' = sqrt(var(percentnosex)/length(percentnosex)))
+
+kable(sum_region_nosex)
+```
+
+## Plot this...
+
+```{r}
+ggplot(sum_region_nosex, aes(x = continent, y = `% nosex`, colour = class)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = `% nosex` - `se nosex`, ymax = `% nosex` + `se nosex`),
+                width = 0.1) +
+  theme_bw(base_size = 14) +
+  xlab("Continent") +
+  ylab("mean % unsexed") +
+  ylim(0, 100) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.9, 0.85)) +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+ggsave(here("figures/nosex-regions.png"), height = 100, units = "mm")
+
+```
+
+## Is this biasing our results?
+
+```{r}
+# Extract data for sexed and unsexed individuals
+ds_orders <-
+  specimens %>%
+  filter(!is.na(sex)) %>%
+  group_by(class) %>%
+  add_count(binomial, name = "n") %>%
+  add_count(binomial, sex, name = "nn") %>%
+  filter(n >= 100 & sex == "Female") %>%
+  rename(female = nn) %>%
+  mutate(male = n - female) %>%
+  select(class, order, binomial, n, female, male) %>%
+  mutate(percentf = (female/n) * 100) %>%
+  distinct()
+
+sum_orders <-
+  ds_orders %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(n),
+           '% female' = round(mean(percentf), 2))
+
+# Remove the < 100 specimens species from the unsexed data
+ds_orders_nosex2 <-
+  ds_orders_nosex %>%
+  filter(nspec >= 100)
+
+sum_orders_nosex2 <-
+  ds_orders_nosex2 %>%
+  group_by(class, order) %>%
+  summarise('n species' = length(unique(binomial)),
+           'n specimens' = sum(nspec),
+           '% nosex' = round(mean(percentnosex), 2))
+```
+
+
+```{r}
+# Combine datasets
+all <- 
+  sum_orders %>%
+  left_join(sum_orders_nosex2, by = c("class", "order")) %>%
+  select(class, order, `% female`, `% nosex`)
+```
+
+```{r}
+ggplot(all, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
+  geom_point() +
+  geom_smooth(method = 'lm', alpha = 0.2) +
+  theme_bw(base_size = 14) +
+  xlab("% female") +
+  ylab("% unsexed") +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.9, 0.85)) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
+
+ggsave(here("figures/nosex-correlation.png"), height = 100, units = "mm")
+
+```
+
+```{r}
+# Fit some models for birds and mammals
+allb <- all %>% filter(class == "Birds")
+allm <- all %>% filter(class != "Birds")
+
+modelb <- lm(`% nosex` ~ `% female`, data = allb)
+autoplot(modelb)
+tidy(anova(modelb))
+tidy(summary(modelb))
+
+modelm <- lm(`% nosex` ~ `% female`, data = allm)
+autoplot(modelm)
+tidy(anova(modelm))
+tidy(summary(modelm))
+```
+## What if we look at each species instead of each order?
+
+```{r}
+# Extract data for sexed and unsexed individuals
+sum_species <-
+  ds_orders %>%
+  group_by(class, binomial) %>%
+  summarise('% female' = round(mean(percentf), 2))
+
+# Extract for species that are unsexed
+sum_species_nosex2 <-
+  ds_orders_nosex2 %>%
+  group_by(class, binomial) %>%
+  summarise('% nosex' = round(mean(percentnosex), 2))
+
+# Combine datasets
+all2 <- 
+  sum_species %>%
+  left_join(sum_species_nosex2, by = c("class", "binomial")) %>%
+  select(class, binomial, `% female`, `% nosex`)
+```
+
+```{r}
+ggplot(all2, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
+  geom_point(alpha = 0.5) +
+  geom_smooth(method = 'lm', alpha = 0.2) +
+  theme_bw(base_size = 14) +
+  xlab("% female") +
+  ylab("% unsexed") +
+  theme(legend.title = element_blank(), 
+        legend.position = c(0.9, 0.85)) +
+  scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
+  scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
+
+ggsave(here("figures/nosex-binomial-correlation.png"), height = 100, units = "mm")
+
+```
+
+```{r}
+# Fit some models for birds and mammals
+allb2 <- all2 %>% filter(class == "Birds")
+allm2 <- all2 %>% filter(class != "Birds")
+
+modelb2 <- lm(`% nosex` ~ `% female`, data = allb2)
+autoplot(modelb2)
+tidy(anova(modelb2))
+tidy(summary(modelb2))
+
+modelm2 <- lm(`% nosex` ~ `% female`, data = allm2)
+autoplot(modelm2)
+tidy(anova(modelm2))
+tidy(summary(modelm2))
+```
