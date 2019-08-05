@@ -85,86 +85,10 @@ There is still a significant positive relationship between the number of specime
 
 %-------------------------------------------------------------------------------
 \newpage
-\section{Exploring the unsexed specimen data}
+\section{Genus-level data}
 
-49\% of bird specimens and 15\% of mammal specimens had no data on their sex at all. This is likely related to a number of factors. 
-First, sexing birds and mammals is not always straightforward. Some species do not have clear external diagnostic features, so require dissection or close inspection by experts. 
-In some bird species, for example, juvenile males and adult females may have very similar plumage, making differentiation difficult. 
-Not all collectors or curators will have the skills to make these decisions, so collections remain unsexed. 
-Second, historical collections often have poor metadata, in part because no-one imagined a time when you might examine the records without the specimen in front of you - as such many obviously male and female specimens are not recorded as such in specimen catalogues (this is common in the NHM collections \textit{pers. comm}).
- Curators and collections managers are often too busy to add these data when collections are massive and in need of much care and attention. 
-
-We cannot sex all of the 687,393 unsexed bird and 161,526 unsexed mammals specimens in this study, instead we investigated variation in the numbers of unsexed specimens by order, collection continent and collection decade. 
-Note that the figures below use all unsexed specimens, i.e. we did not exclude species with fewer than 100 specimens.
-
-% figure A3
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/nosex-orders.png}
-  \caption{Unsexed specimens across orders of birds and mammals. 
-  Points are the mean percentage of unsexed specimens across all species within an order. 
-  Error bars are standard errors.}
-  \label{fig-nosex-orders}
-\end{figure}
-
-% figure A4
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/nosex-through-time.png}
-  \caption{Unsexed specimens of birds and mammals across decades. 
-  Lines show the mean percentage of unsexed specimens across all specimens collected within a given decade with 95\% confidence intervals.}
-  \label{fig-nosex-decade}
-\end{figure}
-
-% figure A5
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/nosex-regions.png}
-  \caption{Unsexed specimens of birds and mammals across continents they were collected in. 
-  Points are the mean percentage of unsexed specimens across all species collected within a continent. 
-  Error bars are standard errors.}
-  \label{fig-nosex-continent}
-\end{figure}
-
-There is a lot of variation in the percentage of unsexed specimens across orders (Figure \ref{fig-nosex-orders}), regions (Figure \ref{fig-nosex-continent}) and through time (Figure \ref{fig-nosex-decade}). 
-Interestingly, while the percentage of unsexed mammals has steadily decreased through time, in birds there is a steady decrease until 1900 followed by a slow increase towards the present. 
-Patterns across orders and regions are not easily explained by the presence of hard to sex species.
-
-\subsection*{Do unsexed specimens bias our results towards males?}
-
-The presence of unsexed specimens may bias our results in various ways, but the worst possible scenario is that the majority of unsexed specimens are females, leading to the male bias we report in the main text. 
-If this were true, we would expect the percentage of unsexed specimens to be strongly negatively correlated with the percentage of female specimens when we only consider female and male specimens. 
-So, for example, a species with 50\% female and 50\% male specimens would have a higher percentage of unsexed specimens than one with 90\% female and 10\% male. 
-
-We tested this by fitting linear models to compare the percentage of unsexed specimens (in species with more than 100 specimens overall) and the percentage of female specimens (in species with more than 100 sexed specimens). 
-We investigated the correlation at two taxonomic levels 1) mean percentages within each order and 2) mean percentages within each species.
-
-\subsubsection*{Within orders}
-There were no significant correlations between the percentage of unsexed specimens and the percentage of female specimens across orders in either birds (linear regression: $slope ± SE = 0.143 \pm 0.359$, $t = 0.398$, $df = 23$, $p = 0.694$; Figure \ref{fig-nosex-correlation}) or mammals (linear regression: $slope \pm SE = 0.225 \pm 0.513$, $t = 0.439$, $df = 23$, $p = 0.665$; Figure \ref{fig-nosex-correlation}). 
-
-% figure A6
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/nosex-correlation.png}
-  \caption{The relationship between the percentage of female specimens and percentage of unsexed specimens across orders of birds and mammals. 
-  Lines are from a linear regression, and shaded bars represent 95\% confidence intervals on the model.}
-  \label{fig-nosex-correlation}
-\end{figure}
-
-\subsubsection*{Within species}
-There was no significant correlation between the percentage of unsexed specimens and the percentage of female specimens across species in birds (linear regression: $slope \pm SE = 0.092 \pm 0.050$, $t = 1.876$, $df = 1743$, $p = 0.061$; Figure \ref{fig-nosex-correlation2}), but there was a weak negative correlation in mammals (linear regression: $slope \pm SE = -0.120 \pm 0.042$, $t = -2.852$, $df = 1487$, $p = 0.004$; Figure \ref{fig-nosex-correlation2}). 
-The effect size was very small, however, so we do not place much emphasis on this result.
-
-Note that without sexing the unsexed specimens we cannot be sure a bias does not exist, but the lack of correlation (except the weak one within species for mammals) makes us believe our results are likely not driven by unsexed specimens being predominantly female.
-
-% figure A7
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/nosex-binomial-correlation.png}
-  \caption{The relationship between the percentage of female specimens and percentage of unsexed specimens across species of birds and mammals.
-  Lines are from a linear regression, and shaded bars represent 95\% confidence intervals on the model.}
-  \label{fig-nosex-correlation2}
-\end{figure}
+% Table A1
+\input{figures/table-genus}
 
 %-------------------------------------------------------------------------------
 \newpage
@@ -198,14 +122,7 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
 
 %-------------------------------------------------------------------------------
 \newpage
-\section{Genus-level data}
-
-% Table A1
-\input{figures/table-genus}
-
-%-------------------------------------------------------------------------------
-\newpage
-\subsection*{Total numbers of female specimens and female type specimens}
+\section{Total numbers of female specimens and female type specimens}
 
 % figure A3
 \begin{figure}[H]
@@ -216,9 +133,88 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
   \label{fig-types}
 \end{figure}
 
+%-------------------------------------------------------------------------------
 \newpage
-% Table A1
-\input{figures/table-percents}
+\section{Exploring the unsexed specimen data}
+
+49\% of bird specimens and 15\% of mammal specimens had no data on their sex at all. This is likely related to a number of factors. 
+First, sexing birds and mammals is not always straightforward. Some species do not have clear external diagnostic features, so require dissection or close inspection by experts. 
+In some bird species, for example, juvenile males and adult females may have very similar plumage, making differentiation difficult. 
+Not all collectors or curators will have the skills to make these decisions, so collections remain unsexed. 
+Second, historical collections often have poor metadata, in part because no-one imagined a time when you might examine the records without the specimen in front of you - as such many obviously male and female specimens are not recorded as such in specimen catalogues (this is common in the NHM collections \textit{pers. comm}).
+ Curators and collections managers are often too busy to add these data when collections are massive and in need of much care and attention. 
+
+We cannot sex all of the 687,393 unsexed bird and 161,526 unsexed mammals specimens in this study, instead we investigated variation in the numbers of unsexed specimens by order, collection continent and collection decade. 
+Note that the figures below use all unsexed specimens, i.e. we did not exclude species with fewer than 100 specimens.
+
+% figure A4
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/nosex-orders.png}
+  \caption{Unsexed specimens across orders of birds and mammals. 
+  Points are the mean percentage of unsexed specimens across all species within an order. 
+  Error bars are standard errors.}
+  \label{fig-nosex-orders}
+\end{figure}
+
+% figure A5
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/nosex-through-time.png}
+  \caption{Unsexed specimens of birds and mammals across decades. 
+  Lines show the mean percentage of unsexed specimens across all specimens collected within a given decade with 95\% confidence intervals.}
+  \label{fig-nosex-decade}
+\end{figure}
+
+% figure A6
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/nosex-regions.png}
+  \caption{Unsexed specimens of birds and mammals across continents they were collected in. 
+  Points are the mean percentage of unsexed specimens across all species collected within a continent. 
+  Error bars are standard errors.}
+  \label{fig-nosex-continent}
+\end{figure}
+
+There is a lot of variation in the percentage of unsexed specimens across orders (Figure \ref{fig-nosex-orders}), regions (Figure \ref{fig-nosex-continent}) and through time (Figure \ref{fig-nosex-decade}). 
+Interestingly, while the percentage of unsexed mammals has steadily decreased through time, in birds there is a steady decrease until 1900 followed by a slow increase towards the present. 
+Patterns across orders and regions are not easily explained by the presence of hard to sex species.
+
+\subsection*{Do unsexed specimens bias our results towards males?}
+
+The presence of unsexed specimens may bias our results in various ways, but the worst possible scenario is that the majority of unsexed specimens are females, leading to the male bias we report in the main text. 
+If this were true, we would expect the percentage of unsexed specimens to be strongly negatively correlated with the percentage of female specimens when we only consider female and male specimens. 
+So, for example, a species with 50\% female and 50\% male specimens would have a higher percentage of unsexed specimens than one with 90\% female and 10\% male. 
+
+We tested this by fitting linear models to compare the percentage of unsexed specimens (in species with more than 100 specimens overall) and the percentage of female specimens (in species with more than 100 sexed specimens). 
+We investigated the correlation at two taxonomic levels 1) mean percentages within each order and 2) mean percentages within each species.
+
+\subsubsection*{Within orders}
+There were no significant correlations between the percentage of unsexed specimens and the percentage of female specimens across orders in either birds (linear regression: $slope ± SE = 0.143 \pm 0.359$, $t = 0.398$, $df = 23$, $p = 0.694$; Figure \ref{fig-nosex-correlation}) or mammals (linear regression: $slope \pm SE = 0.225 \pm 0.513$, $t = 0.439$, $df = 23$, $p = 0.665$; Figure \ref{fig-nosex-correlation}). 
+
+% figure A7
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/nosex-correlation.png}
+  \caption{The relationship between the percentage of female specimens and percentage of unsexed specimens across orders of birds and mammals. 
+  Lines are from a linear regression, and shaded bars represent 95\% confidence intervals on the model.}
+  \label{fig-nosex-correlation}
+\end{figure}
+
+\subsubsection*{Within species}
+There was no significant correlation between the percentage of unsexed specimens and the percentage of female specimens across species in birds (linear regression: $slope \pm SE = 0.092 \pm 0.050$, $t = 1.876$, $df = 1743$, $p = 0.061$; Figure \ref{fig-nosex-correlation2}), but there was a weak negative correlation in mammals (linear regression: $slope \pm SE = -0.120 \pm 0.042$, $t = -2.852$, $df = 1487$, $p = 0.004$; Figure \ref{fig-nosex-correlation2}). 
+The effect size was very small, however, so we do not place much emphasis on this result.
+
+Note that without sexing the unsexed specimens we cannot be sure a bias does not exist, but the lack of correlation (except the weak one within species for mammals) makes us believe our results are likely not driven by unsexed specimens being predominantly female.
+
+% figure A8
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/nosex-binomial-correlation.png}
+  \caption{The relationship between the percentage of female specimens and percentage of unsexed specimens across species of birds and mammals.
+  Lines are from a linear regression, and shaded bars represent 95\% confidence intervals on the model.}
+  \label{fig-nosex-correlation2}
+\end{figure}
 
 %-------------------------------------------------------------------------------
 \newpage
@@ -243,6 +239,12 @@ This difference was significant (paired t-test: $t_{118} = -6.768$, $p < 0.001$;
 }
   \label{fig-asr}
 \end{figure}
+
+%-------------------------------------------------------------------------------
+\newpage
+\section{Species with the most extreme sex ratios}
+% Table A3
+\input{figures/table-percents}
 
 %-------------------------------------------------------------------------------
 \newpage
@@ -299,7 +301,7 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 % figure 3
 \begin{figure}[H]
  \centering
-  \includegraphics[width = \linewidth]{figures/years-all.png}
+  \includegraphics[scale = 0.4]{figures/years-all.png}
   \caption{Changes in the proportion of female specimens for each species collected each year between 1880 and 2010. 
   Best fit lines and 95\% confidence intervals from quasibinomial generalized linear models are shown in grey. 
   Data points represent species with at least 50 specimens collected in a given year. 
