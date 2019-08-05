@@ -98,8 +98,8 @@ body_mammals <-
   body_mammals %>%
   filter(Sex == "Female" | Sex == "Male") %>%
   group_by(MSW05Binomial, Sex) %>%
-  summarise(medianBM = mean(`Body Mass (g)`)) %>%
-  spread(Sex, medianBM) %>%
+  summarise(meanBM = mean(`Body Mass (g)`)) %>%
+  spread(Sex, meanBM) %>%
   mutate(SSD = Male/Female) %>%
   rename(binomial = MSW05Binomial) %>%
   rename(male_mass = Male) %>%
