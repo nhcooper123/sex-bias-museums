@@ -93,7 +93,7 @@ Second, historical collections often have poor metadata, in part because no-one 
  Curators and collections managers are often too busy to add these data when collections are massive and in need of much care and attention. 
 
 We cannot sex all of the 687,393 unsexed bird and 161,526 unsexed mammals specimens in this study, instead we investigated variation in the numbers of unsexed specimens by order, collection continent and collection decade. 
-Note that the figures below use all unsexed specimens, i.e. we did not exclude species with < 100 specimens.
+Note that the figures below use all unsexed specimens, i.e. we did not exclude species with \textless 100 specimens.
 
 % figure A3
 \begin{figure}[H]
@@ -169,7 +169,26 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
 
 % Table A1
 \input{figures/table-genus}
+
 %-------------------------------------------------------------------------------
+\subsection*{Total numbers of female specimens and female type specimens}
+
+
+% figure A3
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/types-all.png}
+  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
+  The dashed line represents 50\% female specimens.}
+  \label{fig-types}
+\end{figure}
+
+
+% Table A1
+\input{figures/table-percents}
+
+%-------------------------------------------------------------------------------
+
 \subsection*{Comparing our sex ratios to wild adult sex ratio data for birds}
 
 There is very little available data on sex ratios in wild bird populations. The study which has collated the most data so far is Szekely et al. (2014). We took their data and compared the wild adult sex ratios (number of males/ number of males + number of females) to the sex ratios of the matching species in our dataset.
@@ -192,6 +211,32 @@ This difference was significant (paired t-test: $t_{118} = -6.768$, $p < 0.001$;
   \label{fig-asr}
 \end{figure}
 
+%-------------------------------------------------------------------------------
+\subsection*{Variation among orders}
+
+% figure A4
+\begin{figure}
+ \centering
+  \includegraphics[width = \linewidth]{figures/orders-density-birds-all.png}
+  \caption{Kernel density plots showing the \% female specimens in each species across orders of birds with at least three species in the dataset. 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens.}
+  \label{fig-bird-orders}
+\end{figure}
+
+% figure A5
+\begin{figure}
+ \centering
+  \includegraphics[width = \linewidth]{figures/orders-density-mammals-all.png}
+  \caption{Kernel density plots showing the \% female specimens in each species across orders of mammals with at least three species in the dataset. 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens.}
+  \label{fig-mammal-orders}
+\end{figure}
+
+\newpage
+% Table A2
+\input{figures/table-orders}
 
 %-------------------------------------------------------------------------------
 \subsection*{Apodiformes}
@@ -228,78 +273,7 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure} 
 
 %-------------------------------------------------------------------------------
-\subsection*{Reverse sexual dimorphism in birds}
-
-Some bird species show reverse sexual dimorphism, where females are larger or showier than the males. 
-This occurs in hawks and vultures (Accipitridae), falcons (Falconidae), sandpipers and snipe (Scolopacidae), phalaropes (Charadriidae), jacanas (Jacanidae), skuas (Stercorariidae), boobies (Sulidae), frigate birds (Fregatidae), owls (Strigiformes), cuckoos (Cuculidae), hummingbirds (Trochilidae), manakins (Pipridae), and some ratites (Struthioniformes) (Swaddle et al. 2000\cite{swaddle2000novel}). 
-The sexual size dimorphism and sexual plumage dimorphism analyses in the main text deal with this quantitatively and within the same framework as more typical male based sexual dimorphism. 
-This is a better technique than lumping species into male versus female dominated dimorphism groupings, as the variation among sexes can vary hugely within these. 
-For example, in European grouse species where the male capercaillie (\textit{Tetrao urogallus}) are more than twice the mass of females, while hazel grouse (\textit{Tetrastes bonasia}) females are only a gram heavier than males (Amadon, 1959\cite{amadon59}). 
-However, our method had limitations - we did not have male and female body size for all species, and we only had plumage data for Passeriformes. 
-As such we may have missed important patterns.
-
-To deal with this, we divided the bird data into species where the female is generally the larger or showier sex (the families  Accipitridae, Falconidae, Scolopacidae, Charadriidae, Jacanidae, Stercorariidae, Sulidae, Fregatidae, Cuculidae, Trochilidae, Pipridae, and the orders Strigiformes and Struthioniformes), and species where the male is generally the larger or showier sex (all other species). We then compared the median percentage of females within species of the two groups, and fitted generalized linear models with quasibinomial errors to test for significant differences. 
-
-Overall we found that the median percentage of females for species where the male was the larger or showier sex was 40\%, the same as for the whole dataset. 
-For species where the female is the larger or showier sex the median percentage of females was 44.6\%, closer to the expected 50:50 ratio. 
-There were significantly more females in species where the female is the larger or showier sex (quasibinomial GLM: $F_{1,1744} = 167.9$, $p < 0.001$; Figure \ref{fig-reverse})
-
-% figure A7
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/female-extreme.png}
-  \caption{Kernel density plots showing the \% female specimens in each species of bird for species where females are the larger or more showy sex (female extreme), or where males are the larger or more showy sex (male extreme). 
-  Only species with at least 100 specimens are included. 
-  The dashed line represents 50\% female specimens. }
-  \label{fig-reverse}
-\end{figure}
-
-
-
-
-%-------------------------------------------------------------------------------
-% Figures
-%-------------------------------------------------------------------------------
-\section*{Supplementary Figures} 
-
-
-
-
-
-
-
-
-
-
-
-% figure A3
-\begin{figure}[H]
- \centering
-  \includegraphics[width = \linewidth]{figures/types-all.png}
-  \caption{Percentages of female (green) and male (blue) specimens in bird and mammal collections for all specimens (left hand panel) and for name-bearing type specimens only (right hand panel). 
-  The dashed line represents 50\% female specimens.}
-  \label{fig-types}
-\end{figure}
-
-% figure A4
-\begin{figure}
- \centering
-  \includegraphics[width = \linewidth]{figures/orders-density-birds-all.png}
-  \caption{Kernel density plots showing the \% female specimens in each species across orders of birds with at least three species in the dataset. 
-  Only species with at least 100 specimens are included. 
-  The dashed line represents 50\% female specimens.}
-  \label{fig-bird-orders}
-\end{figure}
-
-% figure A5
-\begin{figure}
- \centering
-  \includegraphics[width = \linewidth]{figures/orders-density-mammals-all.png}
-  \caption{Kernel density plots showing the \% female specimens in each species across orders of mammals with at least three species in the dataset. 
-  Only species with at least 100 specimens are included. 
-  The dashed line represents 50\% female specimens.}
-  \label{fig-mammal-orders}
-\end{figure}
+\subsection*{Male body mass and sexual size dimorphism.}
 
 % figure A6
 \begin{figure}
@@ -349,26 +323,40 @@ There were significantly more females in species where the female is the larger 
 
 
 %-------------------------------------------------------------------------------
-% Tables
+\subsection*{Reverse sexual dimorphism in birds}
+
+Some bird species show reverse sexual dimorphism, where females are larger or showier than the males. 
+This occurs in hawks and vultures (Accipitridae), falcons (Falconidae), sandpipers and snipe (Scolopacidae), phalaropes (Charadriidae), jacanas (Jacanidae), skuas (Stercorariidae), boobies (Sulidae), frigate birds (Fregatidae), owls (Strigiformes), cuckoos (Cuculidae), hummingbirds (Trochilidae), manakins (Pipridae), and some ratites (Struthioniformes) (Swaddle et al. 2000\cite{swaddle2000novel}). 
+The sexual size dimorphism and sexual plumage dimorphism analyses in the main text deal with this quantitatively and within the same framework as more typical male based sexual dimorphism. 
+This is a better technique than lumping species into male versus female dominated dimorphism groupings, as the variation among sexes can vary hugely within these. 
+For example, in European grouse species where the male capercaillie (\textit{Tetrao urogallus}) are more than twice the mass of females, while hazel grouse (\textit{Tetrastes bonasia}) females are only a gram heavier than males (Amadon, 1959\cite{amadon59}). 
+However, our method had limitations - we did not have male and female body size for all species, and we only had plumage data for Passeriformes. 
+As such we may have missed important patterns.
+
+To deal with this, we divided the bird data into species where the female is generally the larger or showier sex (the families  Accipitridae, Falconidae, Scolopacidae, Charadriidae, Jacanidae, Stercorariidae, Sulidae, Fregatidae, Cuculidae, Trochilidae, Pipridae, and the orders Strigiformes and Struthioniformes), and species where the male is generally the larger or showier sex (all other species). We then compared the median percentage of females within species of the two groups, and fitted generalized linear models with quasibinomial errors to test for significant differences. 
+
+Overall we found that the median percentage of females for species where the male was the larger or showier sex was 40\%, the same as for the whole dataset. 
+For species where the female is the larger or showier sex the median percentage of females was 44.6\%, closer to the expected 50:50 ratio. 
+There were significantly more females in species where the female is the larger or showier sex (quasibinomial GLM: $F_{1,1744} = 167.9$, $p < 0.001$; Figure \ref{fig-reverse})
+
+% figure A7
+\begin{figure}[H]
+ \centering
+  \includegraphics[width = \linewidth]{figures/female-extreme.png}
+  \caption{Kernel density plots showing the \% female specimens in each species of bird for species where females are the larger or more showy sex (female extreme), or where males are the larger or more showy sex (male extreme). 
+  Only species with at least 100 specimens are included. 
+  The dashed line represents 50\% female specimens. }
+  \label{fig-reverse}
+\end{figure}
+
+
 %-------------------------------------------------------------------------------
-
 \newpage
-\section*{Supplementary Tables}
 
-% Table A1
-\input{figures/table-percents}
+\subsection*{Model outputs???}
 
-\newpage
-% Table A2
-\input{figures/table-orders}
-
-\newpage
 % Table A3
 \input{figures/table-outputs}
-
-%-------------------------------------------------------------------------------
-% Methods
-%-------------------------------------------------------------------------------
 
 
 %-------------------------------------------------------------------------------
