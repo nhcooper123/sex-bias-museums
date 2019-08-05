@@ -161,6 +161,7 @@ autoplot(feature_model_mammals)
 tidy(Anova(feature_model_mammals, test = "F"))
 summary(feature_model_mammals)
 ```
+
 ```{r}
 # What about for whether males or females have the ornament?
 sex_model_mammals <- glm(cbind(female, male) ~ ornamentedsex, data = 
