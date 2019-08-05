@@ -121,7 +121,7 @@ We corrected bird taxonomy using the GBIF backbone taxonomy\cite{gbif}, and mamm
 Note that we recognise that biological sex is a spectrum\cite{sciam2017}. 
 We focus here on specimens identified as females and males for simplicity because there were very few recorded intersex specimens in collections databases, but we recognize the importance of these individuals.
 We also excluded non-sexed individuals from the analyses.
-The final dataset contained 2,496,611 specimens (1,395,748 birds and 1,100,863 mammals), 1,647,409 (708,355 birds and 939,054 mammals) of which were sexed (Table AX).
+The final dataset contained 2,496,611 specimens (1,395,748 birds and 1,100,863 mammals), 1,647,409 (708,355 birds and 939,054 mammals) of which were sexed (Table AX - genus level).
 
 \subsubsection{Sexual dimorphism, plumage coloration and ornamentation data.}
 We extracted median body masses (g) for males and females from Lislevand et al.\cite{lislevand2007avian} for birds and Jones et al.\cite{pantheria} for mammals, then calculated sexual size dimorphism by dividing mean male body mass by female body mass. 
@@ -160,32 +160,35 @@ As there were only 55 bird species and 1216 mammal species with over 100 specime
 We fitted all models using generalised linear models (GLM) with quasibinomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable (i.e. a binomial response where the number of females and the number of males for each species were jointly modeled). 
 Quasibinomial rather than binomial errors were used due to overdispersion (all models have deviance/residual degrees of freedom far greater than two; see output on GitHub for exact values), and we assessed the significance of model terms using Type II sums of squares. 
 We used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
-We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) plumage dimorphism (log transformed; passerine birds only); and (vi) ornamentation (mammals only). %%% big birds 
+We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) whether males were larger/more showy than females or vice versa (reverse sexual dimorphism; birds only); (vi) plumage dimorphism (log transformed; passerine birds only); and (vii) ornamentation (mammals only). 
 The number of specimens and species in each model are shown in Table \ref{table_numbers}.
 
-\begin{table}{cccc}
+\begin{table}
+\begin{tabular}{cccc}
 
-\caption{Numbers of specimens and species in each of our models.}\\ 
+\caption{Numbers of specimens and species in each of our models. SSD is sexual size dimorphism. All species have order, reverse SSD and ornamentation data.} 
   
   \hline
   \textbf{Model} & \textbf{Specimens} & \textbf{\% female} & \textbf{Species}\\ 
   \hline
-  \textbf{Birds} & & & \\
+  \textbf{Birds} & & &\\
   \hline
   orders & 497,923 & 39.78 & 1,746\\
-  years & &&\\
+  years & 30,525 & 38.56 & 390\\
   mass/SSD & 277,179 & 39.82 & 829\\
+  reverse SSD & 497,923 & 39.78 & 1,746\\
   plumage & 258,326 & 37.34 & 850\\
   \hline
   \textbf{Mammals} &&&\\
   \hline
   orders & 857,384 & 47.84 & 1,512\\
-  years &&&\\
+  years & 386,476 & 48.20 & 3,417\\
   mass/SSD & 548,514 & 47.97 & 717\\
-  ornamentation &&&\\
+  ornamentation & 857,384 & 47.84 & 1,512\\
   \hline
 
 \label{table_numbers}
+\end{tabular}
 \end{table}
 
 
