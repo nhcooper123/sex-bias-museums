@@ -11,8 +11,8 @@ To cite this repo:
 > XXX
 
 ## Data
-All cleaned data are available from the [NHM Data Portal](https://doi.org/10.5519/0093278).
-For reproducibility purposes download this and place it into a `rawdata/` or `data/` folder as appropriate to rerun our analyses. We were unable to uplaod this to GitHub because the files are too large.
+All cleaned data are available from the [NHM Data Portal](https://doi.org/10.5519/0065209).
+For reproducibility purposes download this and place it into a `rawdata/` or `data/` folder as appropriate to rerun our analyses. We were unable to upload this to GitHub because the files are too large.
 
 * `data/` should include `all-specimen-data.csv` and `all-extra-data.csv`. These are the datasets required to run the analyses.
 * `rawdata/` should contain all other data. Note that we did not upload raw data that can be accessed from the original data sources due to copyright issues, but these can be downloaded from GBIF (references and links below). The raw data are only necessary if you want to repeat the data wrangling steps.
@@ -95,8 +95,7 @@ The analysis code is divided into `.Rmd` files that run the analyses and plot th
 ## Other folders
 
 * `/figures` contains the figures
-* `/img` contains the silhouettes from from `PhyloPic.org` needed for plotting. Contributed by: Ferran Sayol (parrot, hummingbird, tit), Steven Traver (woodpecker), Alexandre Vong (shorebird), Daniel Jaron (mouse), Yan Wong (bat), Becky
-Barnes (shrew), Lukasiniho (tiger), Sarah Werning (monkey), and Oscar Sanisidro (deer).
+* `/img` contains the silhouettes from from `PhyloPic.org` needed for plotting. Contributed by: Ferran Sayol (parrot, hummingbird, tit), Steven Traver (woodpecker), Alexandre Vong (shorebird), Daniel Jaron (mouse), Yan Wong (bat), Becky Barnes (shrew), Lukasiniho (tiger), Sarah Werning (monkey), and Oscar Sanisidro (deer).
 * `/manuscript` contains the manuscript materials in LaTeX format
 
 -------
