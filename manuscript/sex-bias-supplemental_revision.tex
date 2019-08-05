@@ -3,6 +3,7 @@
 %-------------------------------------------------------------------------------
 
 \documentclass[a4paper, 12pt]{article}
+\usepackage[margin=2cm]{geometry}
 \usepackage[osf]{mathpazo} % palatino
 %\usepackage[round]{natbib} % author-year citations
 \usepackage[superscript,biblabel]{cite} % for superscript citations
@@ -43,6 +44,8 @@
 
 \maketitle
 
+\tableofcontents
+
 \parindent = 1.5em
 \addtolength{\parskip}{.3em}
 
@@ -51,9 +54,7 @@
 %-------------------------------------------------------------------------------
 
 \newpage
-\section*{Supplementary Methods and Results}
-
-\subsection*{Numbers of specimens for each species}
+\section{Numbers of specimens for each species}
 
 We expect large skews in the proportion of male or female specimens when sample size is low, but the ratio of male:female specimens should approach 50:50 as more specimens are added if there is no bias. 
 Most species in our dataset were represented by only a few specimens (Figure \ref{fig-histograms}), with large skews in the percentage of female specimens (in both directions) at low numbers (Figure \ref{fig-hex}).
@@ -83,7 +84,8 @@ There is still a significant positive relationship between the number of specime
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection*{Exploring the unsexed specimen data}
+\newpage
+\section{Exploring the unsexed specimen data}
 
 49\% of bird specimens and 15\% of mammal specimens had no data on their sex at all. This is likely related to a number of factors. 
 First, sexing birds and mammals is not always straightforward. Some species do not have clear external diagnostic features, so require dissection or close inspection by experts. 
@@ -93,7 +95,7 @@ Second, historical collections often have poor metadata, in part because no-one 
  Curators and collections managers are often too busy to add these data when collections are massive and in need of much care and attention. 
 
 We cannot sex all of the 687,393 unsexed bird and 161,526 unsexed mammals specimens in this study, instead we investigated variation in the numbers of unsexed specimens by order, collection continent and collection decade. 
-Note that the figures below use all unsexed specimens, i.e. we did not exclude species with \textless 100 specimens.
+Note that the figures below use all unsexed specimens, i.e. we did not exclude species with fewer than 100 specimens.
 
 % figure A3
 \begin{figure}[H]
@@ -165,13 +167,12 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection*{Numbers of species and specimens in each analysis}
+\newpage
+\section{Numbers of species and specimens in each analysis}
 
-\begin{table}
+\begin{table}[H]
 \begin{tabular}{cccc}
 
-\caption{Numbers of specimens and species in each of our models. SSD is sexual size dimorphism. All species have order data, all birds have reverse sexual size dimorphism (presence/absence) data, and all mammals have ornamentation (presence/absence) data.} 
-  
   \hline
   \textbf{Model} & \textbf{Specimens} & \textbf{median \% female} & \textbf{Species}\\ 
   \hline
@@ -191,17 +192,20 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
 
 \label{table_numbers}
 \end{tabular}
+\caption{Numbers of specimens and species in each of our models. SSD is sexual size dimorphism. All species have order data, all birds have reverse sexual size dimorphism (presence/absence) data, and all mammals have ornamentation (presence/absence) data.} 
+
 \end{table}
 
 %-------------------------------------------------------------------------------
-\subsection*{Genus-level data}
+\newpage
+\section{Genus-level data}
 
 % Table A1
 \input{figures/table-genus}
 
 %-------------------------------------------------------------------------------
+\newpage
 \subsection*{Total numbers of female specimens and female type specimens}
-
 
 % figure A3
 \begin{figure}[H]
@@ -212,13 +216,13 @@ Note that without sexing the unsexed specimens we cannot be sure a bias does not
   \label{fig-types}
 \end{figure}
 
-
+\newpage
 % Table A1
 \input{figures/table-percents}
 
 %-------------------------------------------------------------------------------
-
-\subsection*{Comparing our sex ratios to wild adult sex ratio data for birds}
+\newpage
+\section{Comparing our sex ratios to wild adult sex ratio data for birds}
 
 There is very little available data on sex ratios in wild bird populations. The study which has collated the most data so far is Szekely et al. (2014). We took their data and compared the wild adult sex ratios (number of males/ number of males + number of females) to the sex ratios of the matching species in our dataset.
 
@@ -241,10 +245,11 @@ This difference was significant (paired t-test: $t_{118} = -6.768$, $p < 0.001$;
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection*{Variation among orders}
+\newpage
+\section{Variation among orders}
 
 % figure A4
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/orders-density-birds-all.png}
   \caption{Kernel density plots showing the \% female specimens in each species across orders of birds with at least three species in the dataset. 
@@ -254,7 +259,7 @@ This difference was significant (paired t-test: $t_{118} = -6.768$, $p < 0.001$;
 \end{figure}
 
 % figure A5
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/orders-density-mammals-all.png}
   \caption{Kernel density plots showing the \% female specimens in each species across orders of mammals with at least three species in the dataset. 
@@ -268,7 +273,8 @@ This difference was significant (paired t-test: $t_{118} = -6.768$, $p < 0.001$;
 \input{figures/table-orders}
 
 %-------------------------------------------------------------------------------
-\subsection*{Apodiformes}
+\newpage
+\section{Apodiformes}
 
 The order Apodiformes consists of three families hummingbirds (Trochilidae), swifts (Apodidae) and treeswifts (Hemiprocnicadae).
 Hummingbirds are sexually dimorphic, but swifts are not. 
@@ -287,7 +293,8 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure}
 
 %-------------------------------------------------------------------------------
-\subsection*{Changes through time}
+\newpage
+\section{Changes through time}
 
 % figure 3
 \begin{figure}[H]
@@ -302,10 +309,11 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure} 
 
 %-------------------------------------------------------------------------------
-\subsection*{Male body mass and sexual size dimorphism.}
+\newpage
+\section{Male body mass and sexual size dimorphism.}
 
 % figure A6
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/mass-orders-birds.png}
   \caption{Plots showing how \% female specimens in each species varies with male body mass (g) across the six largest orders of birds (from left to right, top to bottom: Passeriformes, Apodiformes, Piciformes, Psittaciformes, Charadriiformes, and Columbiformes). 
@@ -316,7 +324,7 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure}
 
 % figure A7
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/mass-orders-mammals.png}
   \caption{Plots showing how \% female specimens in each species varies with male body mass (g) across the six largest orders of mammals (from left to right, top to bottom: Rodentia, Chiroptera, Soricomorpha, Carnivora, Primates, and Artiodactyla). 
@@ -327,7 +335,7 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure}
 
 % figure A8
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/ssd-orders-birds.png}
   \caption{Plots showing how \% female specimens in each species varies with sexual size dimorphism across the six largest orders of birds (from left to right, top to bottom: Passeriformes, Apodiformes, Piciformes, Psittaciformes, Charadriiformes, and Columbiformes).
@@ -339,7 +347,7 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
 \end{figure}
 
 % figure A9
-\begin{figure}
+\begin{figure}[H]
  \centering
   \includegraphics[width = \linewidth]{figures/ssd-orders-mammals.png}
   \caption{Plots showing how \% female specimens in each species varies with sexual size dimorphism across the six largest orders of mammals (from left to right, top to bottom: Rodentia, Chiroptera, Soricomorpha, Carnivora, Primates, and Artiodactyla). 
@@ -350,9 +358,16 @@ As suspected if sexual plumage dimorphism affects the percentage of female speci
   \label{fig-mammal-ssd}
 \end{figure}
 
+%-------------------------------------------------------------------------------
+\newpage
+% SSD/mass model outputs
+% Table A3
+\input{figures/table-outputs}
+
 
 %-------------------------------------------------------------------------------
-\subsection*{Reverse sexual dimorphism in birds}
+\newpage
+\section{Reverse sexual dimorphism in birds}
 
 Some bird species show reverse sexual dimorphism, where females are larger or showier than the males. 
 This occurs in hawks and vultures (Accipitridae), falcons (Falconidae), sandpipers and snipe (Scolopacidae), phalaropes (Charadriidae), jacanas (Jacanidae), skuas (Stercorariidae), boobies (Sulidae), frigate birds (Fregatidae), owls (Strigiformes), cuckoos (Cuculidae), hummingbirds (Trochilidae), manakins (Pipridae), and some ratites (Struthioniformes) (Swaddle et al. 2000\cite{swaddle2000novel}). 
@@ -380,13 +395,11 @@ There were significantly more females in species where the female is the larger 
 
 %-------------------------------------------------------------------------------
 \newpage
-\subsection*{Ornamentation analyses}
+\section{Ornamentation analyses in mammals}
 
-\begin{table}
+\begin{table}[H]
 \begin{tabular}{cccc}
-
-\caption{Numbers of specimens and species with ornaments, divided by ornament type and order.} 
-  
+ 
   \hline
   \textbf{Model} & \textbf{Specimens} & \textbf{median \% female} & \textbf{Species}\\ 
   \hline
@@ -412,19 +425,11 @@ There were significantly more females in species where the female is the larger 
 
 \label{table_orn_numbers}
 \end{tabular}
+\caption{Numbers of specimens and species with ornaments, divided by ornament type and order.} 
 \end{table}
-
 
 %-------------------------------------------------------------------------------
 \newpage
-
-\subsection*{Model outputs???}
-
-% Table A3
-\input{figures/table-outputs}
-
-
-%-------------------------------------------------------------------------------
 % References
 \bibliographystyle{vancouver}
 \bibliography{sex-bias}
