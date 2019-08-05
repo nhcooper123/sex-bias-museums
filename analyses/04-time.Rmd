@@ -68,6 +68,21 @@ ds_years <-
   distinct()
 ```
 
+# How many males and females are in these analyses?
+
+```{r}
+  sum4 <-
+  ds_years %>%
+  select(class, binomial, male, female) %>%
+  distinct() %>%
+  group_by(class) %>%
+  summarise(species = n(), spec = sum(male, female),
+            male = sum(male), female = sum(female))
+
+  kable(sum4)
+```
+
+
 ## Fitting models
 ### Birds
 ```{r}
