@@ -6,6 +6,8 @@
 raw-data/*
 data/*
 *.html
+manuscript/version1/*
+*.docx
 
 # LaTeX #
 *.aux
