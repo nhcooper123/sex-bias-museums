@@ -98,7 +98,7 @@ We find a slight bias towards males in both groups.
 
 \newpage
 \begin{landscape}
-  \input{figures/table-consequences}
+  \input{figures/table-consequences_revision}
 \end{landscape}
 
 \section{Materials and Methods}
@@ -125,7 +125,7 @@ The final dataset contained 2,496,611 specimens (1,395,748 birds and 1,100,863 m
 
 \subsubsection{Sexual dimorphism, plumage coloration and ornamentation data.}
 We extracted median body masses (g) for males and females from Lislevand et al.\cite{lislevand2007avian} for birds and Jones et al.\cite{pantheria} for mammals, then calculated sexual size dimorphism by dividing mean male body mass by female body mass. 
-Note that the sample size for these variables is lower because sex disaggregated body size data are rare (see Table \ref{table_numbers}).
+Note that the sample size for these variables is lower because sex disaggregated body size data are rare (see Table numbers).
 
 To explore how ``showiness'' might influence sex bias, we included a measure of plumage coloration for passerine birds taken from Dale et al.\cite{dale2015data,dale2015effects}. 
 This measure is based on the mean RGB (red green blue) values for 400 randomly chosen pixels in six patches (nape, crown, forehead, throat, upper breast, and lower breast) for each sex. 
@@ -134,9 +134,9 @@ For mammals, we used the Handbook of Mammals of the World to identify mammals wh
 We defined ornamentation as a feature that might increase the likelihood of a collector targeting an individual, specifically horns, antlers, tusks, well-defined manes (i.e. in lions and some baboons), enlarged nasal appendages (e.g. in elephant seals and proboscis monkeys), or facial colouration (e.g. in mandrills) or large cheek pouches (e.g. orangutans). 
 Where species had ornaments, we recorded whether both sexes or only males routinely possess them. 
 The majority of species with ornaments were Artiodactyla (203 of 232 species). 
-Other ornamented species were walruses, beaked whales, narwhals, rhinoceroses, okapis, and elephants, however only artiodactyls and the walrus were represented by more than 100 specimens in the dataset (see below), so were the only species to appear in our models (see Table \ref{table_numbers}).
+Other ornamented species were walruses, beaked whales, narwhals, rhinoceroses, okapis, and elephants, however only artiodactyls and the walrus were represented by more than 100 specimens in the dataset (see below), so were the only species to appear in our models (see Table numbers).
 
-We do not have body size data for all species (see Table \ref{table_numbers}), and only have plumage data (see below) for passerines, but some bird species show reverse sexual dimorphism, where females are larger or showier than the males. 
+We do not have body size data for all species (see Table numbers), and only have plumage data (see below) for passerines, but some bird species show reverse sexual dimorphism, where females are larger or showier than the males. 
 To see if we detect a different pattern in these species we also divided the bird data into species where the female is generally the larger or showier sex (the families  Accipitridae, Falconidae, Scolopacidae, Charadriidae, Jacanidae, Stercorariidae, Sulidae, Fregatidae, Cuculidae, Trochilidae, Pipridae, and the orders Strigiformes and Struthioniformes\cite{swaddle2000novel}), and species where the male is generally the larger or showier sex (all other species). 
 
 The final cleaned data are available on the NHM Data Portal \cite{sex-bias-data}. 
@@ -155,13 +155,13 @@ In addition, we investigated variation in the numbers of unsexed specimens by or
 Most species were represented by only a few specimens (Figure A1), with large skews towards either males or females at low numbers (Figure A2). 
 To reduce problems this is likely to cause when fitting models, we used only species with 100 or more specimens in our models (see Supplementary Methods for more details), except in our change-through-time models. 
 In these models our response variable was the proportion of males and females in each species for each year from 1880-2010 (before 1880 and after 2010 we did not have any species with sufficient specimens to include). 
-As there were only 55 bird species and 1216 mammal species with over 100 specimens in a year, change-through-time models instead used all species with more than 50 specimens in a single year to increase the sample size (see Table \ref{table_numbers}).
+As there were only 55 bird species and 1,216 mammal species with over 100 specimens in a year, change-through-time models instead used all species with more than 50 specimens in a single year to increase the sample size (see Table numbers).
 
 We fitted all models using generalised linear models (GLM) with quasibinomial errors, with the proportion of female specimens (success) and the proportion of male specimens (failure) for each species as the response variable (i.e. a binomial response where the number of females and the number of males for each species were jointly modeled). 
 Quasibinomial rather than binomial errors were used due to overdispersion (all models have deviance/residual degrees of freedom far greater than two; see output on GitHub for exact values), and we assessed the significance of model terms using Type II sums of squares. 
 We used standard model checks for GLMs (Q-Q plot, histogram of residuals, residuals vs. linear predictors, response vs. fitted values) to assess model fit. 
 We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) whether males were larger/more showy than females or vice versa (reverse sexual dimorphism; birds only); (vi) plumage dimorphism (log transformed; passerine birds only); and (vii) ornamentation (mammals only). 
-The number of specimens and species in each model are shown in Table \ref{table_numbers}.
+The number of specimens and species in each model are shown in Table numbers.
 
 \section{Results and Discussion}
 
@@ -260,7 +260,7 @@ This relationship was not strong, but fits with anecdotal evidence of collection
 \end{figure}
 
 For mammals, species with ornaments (horns, antlers, tusks, manes etc.) had significantly fewer female specimens than those without ornaments (Figure \ref{fig-orn}; $F_{1, 1510} = 46.98$, $p < 0.001$; $slope \pm SE = -0.328 \pm 0.048$). 
-Note, however, that only 67 species across four orders in our analyses had ornamentation (Table \ref{table_orn_numbers}).
+Note, however, that only 67 species across four orders in our analyses had ornamentation (Table ornnumbers}).
 Most of the species with ornaments in our models were artiodactyls, and all artiodactyls have horns or tusks, suggesting that the strong male bias in Artiodactyla (39.7\% female; Figure \ref{fig-mammal_order_six}) was due to selection for males with these features. 
 Within ornamented species there was no significant difference if both sexes or only males possessed the ornament (Figure \ref{fig-orn}; $F_{1, 65} = 0.725$, $p = 0.398$), suggesting that even where females are phenotypically different, preference is still given to collecting males. 
 This is particularly concerning since most artiodactyl species are female skewed in the wild\cite{berger1999sex}. 
@@ -296,6 +296,10 @@ Natural history collections play a critical role in informing multiple research 
 Therefore it is paramount that we continue developing these resources while using a more comprehensive and better informed approach. 
 Finally, researchers investigating broad-scale variation in species should account for these biases when designing data collection protocols and/or in downstream analyses and declare how they dealt with those biases in resulting publications. 
 Our analyses place particular pressure on taxonomists to think more carefully about sex when defining name-bearing types, and suggest more designation of opposite sex paratypes would be desirable, particularly in birds. 
+
+
+
+%Here we have focused on broad-scale patterns across birds and mammals, but of course more fine-scale patterns 
 
 \section{Acknowledgments}
 We thank all collection managers for inputting their specimen data to GBIF.
