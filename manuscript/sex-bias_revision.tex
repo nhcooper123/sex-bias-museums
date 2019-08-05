@@ -163,33 +163,6 @@ We used standard model checks for GLMs (Q-Q plot, histogram of residuals, residu
 We tested whether the proportion of female and male specimens varied with (i) orders; (ii) collection years (1880-2010); (iii) male body mass (log transformed); (iv) sexual size dimorphism (log transformed); (v) whether males were larger/more showy than females or vice versa (reverse sexual dimorphism; birds only); (vi) plumage dimorphism (log transformed; passerine birds only); and (vii) ornamentation (mammals only). 
 The number of specimens and species in each model are shown in Table \ref{table_numbers}.
 
-\begin{table}
-\begin{tabular}{cccc}
-
-\caption{Numbers of specimens and species in each of our models. SSD is sexual size dimorphism. All species have order data, all birds have reverse sexual size dimorphism (presence/absence) data, and all mammals have ornamentation (presence/absence) data.} 
-  
-  \hline
-  \textbf{Model} & \textbf{Specimens} & \textbf{median \% female} & \textbf{Species}\\ 
-  \hline
-  \textbf{Birds} & & &\\
-  \hline
-  orders & 497,923 & 39.78 & 1,746\\
-  years & 30,525 & 38.56 & 390\\
-  mass/SSD & 277,179 & 39.82 & 829\\
-  plumage & 258,326 & 37.34 & 850\\
-  \hline
-  \textbf{Mammals} &&&\\
-  \hline
-  orders & 857,384 & 47.84 & 1,512\\
-  years & 386,476 & 48.20 & 3,417\\
-  mass/SSD & 548,514 & 47.97 & 717\\
-  \hline
-
-\label{table_numbers}
-\end{tabular}
-\end{table}
-
-
 \section{Results and Discussion}
 
 Of the 2,496,328 specimen records (1,395,748 birds and 1,100,580 mammals) in our dataset, 20\% of bird specimens were female, 31\% were male, and 49\% were not sexed (Table AX - genus level). 
@@ -286,54 +259,21 @@ This relationship was not strong, but fits with anecdotal evidence of collection
   \label{fig-plumage}
 \end{figure}
 
-\begin{table}
-\begin{tabular}{cccc}
-
-\caption{Numbers of specimens and species with ornaments, divided by ornament type and order.} 
-  
-  \hline
-  \textbf{Model} & \textbf{Specimens} & \textbf{median \% female} & \textbf{Species}\\ 
-  \hline
-  Absent & 839,981 & 48.32 & 1,445\\
-  Present & 17,403 & 39.52 & 67\\
-  \hline
-  \textbf{Feature} &&&\\
-  \hline
-  cheek extensions & 287 & 39.02 & 1\\
-  horns or antlers & 13,506 & 38.86 & 50\\
-  manes & 752 & 32.67 & 3\\
-  nasal protrusions & 474 & 55.85 & 3\\
-  ossicles & 157 & 49.68 & 1\\
-  tusks & 2,227 & 48.05 & 9\\
-  \hline
-  \textbf{Order} &&&\\
-  \hline
-  Artiodactyla & 15,726 & 39.52 & 59\\
-  Carnivora & 663 & 45.20 & 3\\
-  Chiroptera & 188 & 55.85 & 1\\
-  Primates & 826 & 35.85 & 4\\
-  \hline
-
-\label{table_orn_numbers}
-\end{tabular}
-\end{table}
-
-
-For mammals, species with ornaments (horns, antlers, tusks, manes etc.) had significantly fewer female specimens than those without ornaments (Figure \ref{fig-horns}; $F_{1, 1510} = 46.98$, $p < 0.001$; $slope \pm SE = -0.328 \pm 0.048$). 
-However, we should note that this represents only 67 species across four orders (Table \ref{table_orn_numbers}).
+For mammals, species with ornaments (horns, antlers, tusks, manes etc.) had significantly fewer female specimens than those without ornaments (Figure \ref{fig-orn}; $F_{1, 1510} = 46.98$, $p < 0.001$; $slope \pm SE = -0.328 \pm 0.048$). 
+Note, however, that only 67 species across four orders in our analyses had ornamentation (Table \ref{table_orn_numbers}).
 Most of the species with ornaments in our models were artiodactyls, and all artiodactyls have horns or tusks, suggesting that the strong male bias in Artiodactyla (39.7\% female; Figure \ref{fig-mammal_order_six}) was due to selection for males with these features. 
-Within ornamented species there was no significant difference if both sexes or only males possessed the ornament (Figure \ref{fig-horns}; $F_{1, 65} = 0.725$, $p = 0.398$), suggesting that even where females are phenotypically different, preference is still given to collecting males. 
+Within ornamented species there was no significant difference if both sexes or only males possessed the ornament (Figure \ref{fig-orn}; $F_{1, 65} = 0.725$, $p = 0.398$), suggesting that even where females are phenotypically different, preference is still given to collecting males. 
 This is particularly concerning since most artiodactyl species are female skewed in the wild\cite{berger1999sex}. 
 
 % figure 6
 \begin{figure}
  \centering
   \includegraphics[width = \linewidth]{figures/ornamentation.png}
-  \caption{Kernel density plots comparing the \% female specimens in each mammal species where ornamentations, i.e. horns or tusks, are present or absent (top panel), and when species have ornaments, whether these are found in both sexes or only males (bottom panel). 
+  \caption{Kernel density plots comparing the \% female specimens in each mammal species where ornamentations, i.e. horns, tusks antlers, manes etc., are present or absent (top panel), and when species have ornaments, whether these are found in both sexes or only males (bottom panel). 
   Only species with at least 100 specimens are included. 
   The dashed line represents 50\% female specimens. 
 }
-  \label{fig-horns}
+  \label{fig-orn}
 \end{figure}
 
 \subsection{Type specimens.} 
