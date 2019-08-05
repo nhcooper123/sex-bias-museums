@@ -113,6 +113,34 @@ ds_ornament_mammals2 <-
   kable(sum_mamm)
 ```
 
+# Few other summary stats
+```{r}
+# How many species and specimens with and without ornaments?
+  ds_ornament_mammals %>%
+  group_by(ornamentation) %>%
+  summarise(species = n(), 
+            spec = sum(male, female),
+            median(percent))
+```
+```{r}
+# What ornaments are they?
+  ds_ornament_mammals %>%
+  filter(ornamentation == "Present") %>%
+  group_by(feature) %>%
+  summarise(species = n(), 
+            spec = sum(male, female),
+            median(percent))
+```
+
+```{r}
+# What orders?
+  ds_ornament_mammals %>%
+  filter(ornamentation == "Present") %>%
+  group_by(order) %>%
+  summarise(species = n(), 
+            spec = sum(male, female),
+            median(percent))
+```
 ## Fitting models
 ## Do sexual ornaments influence % female specimens?
 ### Passeriformes plumage
