@@ -6,7 +6,7 @@ output:
   html_document: default
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
@@ -105,7 +105,7 @@ ggplot(ratio, aes(x = ASR, y = asr_museum)) +
   ylab("museum ASR") +
   theme_bw(base_size = 14)
 
-ggsave(here("figures/wild-sex-ratios.png"), height = 100, units = "mm")
+##ggsave(here("figures/wild-sex-ratios.png"), height = 100, units = "mm")
 
 ```
 

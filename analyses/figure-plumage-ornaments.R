@@ -72,7 +72,7 @@ p1 <-
 
 p1
 
-ggsave(here("figures/plumage.png"))
+##ggsave(here("figures/plumage.png"))
 #-------------------------------------------------------------------
 
 absent <- 
@@ -106,4 +106,4 @@ orn <-
 
 absent/orn
 
-ggsave(here("figures/ornamentation.png"))
+##ggsave(here("figures/ornamentation.png"))

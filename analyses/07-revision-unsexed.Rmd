@@ -1,12 +1,12 @@
 ---
-  title: "Revision - more detail on unsexed specimens"
+title: "Revision - more detail on unsexed specimens"
 output:
   word_document: default
-pdf_document: default
-html_document: default
+  pdf_document: default
+  html_document: default
 ---
   
-  ```{r setup, include=FALSE}
+```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = FALSE, message = FALSE, warning = FALSE)
 ```
 
@@ -107,7 +107,7 @@ mammplot <-
 
 birdplot + mammplot
 
-ggsave(here("figures/nosex-orders.png"), height = 100, units = "mm")
+##ggsave(here("figures/nosex-orders.png"), height = 100, units = "mm")
 
 ```
 
@@ -157,7 +157,7 @@ ggplot(sum_decade_nosex, aes(x = decade, y = `% nosex`, fill = class, colour = c
   theme(legend.title = element_blank(), 
         legend.position = c(0.1, 0.2))
 
-ggsave(here("figures/nosex-through-time.png"), height = 100, units = "mm")
+##ggsave(here("figures/nosex-through-time.png"), height = 100, units = "mm")
 
 ```
 
@@ -206,7 +206,7 @@ ggplot(sum_region_nosex, aes(x = continent, y = `% nosex`, colour = class)) +
         legend.position = c(0.9, 0.85)) +
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
-ggsave(here("figures/nosex-regions.png"), height = 100, units = "mm")
+##ggsave(here("figures/nosex-regions.png"), height = 100, units = "mm")
 
 ```
 
@@ -268,7 +268,7 @@ ggplot(all, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
   scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
   scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
 
-ggsave(here("figures/nosex-correlation.png"), height = 100, units = "mm")
+##ggsave(here("figures/nosex-correlation.png"), height = 100, units = "mm")
 
 ```
 
@@ -321,7 +321,7 @@ ggplot(all2, aes(x = `% female`, y = `% nosex`, colour = class, fill = class)) +
   scale_colour_manual(values = c(cbPalette[2], cbPalette[3])) +
   scale_fill_manual(values = c(cbPalette[2], cbPalette[3]))
 
-ggsave(here("figures/nosex-binomial-correlation.png"), height = 100, units = "mm")
+##ggsave(here("figures/nosex-binomial-correlation.png"), height = 100, units = "mm")
 
 ```
 

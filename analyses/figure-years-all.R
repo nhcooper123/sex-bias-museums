@@ -41,4 +41,4 @@ ggplot(ds_years, aes(x = year, y = percentf/100, colour = class)) +
   facet_wrap(~class, ncol = 1)
 
 plot_year
-ggsave("figures/years-all.png", width = 80, units = "mm")
+#ggsave("figures/years-all.png", width = 80, units = "mm")

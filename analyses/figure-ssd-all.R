@@ -308,7 +308,7 @@ artio <-
 
 (rodent | bat | sor)/(carn|primate|artio)
 
-ggsave("figures/ssd-orders-mammals.png", height = 100, units = "mm")
+##ggsave("figures/ssd-orders-mammals.png", height = 100, units = "mm")
 
 #-------------------------------------
 # Male body mass figures per order
@@ -442,4 +442,4 @@ artio <-
 
 (rodent | bat | sor)/(carn|primate|artio)
 
-ggsave("figures/mass-orders-mammals.png", height = 100, units = "mm")
+##ßggsave("figures/mass-orders-mammals.png", height = 100, units = "mm")
