@@ -117,10 +117,9 @@ Note that throughout I've commented out `ggsave` commands so you don't clog your
 * `/manuscript` contains the manuscript materials in LaTeX format
 
 -------
-## Session Info [to add still]
+## Session Info
 For reproducibility purposes, here is the output of `devtools::session_info()` used to perform the analyses in the publication.
 
-    Session info ------------------------------------------------------------------
     ─ Session info ────────────────────────────────────────────────────────────────────────────────
     setting  value                       
     version  R version 3.6.1 (2019-07-05)
