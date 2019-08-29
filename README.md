@@ -20,7 +20,7 @@ We were unable to upload this to GitHub because the files are too large.
 * `rawdata/` should contain all other data. Note that we did not upload raw data that can be accessed from the original data sources due to copyright issues, but these can be downloaded from GBIF (references and links below). The raw data are only necessary if you want to repeat the data wrangling steps.
 
 If you use the cleaned data please cite as follows: 
-> Natalie Cooper, Alexander L Bond, Roberto Portela Miguez, Louise Tomsett and Kristofer M Helgen (2019). Dataset: Sex biases in natural history collections of birds and mammals. Natural History Museum Data Portal (data.nhm.ac.uk). [https://doi.org/10.5519/0065209](https://doi.org/10.5519/0065209).
+> Natalie Cooper, Alexander L Bond, Joshua L. Davis, Roberto Portela Miguez, Louise Tomsett and Kristofer M Helgen (2019). Dataset: Sex biases in natural history collections of birds and mammals. Natural History Museum Data Portal (data.nhm.ac.uk). [https://doi.org/10.5519/0065209](https://doi.org/10.5519/0065209).
 
 Please also cite the original sources of the data as follows:
 
@@ -117,10 +117,9 @@ Note that throughout I've commented out `ggsave` commands so you don't clog your
 * `/manuscript` contains the manuscript materials in LaTeX format
 
 -------
-## Session Info [to add still]
+## Session Info
 For reproducibility purposes, here is the output of `devtools::session_info()` used to perform the analyses in the publication.
 
-    Session info ------------------------------------------------------------------
     ─ Session info ────────────────────────────────────────────────────────────────────────────────
     setting  value                       
     version  R version 3.6.1 (2019-07-05)
