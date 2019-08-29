@@ -118,7 +118,7 @@ All raw data can be downloaded from GBIF\cite{gbif}.
 Prior to analyses we cleaned the data as follows. 
 (i) Record type. To avoid confusing specimens with archives describing specimens we selected only preserved specimen records; 
 (ii) Age. Juveniles can be harder to sex so we excluded all juveniles, young and foetuses from the dataset; 
-(iii) Year. We removed invalid collection years (i.e. years later than 2018); 
+(iii) Year. We removed collection years later than 2018 as these were clearly errors; 
 (iv) Taxonomy. We removed subspecies names and used species binomials because we were interested in species-level sex ratios. 
 To ensure our results were not due to female specimens more frequently being identified to the genus-level only, we also also created a dataset with all specimens with valid generic names.
 We corrected bird taxonomy using the GBIF backbone taxonomy\cite{gbif}, and mammal taxonomy using Mammal Species of the World\cite{wilson2005mammal}; 
@@ -154,7 +154,7 @@ We first summarised the overall proportion of female, male and unsexed specimens
 We then summarised differences in the proportion of female specimens across orders and types. 
 
 Unsexed specimens may bias our results toward males if the majority of unsexed specimens are female. 
-We tested for this by fitting linear models to compare the percentage of unsexed specimens and the percentage of female specimens within species; if this unsexed specimens are generally female we expect to see a negative relationship between unsexed specimens and the proportion of females in a species. 
+We tested for this by fitting linear models to compare the percentage of unsexed specimens and the percentage of female specimens within species; if these unsexed specimens are generally female we expect to see a negative relationship between unsexed specimens and the proportion of females in a species. 
 In addition, we investigated variation in the numbers of unsexed specimens by order, collection continent and collection decade (see Supplementary Information).
 
 Most species were represented by only a few specimens (Figure A1), with large skews towards either males or females at low numbers (Figure A2). 
@@ -171,7 +171,7 @@ The number of specimens and species in each model are shown in Table A2.
 \section{Results and Discussion}
 
 Of the 2,496,328 specimen records (1,395,748 birds and 1,100,580 mammals) in our dataset, 20\% of bird specimens were female, 31\% were male, and 49\% were not sexed (Table A1). 
-For mammals, the number of non-sexed individuals were much lower at 15\%, likely because it is easier to identify sex in mammals, with 41\% female and 44\% male specimens. 
+For mammals, the number of non-sexed individuals was much lower at 15\%, likely because it is easier to identify sex in mammals, with 41\% female and 44\% male specimens. 
 If we consider only sexed specimens, 40\% of bird and 48\% of mammal specimens were female (Figure A3). 
 In real terms this represents 143,905 more male than female specimens in birds and 40,468 more male specimens in mammals. 
 This male bias was not due to unsexed specimens mostly being female (see Supplementary Information; Figures A4-A8).
@@ -246,7 +246,7 @@ As with body mass, this suggested certain orders were more likely to contain mor
 
 In birds that show reverse sexual dimorphism we found that the median percentage of females for species where the male was the larger or showier sex was 40\%, the same as for the whole dataset. 
 For species where the female is the larger or showier sex the median percentage of females was 44.6\%, closer to the expected 50:50 ratio.
- There were significantly more females in species where the female is the larger or showier sex ($F_{1, 1744} = 167.9$, $p < 0.001$; Figure A18)
+ There were significantly more females in species where the female is the larger or showier sex ($F_{1, 1744} = 167.9$, $p < 0.001$; Figure A18).
 
 \subsection{Plumage and ornaments.} 
 In passerine birds, as males became increasingly more colorful than females, the proportion of female specimens decreased (Figure \ref{fig-plumage}; $F_{1, 828} = 58.95$, $p < 0.001$; $slope \pm SE = -0.416 \pm 0.054$). 
