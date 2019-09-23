@@ -1,6 +1,4 @@
 %%
-%% This is file `nature.bst',
-%% generated with the docstrip utility.
 %%
 %% The original source files were:
 %%
