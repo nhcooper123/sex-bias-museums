@@ -2,10 +2,11 @@
 
 Author(s): [Natalie Cooper](mailto:natalie.cooper.@nhm.ac.uk)
 
-This repository contains all the code and some data used in the [link to paper will appear here](). 
+This repository contains all the code and some data used in the [paper](https://10.1098/rspb.2016.0049). 
 
 To cite the paper: 
-> XXX
+> Natalie Cooper, Alexander L. Bond, Joshua L. Davis, Roberto Portela Miguez, Louise Tomsett,
+and Kristofer M. Helgen. 2019. Sex biases in bird and mammal natural history collections. Proceedings of the Royal Society Series B: Biological Sciences. in press. DOI:10.1098/rspb.2016.0049.
 
 To cite this repo: 
 > XXX
