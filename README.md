@@ -9,7 +9,9 @@ To cite the paper:
 and Kristofer M. Helgen. 2019. Sex biases in bird and mammal natural history collections. Proceedings of the Royal Society Series B: Biological Sciences. in press. DOI:10.1098/rspb.2016.0049.
 
 To cite this repo: 
-> XXX
+> Natalie Cooper. 2019. GitHub: nhcooper123/sex-bias-museums: code for the paper. Zenodo. DOI: 10.5281/zenodo.3459138.
+
+[![DOI](https://zenodo.org/badge/161480153.svg)](https://zenodo.org/badge/latestdoi/161480153)
 
 ## Data
 All cleaned data are available from the [NHM Data Portal](https://doi.org/10.5519/0065209).
