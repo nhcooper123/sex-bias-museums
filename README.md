@@ -5,7 +5,7 @@ Author(s): [Natalie Cooper](mailto:natalie.cooper.@nhm.ac.uk)
 This repository contains all the code and some data used in the [paper](http://dx.doi.org/10.1098/rspb.2019.2025). 
 
 To cite the paper: 
-> Natalie Cooper, Alexander L. Bond, Joshua L. Davis, Roberto Portela Miguez, Louise Tomsett, and Kristofer M. Helgen. 2019. Sex biases in bird and mammal natural history collections. Proceedings of the Royal Society Series B: Biological Sciences. 20192025. DOI:10.1098/rspb.2019.2025.
+> Natalie Cooper, Alexander L. Bond, Joshua L. Davis, Roberto Portela Miguez, Louise Tomsett, and Kristofer M. Helgen. 2019. Sex biases in bird and mammal natural history collections. Proceedings of the Royal Society Series B: Biological Sciences. 286, 20192025. DOI:10.1098/rspb.2019.2025.
 
 To cite this repo: 
 > Natalie Cooper. 2019. GitHub: nhcooper123/sex-bias-museums: code for the paper. Zenodo. DOI: 10.5281/zenodo.3459138.
