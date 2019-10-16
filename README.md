@@ -1,5 +1,7 @@
 # Sex biases in bird and mammal natural history collections 
 
+![alt text](https://github.com/nhcooper123/sex-bias-museums/raw/master/manuscript/figures/orders-density-birds-six.png)
+
 Author(s): [Natalie Cooper](mailto:natalie.cooper.@nhm.ac.uk)
 
 This repository contains all the code and some data used in the [paper](http://dx.doi.org/10.1098/rspb.2019.2025). 
