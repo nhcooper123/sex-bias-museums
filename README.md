@@ -1,7 +1,5 @@
 # Sex biases in bird and mammal natural history collections 
 
-![alt text](https://github.com/nhcooper123/sex-bias-museums/raw/master/manuscript/figures/orders-density-birds-six.png)
-
 Author(s): [Natalie Cooper](mailto:natalie.cooper.@nhm.ac.uk)
 
 This repository contains all the code and some data used in the [paper](http://dx.doi.org/10.1098/rspb.2019.2025). 
@@ -13,6 +11,9 @@ To cite this repo:
 > Natalie Cooper. 2019. GitHub: nhcooper123/sex-bias-museums: code for the paper. Zenodo. DOI: 10.5281/zenodo.3459138.
 
 [![DOI](https://zenodo.org/badge/161480153.svg)](https://zenodo.org/badge/latestdoi/161480153)
+
+![alt text](https://github.com/nhcooper123/sex-bias-museums/raw/master/manuscript/figures/orders-density-birds-six.png)
+
 
 ## Data
 All cleaned data are available from the [NHM Data Portal](https://doi.org/10.5519/0065209).
@@ -223,5 +224,5 @@ For reproducibility purposes, here is the output of `devtools::session_info()` u
 To rerun all the code with packages as they existed on CRAN at time of our analyses we recommend using the `checkpoint` package, and running this code prior to the analysis:
 
 ```{r}
-checkpoint("2019-08-06")
+checkpoint("2019-08-12")
 ```
