@@ -14,6 +14,9 @@ To cite this repo:
 
 ![alt text](https://github.com/nhcooper123/sex-bias-museums/raw/master/manuscript/figures/orders-density-birds-six.png)
 
+## UPDATE August 2021
+
+While working with this code for another project I discovered a small issue with the code. A shortcut in some of the scripts means that species with no female specimens were excluded from the analyses/figures. Overall this is 2945 species (2427 birds and 518 mammals). However, all bar one of these species (*Emberiza schoeniclus*, 324 specimens all males) has fewer than 100 specimens so these were removed from the analyses at a later step anyway. In terms of the paper, this means there are teeny tiny quantitative changes in the results of the models, but these are within the rounding errors so none of the numbers in the paper change. The only difference is in our supplemental figures (Fig A1 and Fig A2) showing the overall distribution of the proportion of females for all the data prior to the removal of species with fewer than 100 specimens. These have an additional bar at 0 percent (Fig A1) and one hexagon has changed colour (Fig A2). I've fixed the code and added these two new figures here. The changes were not substantial enough to merit a correction as they only apply to these two supplemental figures. However, in the interests of transparency and reproducibility I thought I should comment on this here.
 
 ## Data
 All cleaned data are available from the [NHM Data Portal](https://doi.org/10.5519/0065209).
